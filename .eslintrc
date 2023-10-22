@@ -1,0 +1,48 @@
+{
+  "root": true,
+  "env": { "browser": true, "es2020": true },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react-hooks/recommended"
+  ],
+  "ignorePatterns": ["dist", ".eslintrc.cjs"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["react-refresh", "react", "@typescript-eslint", "import"],
+  "rules": {
+    "react/react-in-jsx-scope": 0,
+    "react/display-name": 0,
+    "@typescript-eslint/no-var-requires": "off",
+    "@typescript-eslint/no-unused-vars": "warn",
+    "@typescript-eslint/no-explicit-any": "error",
+    "react/jsx-props-no-spreading": "off",
+    "react/jsx-no-useless-fragment": "off",
+    "no-console": ["warn", { "allow": ["warn", "error"] }],
+
+    "import/order": [
+      "error",
+      {
+        "groups": [["builtin", "external"], ["parent", "sibling"], "index"],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ],
+    "import/prefer-default-export": "off",
+
+    "react/self-closing-comp": [
+      "error",
+      {
+        "component": true,
+        "html": true
+      }
+    ],
+    "react/function-component-definition": [
+      2,
+      { "namedComponents": "function-declaration" }
+    ],
+    "react/jsx-one-expression-per-line": "off"
+  }
+}
