@@ -24,7 +24,9 @@
     "paths": {
       "@/modules/*": ["./modules/*"],
       "@constants/*": ["./shared/constants/*"],
-      "@styles/*": ["./shared/styles/*"]
+      "@styles/*": ["./shared/styles/*"],
+      "@/store": ["./store"],
+      "@/mocks": ["./mocks"]
     }
   },
   "include": ["src"],
