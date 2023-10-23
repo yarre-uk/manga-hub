@@ -7,17 +7,14 @@ import { rootReducer } from './rootReducer';
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: [],
+  // whitelist: [homeSlice.name],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 export const store = configureStore({
   reducer: persistedReducer,
-  middleware: (getDefaultMiddleware) => {
-    return getDefaultMiddleware({
-      serializableCheck: false,
-    });
-  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({ serializableCheck: false }).concat(),
 });
 
 export const persistor = persistStore(store);

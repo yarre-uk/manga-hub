@@ -26,7 +26,8 @@
       "@constants/*": ["./shared/constants/*"],
       "@styles/*": ["./shared/styles/*"],
       "@/store": ["./store"],
-      "@/mocks": ["./mocks"]
+      "@/mocks": ["./mocks"],
+      "@/pages/*": ["./pages/*"]
     }
   },
   "include": ["src"],
