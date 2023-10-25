@@ -4,10 +4,12 @@ import storage from 'redux-persist/lib/storage';
 
 import { rootReducer } from './rootReducer';
 
+import { homeSlice } from '@/pages/home/features';
+
 const persistConfig = {
   key: 'root',
   storage,
-  // whitelist: [homeSlice.name],
+  whitelist: [homeSlice.name],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

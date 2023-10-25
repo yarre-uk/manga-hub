@@ -1,5 +1,5 @@
-export { default as SignIn } from './SignIn';
-export { default as SignUp } from './SignUp';
-export { default as Home } from './home/Home';
-export { default as ChangePassword } from './ChangePassword';
-export { default as ForgotPassword } from './ForgotPassword';
+export { default as SignIn } from './sign-in';
+export { default as SignUp } from './sign-up';
+export { default as Home } from './home';
+export { default as ChangePassword } from './change-password';
+export { default as ForgotPassword } from './forgot-password';
