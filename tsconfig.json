@@ -17,14 +17,8 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "baseUrl": "./src",
     "paths": {
-      "@/modules/*": ["./modules/*"],
-      "@constants/*": ["./shared/constants/*"],
-      "@styles/*": ["./shared/styles/*"],
-      "@/store": ["./store"],
-      "@/mocks": ["./mocks"],
-      "@/pages/*": ["./pages/*"]
+      "@/*": ["./src/*"]
     },
     "allowJs": true,
     "incremental": true,
