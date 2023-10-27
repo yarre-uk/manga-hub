@@ -1,10 +1,33 @@
-import { Input } from '@/shared/components/ui/input';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+'use client';
 
-export default function Page() {
+import Button from '@/shared/components/Button';
+import axios from '@/shared/lib/axios';
+
+function HomePage() {
+  // const { data: session } = useSession();
+  // const [posts, setPosts] = useState();
+  // const axiosAuth = useAxiosAuth();
+
+  const fetchPost = async () => {
+    let res: any;
+
+    try {
+      res = await axios.post('https://localhost:7142/api/Auth/login', {
+        login: 'Admin',
+        password: 'admin231_rte',
+      });
+    } catch (e) {
+      console.log(JSON.stringify(res?.data, null, 4));
+    }
+  };
+
   return (
     <div>
-      <Input type="email" placeholder="Email" />
-      <h1 className="text-3xl font-bold underline">Hello, Next.js!</h1>
+      <Button onClick={fetchPost}>Get User Posts</Button>
+      {/* {posts && JSON.stringify(posts)} */}
     </div>
   );
 }
+
+export default HomePage;
