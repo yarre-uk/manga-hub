@@ -15,7 +15,10 @@ function Header() {
       <div className="ml-auto flex gap-2">
         {session?.user ? (
           <>
-            <p className="text-sky-600"> {session.user.name}</p>
+            <p className="text-sky-600">
+              {' '}
+              {session?.user?.refreshToken?.slice(0, 15)}
+            </p>
             <button className="text-red-500" onClick={() => signOut()}>
               Sign Out
             </button>

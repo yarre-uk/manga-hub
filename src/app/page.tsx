@@ -2,23 +2,20 @@
 'use client';
 
 import Button from '@/shared/components/Button';
-import axios from '@/shared/lib/axios';
+import useAxiosAuth from '@/shared/lib/hooks/useAxiosAuth';
 
 function HomePage() {
   // const { data: session } = useSession();
   // const [posts, setPosts] = useState();
-  // const axiosAuth = useAxiosAuth();
+  const axiosAuth = useAxiosAuth();
 
   const fetchPost = async () => {
-    let res: any;
-
     try {
-      res = await axios.post('https://localhost:7142/api/Auth/login', {
-        login: 'Admin',
-        password: 'admin231_rte',
-      });
+      await axiosAuth.get('https://localhost:7142/WeatherForecast');
+
+      console.log('1');
     } catch (e) {
-      console.log(JSON.stringify(res?.data, null, 4));
+      console.error(e);
     }
   };
 

@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import NextAuth, { AuthOptions } from 'next-auth';
 // import { JWT } from 'next-auth/jwt';
@@ -9,6 +8,8 @@ import axios from '@/shared/lib/axios';
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 export const authOptions: AuthOptions = {
+  session: { strategy: 'jwt' },
+  secret: 'Pn9CJbdUk6C9J8+lY6SlmFHkw4NItMpoHJ6ylIwEqrk=',
   providers: [
     CredentialsProvider({
       name: 'Credentials',
@@ -38,18 +39,21 @@ export const authOptions: AuthOptions = {
             return null;
           }
         } catch (e) {
-          console.error(e);
+          console.error(`Error ${e}`);
           return null;
         }
       },
     }),
   ],
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user, trigger, session }) {
+      if (trigger == 'update') {
+        return { ...token, ...session.user };
+      }
+
       return { ...token, ...user };
     },
     async session({ session, token }) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       session.user = token as any;
 
       return session;
