@@ -3,7 +3,7 @@ import NextAuth, { AuthOptions } from 'next-auth';
 // import { JWT } from 'next-auth/jwt';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
-import axios from '@/shared/lib/axios';
+import { axiosAuth } from '@/shared/lib/axios';
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
@@ -23,13 +23,10 @@ export const authOptions: AuthOptions = {
       },
       async authorize(credentials) {
         try {
-          const res = await axios.post(
-            'https://localhost:7142/api/Auth/login',
-            {
-              login: credentials.login,
-              password: credentials.password,
-            },
-          );
+          const res = await axiosAuth.post('api/Auth/login', {
+            login: credentials.login,
+            password: credentials.password,
+          });
 
           const user = res.data;
 

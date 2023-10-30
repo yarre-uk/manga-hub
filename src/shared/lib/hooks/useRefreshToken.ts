@@ -1,14 +1,15 @@
 'use client';
 
-import axios from 'axios';
 import { signIn, useSession } from 'next-auth/react';
+
+import { axiosAuth } from '../axios';
 
 export const useRefreshToken = () => {
   const { data: session, update } = useSession();
 
   const refreshToken = async () => {
     if (session?.user?.refreshToken) {
-      const res = await axios.get('https://localhost:7142/api/Auth/refresh', {
+      const res = await axiosAuth.get('api/Auth/refresh', {
         headers: { refreshTokenString: session?.user.refreshToken },
       });
 

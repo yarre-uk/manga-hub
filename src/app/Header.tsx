@@ -7,28 +7,30 @@ function Header() {
   const { data: session } = useSession();
 
   return (
-    <div className="bg-gradient-to-b from-cyan-50 to-cyan-200 p-2 flex gap-5 ">
+    <div className="flex gap-5 bg-slate-300 p-4">
       <Link href={'/'}>Home</Link>
-      <Link href={'/sign-up'}>Sign Up</Link>
       <Link href={'/forgot-password'}>Forgot Password</Link>
       <Link href={'/change-password'}>Change Password</Link>
-      <div className="ml-auto flex gap-2">
+      <div className="ml-auto flex gap-5">
         {session?.user ? (
           <>
             <p className="text-sky-600">
               {' '}
               {session?.user?.refreshToken?.slice(0, 15)}
             </p>
+
             <button className="text-red-500" onClick={() => signOut()}>
               Sign Out
             </button>
           </>
         ) : (
-          <button className="text-green-600" onClick={() => signIn()}>
-            Sign In
-          </button>
+          <>
+            <button className="text-green-600" onClick={() => signIn()}>
+              Sign In
+            </button>
+            <Link href={'/sign-up'}>Sign Up</Link>
+          </>
         )}
-        <button onClick={() => console.log(session)}>session</button>
       </div>
     </div>
   );
