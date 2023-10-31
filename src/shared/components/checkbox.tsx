@@ -1,5 +1,7 @@
 import { Path, UseFormRegister } from 'react-hook-form';
 
+import transformStringFromCamelCase from '../lib/transformStringFromCamelCase';
+
 import { Checkbox as CheckboxShadCn } from '@/shared/components/ui/checkbox';
 
 interface CheckboxProps<T> {
@@ -13,19 +15,9 @@ interface CheckboxProps<T> {
 function Checkbox<T>({ label, register, className, error }: CheckboxProps<T>) {
   return (
     <div className="items-top flex space-x-2">
-      <CheckboxShadCn
-        id={label}
-        className={className}
-        {...register(label)}
-        checked={true}
-      />
+      <CheckboxShadCn id={label} className={className} {...register(label)} />
       <div className="grid gap-1.5 leading-none">
-        <label
-          htmlFor="terms1"
-          className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-        >
-          {label[0].toLocaleUpperCase() + label.slice(1)}
-        </label>
+        <label htmlFor={label}>{transformStringFromCamelCase(label)}</label>
         {error && <p className="text-red-500 ml-2">{error}</p>}
       </div>
     </div>

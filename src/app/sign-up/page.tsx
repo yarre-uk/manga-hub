@@ -5,11 +5,11 @@ import { useRouter } from 'next/navigation';
 import { Resolver, SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
-import Checkbox from './components/checkbox';
-import Input from './components/input';
-import Textarea from './components/textarea';
 import { SignUpDTO } from './types';
 
+import Checkbox from '@/shared/components/checkbox';
+import Input from '@/shared/components/input';
+import Textarea from '@/shared/components/textarea';
 import { Button } from '@/shared/components/ui/button';
 import { useToast } from '@/shared/components/ui/use-toast';
 import axios from '@/shared/lib/axios';

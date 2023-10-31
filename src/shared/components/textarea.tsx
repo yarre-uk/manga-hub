@@ -1,6 +1,8 @@
 import { InputHTMLAttributes } from 'react';
 import { Path, UseFormRegister } from 'react-hook-form';
 
+import transformStringFromCamelCase from '../lib/transformStringFromCamelCase';
+
 import { Textarea as TextareaShadCn } from '@/shared/components/ui/textarea';
 
 interface TextareaProps<T> extends InputHTMLAttributes<HTMLTextAreaElement> {
@@ -21,7 +23,7 @@ function Textarea<T>({
 }: TextareaProps<T>) {
   return (
     <div className={divClassName ? divClassName : 'flex flex-col gap-1'}>
-      <label>{label[0].toLocaleUpperCase() + label.slice(1)}</label>
+      <label htmlFor={label}>{transformStringFromCamelCase(label)}</label>
       <TextareaShadCn
         className={className}
         {...register(label)}
