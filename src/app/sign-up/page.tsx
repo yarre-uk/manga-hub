@@ -1,17 +1,51 @@
 'use client';
 
+import { yupResolver } from '@hookform/resolvers/yup';
 import { useRouter } from 'next/navigation';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { Resolver, SubmitHandler, useForm } from 'react-hook-form';
+import * as yup from 'yup';
 
-import Input from './input';
+import Checkbox from './components/checkbox';
+import Input from './components/input';
+import Textarea from './components/textarea';
 import { SignUpDTO } from './types';
 
 import { Button } from '@/shared/components/ui/button';
-import { Textarea } from '@/shared/components/ui/textarea';
 import { useToast } from '@/shared/components/ui/use-toast';
 import axios from '@/shared/lib/axios';
 
-function UserForm() {
+const schema = yup
+  .object({
+    login: yup.string().required('Login required').min(4),
+    password: yup
+      .string()
+      .required('No password provided.')
+      .min(8, 'Password is too short - should be 8 chars minimum.')
+      .matches(/[a-zA-Z]/, 'Password can only contain Latin letters.'),
+    firstName: yup.string().required('First Name required').min(4),
+    lastName: yup.string().required('Last Name required').min(4),
+    description: yup.string().required('Description required').min(15),
+    phoneNumber: yup
+      .string()
+      .required('Phone number required')
+      .min(9, "Phone number can't be less than 9")
+      .max(9, "Phone number can't be bigger than 9"),
+    showConfidentialInformation: yup
+      .boolean()
+      .transform((value) => {
+        return value === 'on';
+      })
+      .required('Show Confidential Information required'),
+    birthDate: yup.date().required('Birth dare required').min(new Date(1950)),
+    email: yup
+      .string()
+      .required('Email required')
+      .email('Incorrect email')
+      .min(4),
+  })
+  .required();
+
+function SignUpPage() {
   const { toast } = useToast();
   const router = useRouter();
 
@@ -19,7 +53,9 @@ function UserForm() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<SignUpDTO>();
+  } = useForm<SignUpDTO>({
+    resolver: yupResolver(schema) as Resolver<SignUpDTO, unknown>,
+  });
 
   const onSubmit: SubmitHandler<SignUpDTO> = async (data) => {
     try {
@@ -29,13 +65,11 @@ function UserForm() {
         birthDate: new Date(data.birthDate).toISOString(),
       });
 
-      // Success toast
       toast({
         title: 'Success',
         description: 'Check your email for confirmation before login',
       });
 
-      // Redirect to home page
       router.push('/');
     } catch (error) {
       // Error toast
@@ -53,37 +87,57 @@ function UserForm() {
         className="flex flex-col gap-6 w-[50%] lg:w-[50rem]"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <Input label="login" register={register} errors={errors} />
-        <Input label="password" register={register} errors={errors} />
-        <Input label="email" register={register} errors={errors} />
-        <Input label="firstName" register={register} errors={errors} />
-        <Input label="lastName" register={register} errors={errors} />
-
-        <div className="flex flex-col gap-2">
-          <label htmlFor="description">Description</label>
-          <Textarea
-            {...register('description', { required: 'This field is required' })}
-          />
-          {errors.description && (
-            <p className="text-red-500 ml-2">{errors.description.message}</p>
-          )}
-        </div>
-        <Input label="phoneNumber" register={register} errors={errors} />
         <Input
-          type="checkbox"
-          label="showConfidentialInformation"
-          className="h-4 w-fit"
-          divClassName="flex flex-row gap-4 items-center"
+          label="login"
           register={register}
-          errors={errors}
+          error={errors?.login?.message}
         />
+        <Input
+          label="password"
+          register={register}
+          error={errors?.password?.message}
+        />
+        <Input
+          label="email"
+          register={register}
+          error={errors?.email?.message}
+        />
+        <Input
+          label="firstName"
+          register={register}
+          error={errors?.firstName?.message}
+        />
+        <Input
+          label="lastName"
+          register={register}
+          error={errors?.lastName?.message}
+        />
+
+        <Textarea
+          label="description"
+          register={register}
+          error={errors?.description?.message}
+        />
+
+        <Input
+          label="phoneNumber"
+          register={register}
+          error={errors?.phoneNumber?.message}
+        />
+
+        <Checkbox
+          label="showConfidentialInformation"
+          register={register}
+          error={errors?.showConfidentialInformation?.message}
+        />
+
         <Input
           type="date"
           label="birthDate"
           register={register}
-          errors={errors}
+          defaultValue={new Date().toISOString().slice(0, 10)}
+          error={errors?.birthDate?.message}
         />
-
         <Button
           type="submit"
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
@@ -95,4 +149,4 @@ function UserForm() {
   );
 }
 
-export default UserForm;
+export default SignUpPage;
