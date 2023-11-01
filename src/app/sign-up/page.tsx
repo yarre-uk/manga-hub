@@ -12,6 +12,7 @@ import Input from '@/shared/components/input';
 import Textarea from '@/shared/components/textarea';
 import { Button } from '@/shared/components/ui/button';
 import { useToast } from '@/shared/components/ui/use-toast';
+import { PasswordRegex } from '@/shared/constants/validationConstants';
 import axios from '@/shared/lib/axios';
 
 const schema = yup
@@ -20,8 +21,11 @@ const schema = yup
     password: yup
       .string()
       .required('No password provided.')
-      .min(8, 'Password is too short - should be 8 chars minimum.')
-      .matches(/[a-zA-Z]/, 'Password can only contain Latin letters.'),
+      .min(
+        8,
+        'Password may contain only latin characters, numbers and special characters.',
+      )
+      .matches(PasswordRegex, 'Password can only contain Latin letters.'),
     firstName: yup.string().required('First Name required').min(4),
     lastName: yup.string().required('Last Name required').min(4),
     description: yup.string().required('Description required').min(15),
@@ -41,7 +45,7 @@ const schema = yup
       .string()
       .required('Email required')
       .email('Incorrect email')
-      .min(4),
+      .min(5, 'Email minimum length is 5'),
   })
   .required();
 
@@ -72,7 +76,6 @@ function SignUpPage() {
 
       router.push('/');
     } catch (error) {
-      // Error toast
       toast({
         title: 'Error occurred',
         variant: 'destructive',

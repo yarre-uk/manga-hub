@@ -14,11 +14,10 @@ export const authOptions: AuthOptions = {
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
-        login: { label: 'Login', type: 'text', value: 'Admin' },
+        login: { label: 'Login', type: 'text' },
         password: {
           label: 'Password',
           type: 'password',
-          value: 'admin231_rte',
         },
       },
       async authorize(credentials) {
