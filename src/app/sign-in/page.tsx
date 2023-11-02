@@ -1,31 +1,99 @@
-import { SubmitHandler, useForm } from 'react-hook-form';
+'use client';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useRouter } from 'next/navigation';
+import { signIn } from 'next-auth/react';
+import { Resolver, SubmitHandler, useForm } from 'react-hook-form';
+import * as yup from 'yup';
 
-type Inputs = {
-  login: string;
-  password: string;
+import { SignInForm } from './types';
+
+import Input from '@/shared/components/input';
+import { Button } from '@/shared/components/ui/button';
+import { PasswordRegex } from '@/shared/constants/validationConstants';
+
+type SignInProps = {
+  className?: string;
+  callbackUrl?: string;
+  error?: string;
 };
 
-function SignIn() {
+const validationSchema = yup
+  .object({
+    login: yup.string().required('Login required').min(4),
+    password: yup
+      .string()
+      .required('No password provided.')
+      .min(8, 'Password minimal length is 8')
+      .matches(
+        PasswordRegex,
+        'Password may contain only latin characters, numbers and special characters.',
+      ),
+  })
+  .required();
+
+function SignInPage(props: SignInProps) {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log(data);
+  } = useForm<SignInForm>({
+    resolver: yupResolver(validationSchema) as Resolver<SignInForm, unknown>,
+  });
+
+  const onSubmit: SubmitHandler<SignInForm> = async (data) => {
+    const res = await signIn('credentials', {
+      login: data.login,
+      password: data.password,
+      redirect: false,
+    });
+
+    if (!res?.error) {
+      router.push(props.callbackUrl ?? 'http://localhost:3000');
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <input {...register('login', { required: true })} />
-      {errors.login && <span>This field is required</span>}
+    <div className="flex gap-6 items-center pt-10 flex-col">
+      <p className="text-2xl">Sign In</p>
+      <form
+        className="flex flex-col gap-6 w-[50%] lg:w-[50rem]"
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        {!!props.error && (
+          <p className="bg-red-100 text-red-600 text-center p-2">
+            Authentication Failed
+          </p>
+        )}
+        <Input
+          id="login"
+          label="login"
+          register={register}
+          error={errors?.login?.message}
+        />
+        <Input
+          id="password"
+          label="password"
+          type="password"
+          register={register}
+          error={errors?.password?.message}
+        />
 
-      <input {...register('password', { required: true })} />
-      {errors.password && <span>This field is required</span>}
+        <Button type="submit">Submit</Button>
 
-      <input type="submit" />
-    </form>
+        <hr />
+        <Button
+          onClick={() => {
+            router.push('/forgot-password');
+          }}
+          variant="outline"
+        >
+          Forgot Password
+        </Button>
+      </form>
+    </div>
   );
 }
 
-export default SignIn;
+export default SignInPage;

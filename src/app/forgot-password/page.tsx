@@ -10,7 +10,7 @@ import { ForgotPasswordDTO } from './types';
 import Input from '@/shared/components/input';
 import { Button } from '@/shared/components/ui/button';
 import { useToast } from '@/shared/components/ui/use-toast';
-import axios from '@/shared/lib/axios';
+import { axios } from '@/shared/lib/axios';
 
 const validationSchema = yup
   .object({

@@ -7,10 +7,8 @@ function Header() {
   const { data: session } = useSession();
 
   return (
-    <div className="flex gap-5 bg-slate-300 p-4">
+    <div className="flex gap-5 bg-secondary p-4">
       <Link href={'/'}>Home</Link>
-      <Link href={'/forgot-password'}>Forgot Password</Link>
-      <Link href={'/change-password'}>Change Password</Link>
       <div className="ml-auto flex gap-5">
         {session?.user ? (
           <>

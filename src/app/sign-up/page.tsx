@@ -13,19 +13,19 @@ import Textarea from '@/shared/components/textarea';
 import { Button } from '@/shared/components/ui/button';
 import { useToast } from '@/shared/components/ui/use-toast';
 import { PasswordRegex } from '@/shared/constants/validationConstants';
-import axios from '@/shared/lib/axios';
+import { axios } from '@/shared/lib/axios';
 
-const schema = yup
+const validationSchema = yup
   .object({
     login: yup.string().required('Login required').min(4),
     password: yup
       .string()
       .required('No password provided.')
-      .min(
-        8,
+      .min(8, 'Password minimal length is 8')
+      .matches(
+        PasswordRegex,
         'Password may contain only latin characters, numbers and special characters.',
-      )
-      .matches(PasswordRegex, 'Password can only contain Latin letters.'),
+      ),
     firstName: yup.string().required('First Name required').min(4),
     lastName: yup.string().required('Last Name required').min(4),
     description: yup.string().required('Description required').min(15),
@@ -58,7 +58,7 @@ function SignUpPage() {
     handleSubmit,
     formState: { errors },
   } = useForm<SignUpDTO>({
-    resolver: yupResolver(schema) as Resolver<SignUpDTO, unknown>,
+    resolver: yupResolver(validationSchema) as Resolver<SignUpDTO, unknown>,
   });
 
   const onSubmit: SubmitHandler<SignUpDTO> = async (data) => {
@@ -141,12 +141,7 @@ function SignUpPage() {
           defaultValue={new Date().toISOString().slice(0, 10)}
           error={errors?.birthDate?.message}
         />
-        <Button
-          type="submit"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
-          Submit
-        </Button>
+        <Button type="submit">Submit</Button>
       </form>
     </div>
   );

@@ -13,12 +13,12 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <body>
         <Providers>
           <Header />
           <Toaster />
-          <div className={'  h-screen '}>{children}</div>
+          <div className="h-screen">{children}</div>
         </Providers>
       </body>
     </html>

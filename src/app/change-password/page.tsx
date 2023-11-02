@@ -12,26 +12,26 @@ import Input from '@/shared/components/input';
 import { Button } from '@/shared/components/ui/button';
 import { useToast } from '@/shared/components/ui/use-toast';
 import { PasswordRegex } from '@/shared/constants/validationConstants';
-import axios from '@/shared/lib/axios';
+import { axios } from '@/shared/lib/axios';
 
 const validationSchema = yup
   .object({
     password: yup
       .string()
       .required('No password provided.')
-      .min(
-        8,
+      .min(8, 'Password minimal length is 8')
+      .matches(
+        PasswordRegex,
         'Password may contain only latin characters, numbers and special characters.',
-      )
-      .matches(PasswordRegex, 'Password can only contain Latin letters.'),
+      ),
     confirmPassword: yup
       .string()
       .required('No password provided.')
-      .min(
-        8,
+      .min(8, 'Password minimal length is 8')
+      .matches(
+        PasswordRegex,
         'Password may contain only latin characters, numbers and special characters.',
-      )
-      .matches(PasswordRegex, 'Password can only contain Latin letters.'),
+      ),
   })
   .required();
 
@@ -54,9 +54,14 @@ function ChangePasswordPage() {
   });
 
   useEffect(() => {
-    axios
-      .get('api/User/request-reset-password', { params: { token } })
-      .catch(() => {
+    (async () => {
+      try {
+        await axios.get('api/User/request-reset-password', {
+          params: { token },
+        });
+      } catch (e) {
+        console.error(e);
+
         toast({
           title: 'Error occurred!',
           variant: 'destructive',
@@ -64,7 +69,8 @@ function ChangePasswordPage() {
         });
 
         router.push('/');
-      });
+      }
+    })();
   }, [token]);
 
   const onSubmit: SubmitHandler<ChangePasswordForm> = async (data) => {
@@ -79,7 +85,7 @@ function ChangePasswordPage() {
 
       toast({
         title: 'Success',
-        description: 'Check your email for changing password',
+        description: 'Your password has been changed successfully',
       });
 
       router.push('/');
@@ -99,11 +105,13 @@ function ChangePasswordPage() {
         onSubmit={handleSubmit(onSubmit)}
       >
         <Input
+          type="password"
           label="password"
           register={register}
           error={errors?.password?.message}
         />
         <Input
+          type="password"
           label="confirmPassword"
           register={register}
           error={errors?.confirmPassword?.message}

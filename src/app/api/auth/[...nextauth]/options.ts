@@ -1,15 +1,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { jwtDecode } from 'jwt-decode';
 import NextAuth, { AuthOptions } from 'next-auth';
-// import { JWT } from 'next-auth/jwt';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
 import { axiosAuth } from '@/shared/lib/axios';
+import { Role } from '@/shared/models/auth';
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 export const authOptions: AuthOptions = {
   session: { strategy: 'jwt' },
   secret: 'Pn9CJbdUk6C9J8+lY6SlmFHkw4NItMpoHJ6ylIwEqrk=',
+  pages: {
+    signIn: '/sign-in',
+  },
   providers: [
     CredentialsProvider({
       name: 'Credentials',
@@ -29,11 +33,21 @@ export const authOptions: AuthOptions = {
 
           const user = res.data;
 
-          if (user) {
-            return user;
-          } else {
+          if (!user) {
             return null;
           }
+
+          const decoded = jwtDecode(user.accessToken);
+          let role: Role;
+
+          // TODO fix
+          for (const prop in decoded) {
+            if (prop.includes('role')) {
+              role = decoded[prop];
+            }
+          }
+
+          return { ...user, role };
         } catch (e) {
           console.error(`Error ${e}`);
           return null;
