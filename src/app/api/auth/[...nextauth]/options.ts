@@ -10,7 +10,6 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 export const authOptions: AuthOptions = {
   session: { strategy: 'jwt' },
-  secret: 'Pn9CJbdUk6C9J8+lY6SlmFHkw4NItMpoHJ6ylIwEqrk=',
   pages: {
     signIn: '/sign-in',
   },

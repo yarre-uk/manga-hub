@@ -1,7 +1,8 @@
 'use client';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useRouter } from 'next/navigation';
-import { signIn } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
+import { useEffect } from 'react';
 import { Resolver, SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
@@ -33,6 +34,7 @@ const validationSchema = yup
 
 function SignInPage(props: SignInProps) {
   const router = useRouter();
+  const { data: session } = useSession();
 
   const {
     register,
@@ -53,6 +55,12 @@ function SignInPage(props: SignInProps) {
       router.push(props.callbackUrl ?? 'http://localhost:3000');
     }
   };
+
+  useEffect(() => {
+    if (session?.user) {
+      router.push('/');
+    }
+  }, [session]);
 
   return (
     <div className="flex gap-6 items-center pt-10 flex-col">
