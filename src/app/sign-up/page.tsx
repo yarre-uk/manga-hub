@@ -12,6 +12,7 @@ import Input from '@/shared/components/input';
 import Textarea from '@/shared/components/textarea';
 import { Button } from '@/shared/components/ui/button';
 import { useToast } from '@/shared/components/ui/use-toast';
+import Route from '@/shared/constants/routes';
 import { PasswordRegex } from '@/shared/constants/validationConstants';
 import { axios } from '@/shared/lib/axios';
 
@@ -74,7 +75,7 @@ function SignUpPage() {
         description: 'Check your email for confirmation before login',
       });
 
-      router.push('/');
+      router.push(Route.Home);
     } catch (error) {
       toast({
         title: 'Error occurred',

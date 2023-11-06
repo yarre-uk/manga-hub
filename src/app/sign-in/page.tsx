@@ -10,6 +10,7 @@ import { SignInForm } from './types';
 
 import Input from '@/shared/components/input';
 import { Button } from '@/shared/components/ui/button';
+import Route from '@/shared/constants/routes';
 import { PasswordRegex } from '@/shared/constants/validationConstants';
 
 type SignInProps = {
@@ -45,20 +46,22 @@ function SignInPage(props: SignInProps) {
   });
 
   const onSubmit: SubmitHandler<SignInForm> = async (data) => {
-    const res = await signIn('credentials', {
+    await signIn('credentials', {
       login: data.login,
       password: data.password,
-      redirect: false,
+      redirect: true,
     });
 
-    if (!res?.error) {
-      router.push(props.callbackUrl ?? 'http://localhost:3000');
-    }
+    router.push(props.callbackUrl ?? Route.Home);
+
+    // if (!res?.error) {
+    //   router.push(props.callbackUrl ?? Route.Home);
+    // }
   };
 
   useEffect(() => {
     if (session?.user) {
-      router.push('/');
+      router.push(Route.Home);
     }
   }, [session]);
 
@@ -93,7 +96,7 @@ function SignInPage(props: SignInProps) {
         <hr />
         <Button
           onClick={() => {
-            router.push('/forgot-password');
+            router.push(Route.ForgotPassword);
           }}
           variant="outline"
         >

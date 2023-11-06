@@ -5,12 +5,8 @@ declare module 'next-auth' {
     user: {
       accessToken: string;
       refreshToken: string;
+      id: number;
       role: Role;
     };
-  }
-  interface DefaultJWT {
-    accessToken: string;
-    refreshToken: string;
-    role: Role;
   }
 }

@@ -1,9 +1,12 @@
 const Route = {
   Home: '/',
-  SignIn: 'signin',
-  SignUp: 'signup',
-  ChangePassword: 'change-password',
-  ForgotPassword: 'forgot-password',
+  SignIn: '/sign-in',
+  SignUp: '/sign-up',
+  ChangePassword: '/change-password',
+  ForgotPassword: '/forgot-password',
+  Weather: '/weather',
+  Admin: '/admin',
+  AddAdmin: '/admin/add-admin',
 };
 
 export default Route;

@@ -1,19 +1,21 @@
 'use client';
 import Link from 'next/link';
-import { signIn, signOut, useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import React from 'react';
+
+import Route from '@/shared/constants/routes';
 
 function Header() {
   const { data: session } = useSession();
 
   return (
     <div className="flex gap-5 bg-secondary p-4">
-      <Link href={'/'}>Home</Link>
+      <Link href={Route.Home}>Home</Link>
       {session?.user.role == 'Admin' || session?.user.role == 'User' ? (
-        <Link href={'/weather'}>Weather Page</Link>
+        <Link href={Route.Weather}>Weather Page</Link>
       ) : null}
       {session?.user.role == 'Admin' ? (
-        <Link href={'/admin'}>Admin Page</Link>
+        <Link href={Route.Admin}>Admin Page</Link>
       ) : null}
       <div className="ml-auto flex gap-5">
         {session?.user ? (
@@ -29,10 +31,8 @@ function Header() {
           </>
         ) : (
           <>
-            <button className="text-green-600" onClick={() => signIn()}>
-              Sign In
-            </button>
-            <Link href={'/sign-up'}>Sign Up</Link>
+            <Link href={Route.SignIn}>Sign In</Link>
+            <Link href={Route.SignUp}>Sign Up</Link>
           </>
         )}
       </div>
