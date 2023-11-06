@@ -6,7 +6,7 @@ export interface User {
   description: string;
   phoneNumber: string;
   showConfidentialInformation: boolean;
-  birthDate: string;
+  birthDate: Date;
   email: string;
   login: string;
   registrationDate: Date;

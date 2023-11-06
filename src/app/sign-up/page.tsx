@@ -7,13 +7,15 @@ import * as yup from 'yup';
 
 import { SignUpDTO } from './types';
 
-import Checkbox from '@/shared/components/checkbox';
 import Input from '@/shared/components/input';
 import Textarea from '@/shared/components/textarea';
 import { Button } from '@/shared/components/ui/button';
 import { useToast } from '@/shared/components/ui/use-toast';
 import Route from '@/shared/constants/routes';
-import { PasswordRegex } from '@/shared/constants/validationConstants';
+import {
+  PasswordRegex,
+  PhoneRegex,
+} from '@/shared/constants/validationConstants';
 import { axios } from '@/shared/lib/axios';
 
 const validationSchema = yup
@@ -33,13 +35,9 @@ const validationSchema = yup
     phoneNumber: yup
       .string()
       .required('Phone number required')
-      .min(9, "Phone number can't be less than 9")
-      .max(9, "Phone number can't be bigger than 9"),
+      .matches(PhoneRegex, 'Incorrect phone number'),
     showConfidentialInformation: yup
       .boolean()
-      .transform((value) => {
-        return value === 'on';
-      })
       .required('Show Confidential Information required'),
     birthDate: yup.date().required('Birth dare required').min(new Date(1950)),
     email: yup
@@ -68,6 +66,7 @@ function SignUpPage() {
         ...data,
         userId: 0,
         birthDate: new Date(data.birthDate).toISOString(),
+        avatar: '',
       });
 
       toast({
@@ -129,9 +128,17 @@ function SignUpPage() {
           error={errors?.phoneNumber?.message}
         />
 
-        <Checkbox
+        {/* <Checkbox
           label="showConfidentialInformation"
           register={register}
+          error={errors?.showConfidentialInformation?.message}
+        /> */}
+
+        <Input
+          type="checkbox"
+          label="showConfidentialInformation"
+          register={register}
+          className="flex flex-row"
           error={errors?.showConfidentialInformation?.message}
         />
 

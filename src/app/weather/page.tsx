@@ -30,7 +30,7 @@ function WeatherPage() {
   return (
     <div>
       <p>User page page</p>
-      <Button onClick={fetchWeather}>Get weather admin</Button>
+      <Button onClick={fetchWeather}>Get weather</Button>
     </div>
   );
 }

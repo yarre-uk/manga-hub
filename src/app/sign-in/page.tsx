@@ -1,6 +1,7 @@
 'use client';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { signIn, useSession } from 'next-auth/react';
 import { useEffect } from 'react';
 import { Resolver, SubmitHandler, useForm } from 'react-hook-form';
@@ -12,12 +13,6 @@ import Input from '@/shared/components/input';
 import { Button } from '@/shared/components/ui/button';
 import Route from '@/shared/constants/routes';
 import { PasswordRegex } from '@/shared/constants/validationConstants';
-
-type SignInProps = {
-  className?: string;
-  callbackUrl?: string;
-  error?: string;
-};
 
 const validationSchema = yup
   .object({
@@ -33,9 +28,10 @@ const validationSchema = yup
   })
   .required();
 
-function SignInPage(props: SignInProps) {
+function SignInPage() {
   const router = useRouter();
   const { data: session } = useSession();
+  const searchParams = useSearchParams();
 
   const {
     register,
@@ -49,10 +45,12 @@ function SignInPage(props: SignInProps) {
     await signIn('credentials', {
       login: data.login,
       password: data.password,
-      redirect: true,
+      redirect: false,
     });
 
-    router.push(props.callbackUrl ?? Route.Home);
+    setTimeout(() => {
+      router.replace(searchParams.get('callbackUrl') ?? Route.Home);
+    }, 50);
 
     // if (!res?.error) {
     //   router.push(props.callbackUrl ?? Route.Home);
@@ -72,7 +70,7 @@ function SignInPage(props: SignInProps) {
         className="flex flex-col gap-6 w-[50%] lg:w-[50rem]"
         onSubmit={handleSubmit(onSubmit)}
       >
-        {!!props.error && (
+        {!!searchParams.get('error') && (
           <p className="bg-red-100 text-red-600 text-center p-2">
             Authentication Failed
           </p>
@@ -94,13 +92,13 @@ function SignInPage(props: SignInProps) {
         <Button type="submit">Submit</Button>
 
         <hr />
-        <Button
-          onClick={() => {
-            router.push(Route.ForgotPassword);
-          }}
-          variant="outline"
-        >
-          Forgot Password
+        <Button className="p-0 " type="button" variant="outline">
+          <Link
+            className="w-full h-full text-center items-center p-2"
+            href={Route.ForgotPassword}
+          >
+            Forgot Password
+          </Link>
         </Button>
       </form>
     </div>
