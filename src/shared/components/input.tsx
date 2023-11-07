@@ -25,7 +25,7 @@ function Input<T>({
     <div className={divClassName ? divClassName : 'flex flex-col gap-1'}>
       <label htmlFor={label}>{transformStringFromCamelCase(label)}</label>
       <InputShadCn className={className} {...register(label)} {...inputProps} />
-      {error && <p className="text-red-500 ml-2">{error}</p>}
+      {error && <p className="ml-2 text-red-500">{error}</p>}
     </div>
   );
 }

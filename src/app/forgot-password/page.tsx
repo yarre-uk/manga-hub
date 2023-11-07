@@ -57,10 +57,10 @@ function ForgotPasswordPage() {
     }
   };
   return (
-    <div className="flex gap-6 items-center pt-10 flex-col">
+    <div className="flex flex-col items-center gap-6 pt-10">
       <p className="text-2xl">Change Password Form</p>
       <form
-        className="flex flex-col gap-6 w-[50%] lg:w-[50rem]"
+        className="flex w-[50%] flex-col gap-6 lg:w-[50rem]"
         onSubmit={handleSubmit(onSubmit)}
       >
         <Input
@@ -71,7 +71,7 @@ function ForgotPasswordPage() {
 
         <Button
           type="submit"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          className="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
         >
           Submit
         </Button>

@@ -19,6 +19,7 @@
     "axios": "^1.5.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
+    "eslint-config-prettier": "^9.0.0",
     "jwt-decode": "^4.0.0",
     "lucide-react": "^0.289.0",
     "next": "^13.5.6",
@@ -41,6 +42,7 @@
     "eslint": "^8.45.0",
     "eslint-config-next": "^13.5.6",
     "eslint-plugin-import": "^2.28.1",
+    "eslint-plugin-prettier": "^5.0.1",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
@@ -48,6 +50,7 @@
     "lint-staged": "^15.0.2",
     "postcss": "^8.4.31",
     "prettier": "3.0.3",
+    "prettier-plugin-tailwindcss": "^0.5.6",
     "shadcn-ui": "^0.4.1",
     "tailwindcss": "^3.3.5",
     "typescript": "^5.0.2"

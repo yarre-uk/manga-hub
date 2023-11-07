@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { DataTable as _DataTable } from './components/data-table';
 import { columns } from './types/columns';
@@ -14,49 +14,51 @@ import useAxiosAuth from '@/shared/lib/hooks/useAxiosAuth';
 import { User } from '@/shared/models/user';
 
 function AdminPage() {
+  const router = useRouter();
+  const session = useSession();
   const axiosAuth = useAxiosAuth();
   const { toast } = useToast();
-  const session = useSession();
-  const router = useRouter();
 
   const [users, setUsers] = useState<User[]>([]);
   const [page, setPage] = useState<number>(1);
 
-  const fetchUsers = async (page: number) => {
-    try {
-      const res = await axiosAuth.get<User[]>('api/User/get-all', {
-        params: { PageSize: 5, PageCount: page },
-      });
+  const fetchUsers = useCallback(
+    async (page: number) => {
+      try {
+        const res = await axiosAuth.get<User[]>('api/User/get-all', {
+          params: { PageSize: 5, PageCount: page },
+        });
 
-      const users = res.data.map((user) => {
-        user.birthDate = new Date(user.birthDate);
-        user.registrationDate = new Date(user.registrationDate);
+        const users = res.data.map((user) => ({
+          ...user,
+          birthDate: new Date(user.birthDate),
+          registrationDate: new Date(user.registrationDate),
+        }));
 
-        return user;
-      });
+        setUsers(users);
 
-      setUsers(users);
+        toast({
+          title: 'Success',
+          description: `Result length - ${res.data.length}`,
+        });
+      } catch (e) {
+        console.error(e);
 
-      toast({
-        title: 'Success',
-        description: `Result length - ${res.data.length}`,
-      });
-    } catch (e) {
-      console.error(e);
-
-      toast({
-        title: 'Error occurred!',
-        variant: 'destructive',
-        description: 'Some error occurred',
-      });
-    }
-  };
+        toast({
+          title: 'Error occurred!',
+          variant: 'destructive',
+          description: 'Some error occurred',
+        });
+      }
+    },
+    [axiosAuth, toast],
+  );
 
   useEffect(() => {
     if (session.data) {
       fetchUsers(page);
     }
-  }, [session, page]);
+  }, [session, page, fetchUsers]);
 
   const onClickNextPage = () => {
     if (users.length != 0) {
@@ -89,7 +91,7 @@ function AdminPage() {
           Previous page
         </Button>
       </div>
-      <p className="text-center p-2">Current page {page}</p>
+      <p className="p-2 text-center">Current page {page}</p>
     </div>
   );
 

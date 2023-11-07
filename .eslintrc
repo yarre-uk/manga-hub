@@ -5,11 +5,18 @@
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:react-hooks/recommended",
-    "next/core-web-vitals"
+    "next/core-web-vitals",
+    "plugin:prettier/recommended"
   ],
   "ignorePatterns": ["dist", ".eslintrc.cjs"],
   "parser": "@typescript-eslint/parser",
-  "plugins": ["react-refresh", "react", "@typescript-eslint", "import"],
+  "plugins": [
+    "react-refresh",
+    "react",
+    "@typescript-eslint",
+    "import",
+    "prettier"
+  ],
   "rules": {
     "react/react-in-jsx-scope": 0,
     "react/display-name": 0,

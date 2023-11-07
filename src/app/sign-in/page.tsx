@@ -61,17 +61,17 @@ function SignInPage() {
     if (session?.user) {
       router.push(Route.Home);
     }
-  }, [session]);
+  }, [session, router]);
 
   return (
-    <div className="flex gap-6 items-center pt-10 flex-col">
+    <div className="flex flex-col items-center gap-6 pt-10">
       <p className="text-2xl">Sign In</p>
       <form
-        className="flex flex-col gap-6 w-[50%] lg:w-[50rem]"
+        className="flex w-[50%] flex-col gap-6 lg:w-[50rem]"
         onSubmit={handleSubmit(onSubmit)}
       >
         {!!searchParams.get('error') && (
-          <p className="bg-red-100 text-red-600 text-center p-2">
+          <p className="bg-red-100 p-2 text-center text-red-600">
             Authentication Failed
           </p>
         )}
@@ -94,7 +94,7 @@ function SignInPage() {
         <hr />
         <Button className="p-0 " type="button" variant="outline">
           <Link
-            className="w-full h-full text-center items-center p-2"
+            className="h-full w-full items-center p-2 text-center"
             href={Route.ForgotPassword}
           >
             Forgot Password

@@ -84,10 +84,10 @@ function SignUpPage() {
     }
   };
   return (
-    <div className="flex gap-6 items-center pt-10 flex-col">
+    <div className="flex flex-col items-center gap-6 pt-10">
       <p className="text-2xl">Registration form</p>
       <form
-        className="flex flex-col gap-6 w-[50%] lg:w-[50rem]"
+        className="flex w-[50%] flex-col gap-6 lg:w-[50rem]"
         onSubmit={handleSubmit(onSubmit)}
       >
         <Input

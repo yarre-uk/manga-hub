@@ -63,3 +63,17 @@
     @apply w-16;
   }
 }
+
+::-webkit-scrollbar-track {
+  background-color: rgba(255, 255, 255, 0.51);
+  padding: 2px;
+  backdrop-filter: blur(35px);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #27272a;
+}
+
+::-webkit-scrollbar {
+  width: 2px;
+}

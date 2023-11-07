@@ -29,7 +29,7 @@ function Textarea<T>({
         {...register(label)}
         {...inputProps}
       />
-      {error && <p className="text-red-500 ml-2">{error}</p>}
+      {error && <p className="ml-2 text-red-500">{error}</p>}
     </div>
   );
 }

@@ -18,7 +18,7 @@ function Checkbox<T>({ label, register, className, error }: CheckboxProps<T>) {
       <CheckboxShadCn id={label} className={className} {...register(label)} />
       <div className="grid gap-1.5 leading-none">
         <label htmlFor={label}>{transformStringFromCamelCase(label)}</label>
-        {error && <p className="text-red-500 ml-2">{error}</p>}
+        {error && <p className="ml-2 text-red-500">{error}</p>}
       </div>
     </div>
   );
