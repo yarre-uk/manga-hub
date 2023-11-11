@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-import { COLORS } from '@/theme';
-
 export const PageLoaderWrapper = styled.div`
   position: absolute;
   top: 0;
