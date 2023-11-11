@@ -6,7 +6,7 @@ import { Control as AuthControl } from '@/shared/components';
 export const SignPageWrapper = styled.div`
   display: grid;
   grid-template-columns: 2fr 1fr;
-  height: calc(100vh - 56px);
+  height: 100vh;
 `;
 
 export const PictureSection = styled.div`
@@ -76,6 +76,7 @@ export const Heading = styled.h2`
   margin: 0 0 1rem;
   text-align: center;
   letter-spacing: 0.4px;
+  line-height: normal;
   font-size: 1.75rem;
   font-weight: 800;
 `;
@@ -85,6 +86,7 @@ export const Subheading = styled.h5`
   text-align: center;
   font-size: 0.9rem;
   font-weight: 400;
+  line-height: normal;
   color: aliceblue;
   letter-spacing: 0.5px;
 `;
@@ -175,7 +177,7 @@ export const SignInButton = styled(Link)`
 export const CopyrightText = styled.p`
   position: absolute;
   right: 2rem;
-  bottom: 0;
+  bottom: 1rem;
   opacity: 0.5;
   pointer-events: none;
   color: #a0a6b0;

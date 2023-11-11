@@ -1,3 +1,4 @@
+'use client';
 import { CSSProperties } from 'react';
 
 import { createAnimation, cssValue, parseLengthAndUnit } from '@/shared/utils';

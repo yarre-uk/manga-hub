@@ -30,5 +30,5 @@ export const GoogleLogo = styled.img`
 export const GoogleSignInButtonText = styled.span`
   all: unset;
   text-transform: none;
-  font-weight: 500;
+  font-weight: 600;
 `;

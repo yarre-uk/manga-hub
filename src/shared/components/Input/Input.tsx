@@ -1,3 +1,4 @@
+'use client';
 import { ChangeEvent, forwardRef, InputHTMLAttributes, Ref } from 'react';
 
 import { Input as StyledInput } from './InputStyles';
