@@ -98,7 +98,7 @@ export const SubmitButton = styled.button<{ bgtype: 'signin' | 'signup' }>`
   height: 3rem;
   margin: 0.75rem 0 0.5rem;
   padding: 0 16px;
-  background: #0b63d9;
+  background: #ff5566;
   color: #f7f7f7;
   border: 0;
   font-family: inherit;
@@ -168,7 +168,7 @@ export const HaveAccountText = styled.p`
   font-weight: 500;
 `;
 
-export const SignInButton = styled(Link)`
+export const SignUpButton = styled(Link)`
   all: unset;
   color: #674299;
   cursor: pointer;

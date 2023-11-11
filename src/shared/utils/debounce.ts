@@ -6,7 +6,6 @@ function debounce<T extends (...args: unknown[]) => void>(
 
   function debounced(...args: Parameters<T>): void {
     const later = () => {
-      // @ts-ignore
       func.apply(this, args);
     };
     clearTimeout(timeout);

@@ -1,11 +1,7 @@
 'use client';
 
 import { yupResolver } from '@hookform/resolvers/yup';
-import {
-  ReadonlyURLSearchParams,
-  useRouter,
-  useSearchParams,
-} from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { signIn } from 'next-auth/react';
 import { useEffect } from 'react';
@@ -36,10 +32,6 @@ import { SignInForm } from '@/components/sign-in/types';
 import { GoogleSignButton } from '@/shared/components';
 import { ROUTE } from '@/shared/constants/routes';
 import { PasswordRegex } from '@/shared/constants/validationConstants';
-
-type Props = {
-  searchParams: ReadonlyURLSearchParams;
-};
 
 const validationSchema = yup
   .object({

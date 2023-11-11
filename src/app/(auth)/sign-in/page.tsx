@@ -1,7 +1,9 @@
-import SignInContainer from '@/components/sign-in';
+import dynamic from 'next/dynamic';
 
-function SignInPage() {
+const SignInContainer = dynamic(() => import('@/components/sign-in'), {
+  ssr: false,
+});
+
+export default function SignInPage() {
   return <SignInContainer />;
 }
-
-export default SignInPage;
