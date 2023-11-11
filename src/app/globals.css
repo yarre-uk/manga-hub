@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap');
 
 @layer base {
   :root {
@@ -62,6 +63,10 @@
   .input {
     @apply w-16;
   }
+}
+
+* {
+  font-family: 'Rubik', sans-serif;
 }
 
 ::-webkit-scrollbar-track {
