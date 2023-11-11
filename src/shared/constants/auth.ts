@@ -1,5 +1,5 @@
-import Route from './routes';
+import { ROUTE } from './routes';
 
-export const UserPages = [Route.Weather];
-export const AdminPages = [Route.Admin, Route.AddAdmin];
+export const UserPages = [ROUTE.WEATHER];
+export const AdminPages = [ROUTE.ADMIN, ROUTE.ADD_ADMIN];
 export const ValidatePages = UserPages.concat(AdminPages);

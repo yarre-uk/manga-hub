@@ -1,12 +1,13 @@
-const Route = {
-  Home: '/',
-  SignIn: '/sign-in',
-  SignUp: '/sign-up',
-  ChangePassword: '/change-password',
-  ForgotPassword: '/forgot-password',
-  Weather: '/weather',
-  Admin: '/admin',
-  AddAdmin: '/admin/add-admin',
-};
+export const enum ROUTE {
+  HOME = '/',
+  SIGN_IN = '/sign-in',
+  SIGN_UP = '/sign-up',
+  CHANGE_PASSWORD = '/change-password',
+  FORGOT_PASSWORD = '/forgot-password',
+  ADMIN = '/admin',
+  ADD_ADMIN = '/admin/add-admin',
+  PROFILE = '/profile',
+  PAGE_NOT_FOUND = '/404',
 
-export default Route;
+  WEATHER = '/weather',
+}
