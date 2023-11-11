@@ -10,7 +10,7 @@ import { ForgotPasswordDTO } from './types';
 import Input from '@/shared/components/input';
 import { Button } from '@/shared/components/ui/button';
 import { useToast } from '@/shared/components/ui/use-toast';
-import Route from '@/shared/constants/routes';
+import { ROUTE } from '@/shared/constants/routes';
 import { axios } from '@/shared/lib/axios';
 
 const validationSchema = yup
@@ -47,7 +47,7 @@ function ForgotPasswordPage() {
         description: 'Check your email for changing password',
       });
 
-      router.push(Route.Home);
+      router.push(ROUTE.HOME);
     } catch (error) {
       toast({
         title: 'Error occurred!',

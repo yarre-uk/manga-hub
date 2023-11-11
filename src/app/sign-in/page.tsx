@@ -1,17 +1,35 @@
 'use client';
 import { yupResolver } from '@hookform/resolvers/yup';
-import Link from 'next/link';
+import { ArrowLeft } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { signIn, useSession } from 'next-auth/react';
 import { useEffect } from 'react';
 import { Resolver, SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
+import {
+  CopyrightText,
+  ForgotPasswordButton,
+  Form,
+  FormFooter,
+  FormSection,
+  HaveAccountText,
+  Heading,
+  PictureSection,
+  Picture,
+  SignPageWrapper,
+  SignInButton,
+  Subheading,
+  SubmitButton,
+  OrText,
+  Control,
+  BackButton,
+  FormContentWrapper,
+} from './styles';
 import { SignInForm } from './types';
 
-import Input from '@/shared/components/input';
-import { Button } from '@/shared/components/ui/button';
-import Route from '@/shared/constants/routes';
+import { GoogleSignButton } from '@/shared/components';
+import { ROUTE } from '@/shared/constants/routes';
 import { PasswordRegex } from '@/shared/constants/validationConstants';
 
 const validationSchema = yup
@@ -34,7 +52,7 @@ function SignInPage() {
   const searchParams = useSearchParams();
 
   const {
-    register,
+    register: formRegister,
     handleSubmit,
     formState: { errors },
   } = useForm<SignInForm>({
@@ -49,59 +67,83 @@ function SignInPage() {
     });
 
     setTimeout(() => {
-      router.replace(searchParams.get('callbackUrl') ?? Route.Home);
+      router.replace(searchParams.get('callbackUrl') ?? ROUTE.HOME);
     }, 50);
-
-    // if (!res?.error) {
-    //   router.push(props.callbackUrl ?? Route.Home);
-    // }
   };
 
   useEffect(() => {
     if (session?.user) {
-      router.push(Route.Home);
+      router.push(ROUTE.HOME);
     }
   }, [session, router]);
 
   return (
-    <div className="flex flex-col items-center gap-6 pt-10">
-      <p className="text-2xl">Sign In</p>
-      <form
-        className="flex w-[50%] flex-col gap-6 lg:w-[50rem]"
-        onSubmit={handleSubmit(onSubmit)}
-      >
-        {!!searchParams.get('error') && (
-          <p className="bg-red-100 p-2 text-center text-red-600">
-            Authentication Failed
-          </p>
-        )}
-        <Input
-          id="login"
-          label="login"
-          register={register}
-          error={errors?.login?.message}
-        />
-        <Input
-          id="password"
-          label="password"
-          type="password"
-          register={register}
-          error={errors?.password?.message}
-        />
+    <SignPageWrapper>
+      <PictureSection>
+        <Picture src="sign/signin.jpg" alt="bg-image" />
+      </PictureSection>
 
-        <Button type="submit">Submit</Button>
-
-        <hr />
-        <Button className="p-0 " type="button" variant="outline">
-          <Link
-            className="h-full w-full items-center p-2 text-center"
-            href={Route.ForgotPassword}
+      <FormSection>
+        <BackButton href={ROUTE.HOME}>
+          <svg
+            viewBox="0 0 24 24"
+            height="3rem"
+            width="3rem"
+            aria-hidden="true"
+            focusable="false"
+            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
           >
-            Forgot Password
-          </Link>
-        </Button>
-      </form>
-    </div>
+            <path d="M12.29 8.71 9.7 11.3a.996.996 0 0 0 0 1.41l2.59 2.59c.63.63 1.71.18 1.71-.71V9.41c0-.89-1.08-1.33-1.71-.7z" />
+          </svg>
+        </BackButton>
+
+        <FormContentWrapper>
+          <Heading>{"Welcome back! Let's sign in to your account"}</Heading>
+          <Subheading>
+            Join our vibrant community and explore exciting features
+          </Subheading>
+
+          <Form onSubmit={handleSubmit(onSubmit)}>
+            <GoogleSignButton>Sign in with Google</GoogleSignButton>
+
+            <OrText>Or</OrText>
+
+            <Control
+              id="login"
+              type="string"
+              placeholder="Login"
+              errorMessage={errors?.login?.message}
+              {...formRegister('login')}
+            />
+
+            <Control
+              id="password"
+              type="password"
+              placeholder="Password"
+              errorMessage={errors?.password?.message}
+              {...formRegister('password')}
+            />
+
+            <SubmitButton bgtype="signin" type="submit">
+              Login
+            </SubmitButton>
+
+            <FormFooter>
+              <HaveAccountText>
+                {"Don't have an account"}
+                <SignInButton href={ROUTE.SIGN_UP}>Sign up</SignInButton>
+              </HaveAccountText>
+
+              <ForgotPasswordButton href={ROUTE.FORGOT_PASSWORD} type="button">
+                Forgot password
+              </ForgotPasswordButton>
+            </FormFooter>
+          </Form>
+          <CopyrightText>© PZPI-21-5 PseudoTeam</CopyrightText>
+        </FormContentWrapper>
+      </FormSection>
+    </SignPageWrapper>
   );
 }
 

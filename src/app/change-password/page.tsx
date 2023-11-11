@@ -11,7 +11,7 @@ import { ChangePasswordDTO, ChangePasswordForm } from './types';
 import Input from '@/shared/components/input';
 import { Button } from '@/shared/components/ui/button';
 import { useToast } from '@/shared/components/ui/use-toast';
-import Route from '@/shared/constants/routes';
+import { ROUTE } from '@/shared/constants/routes';
 import { PasswordRegex } from '@/shared/constants/validationConstants';
 import { axios } from '@/shared/lib/axios';
 
@@ -69,7 +69,7 @@ function ChangePasswordPage() {
           description: 'Your token is invalid, please try again from the start',
         });
 
-        router.push(Route.Home);
+        router.push(ROUTE.HOME);
       }
     })();
   }, [token, router, toast]);
@@ -89,7 +89,7 @@ function ChangePasswordPage() {
         description: 'Your password has been changed successfully',
       });
 
-      router.push(Route.Home);
+      router.push(ROUTE.HOME);
     } catch (error) {
       toast({
         title: 'Error occurred!',

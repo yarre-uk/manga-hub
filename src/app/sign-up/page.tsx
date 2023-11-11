@@ -11,7 +11,7 @@ import Input from '@/shared/components/input';
 import Textarea from '@/shared/components/textarea';
 import { Button } from '@/shared/components/ui/button';
 import { useToast } from '@/shared/components/ui/use-toast';
-import Route from '@/shared/constants/routes';
+import { ROUTE } from '@/shared/constants/routes';
 import {
   PasswordRegex,
   PhoneRegex,
@@ -74,7 +74,7 @@ function SignUpPage() {
         description: 'Check your email for confirmation before login',
       });
 
-      router.push(Route.Home);
+      router.push(ROUTE.HOME);
     } catch (error) {
       toast({
         title: 'Error occurred',

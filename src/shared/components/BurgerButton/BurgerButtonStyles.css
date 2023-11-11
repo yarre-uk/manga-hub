@@ -1,0 +1,76 @@
+
+.burger, .x {
+  position: absolute;
+  width: 4rem;
+  height: 4rem;
+  z-index: 200;
+}
+.plate {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.burger {
+  filter: url(#gooeyness);
+}
+.line {
+  fill: none;
+  stroke: white;
+  stroke-width: 6px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transform-origin: 50%;
+  transition: stroke-dasharray 500ms 200ms, stroke-dashoffset 500ms 200ms, transform 500ms 200ms;
+}
+.x .line {
+  stroke-width: 4px;
+}
+.active .x {
+  transform: scale(1);
+  transition: transform 400ms 350ms;
+}
+
+.plate .line {
+  transition: stroke-dasharray 400ms 100ms, stroke-dashoffset 400ms 100ms, transform 400ms 100ms;
+}
+.plate .line1 {
+  stroke-dasharray: 40 40;
+}
+.plate .line2 {
+  stroke-dasharray: 21 39;
+}
+.plate .line3 {
+  stroke-dasharray: 21 39;
+}
+.plate .line4 {
+  stroke-dasharray: 40 40;
+}
+.plate .x {
+  transition: transform 400ms 50ms;
+}
+
+.active .line {
+  transition: stroke-dasharray 400ms, stroke-dashoffset 400ms, transform 400ms;
+}
+.active .line1 {
+  stroke-dasharray: 1 40;
+  stroke-dashoffset: -33px;
+}
+.active .line2 {
+  stroke-dasharray: 5 39;
+  stroke-dashoffset: -37px;
+}
+.active .line3 {
+  stroke-dasharray: 5 39;
+  stroke-dashoffset: -37px;
+}
+.active .line4 {
+  stroke-dasharray: 1 40;
+  stroke-dashoffset: -33px;
+}
+
+.x {
+  transform: scale(0);
+  transition: transform 400ms;
+}

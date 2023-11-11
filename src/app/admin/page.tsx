@@ -9,7 +9,7 @@ import { columns } from './types/columns';
 
 import { Button } from '@/shared/components/ui/button';
 import { useToast } from '@/shared/components/ui/use-toast';
-import Route from '@/shared/constants/routes';
+import { ROUTE } from '@/shared/constants/routes';
 import useAxiosAuth from '@/shared/lib/hooks/useAxiosAuth';
 import { User } from '@/shared/models/user';
 
@@ -127,7 +127,7 @@ function AdminPage() {
       </Button>
       <Button
         onClick={() => {
-          router.push(Route.AddAdmin);
+          router.push(ROUTE.ADD_ADMIN);
         }}
       >
         Add Admin

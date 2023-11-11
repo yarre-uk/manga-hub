@@ -18,7 +18,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <Providers>
           <Header />
           <Toaster />
-          <div className="h-screen">{children}</div>
+          <div className="h-[calc(100vh-56px)]">{children}</div>
         </Providers>
       </body>
     </html>
