@@ -1,8 +1,13 @@
 'use client';
+
 import { yupResolver } from '@hookform/resolvers/yup';
-import { ArrowLeft } from 'lucide-react';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { signIn, useSession } from 'next-auth/react';
+import {
+  ReadonlyURLSearchParams,
+  useRouter,
+  useSearchParams,
+} from 'next/navigation';
+import { useSession } from 'next-auth/react';
+import { signIn } from 'next-auth/react';
 import { useEffect } from 'react';
 import { Resolver, SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
@@ -26,11 +31,15 @@ import {
   BackButton,
   FormContentWrapper,
 } from './styles';
-import { SignInForm } from './types';
 
+import { SignInForm } from '@/components/sign-in/types';
 import { GoogleSignButton } from '@/shared/components';
 import { ROUTE } from '@/shared/constants/routes';
 import { PasswordRegex } from '@/shared/constants/validationConstants';
+
+type Props = {
+  searchParams: ReadonlyURLSearchParams;
+};
 
 const validationSchema = yup
   .object({
@@ -46,7 +55,7 @@ const validationSchema = yup
   })
   .required();
 
-function SignInPage() {
+export default function SignInContainer() {
   const router = useRouter();
   const { data: session } = useSession();
   const searchParams = useSearchParams();
@@ -146,5 +155,3 @@ function SignInPage() {
     </SignPageWrapper>
   );
 }
-
-export default SignInPage;

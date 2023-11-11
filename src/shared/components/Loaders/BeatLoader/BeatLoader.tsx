@@ -1,7 +1,7 @@
-import { CSSProperties, FC } from 'react';
+'use client';
+import { CSSProperties } from 'react';
 
 import { createAnimation, cssValue } from '@/shared/utils';
-import { COLORS } from '@/theme';
 
 export interface BeatLoaderProps {
   color?: string;
@@ -17,14 +17,14 @@ const beat = createAnimation(
   'beat',
 );
 
-const BeatLoader: FC<BeatLoaderProps> = ({
+function BeatLoader({
   color = '#674299',
   speedMultiplier = 1,
   cssOverride = {},
   size = 15,
   margin = 2,
   ...additionalProps
-}) => {
+}) {
   const wrapper: CSSProperties = {
     display: 'inherit',
     ...cssOverride,
@@ -52,6 +52,6 @@ const BeatLoader: FC<BeatLoaderProps> = ({
       <span style={style(3)} />
     </span>
   );
-};
+}
 
 export default BeatLoader;

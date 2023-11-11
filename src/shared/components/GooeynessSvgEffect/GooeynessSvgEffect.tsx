@@ -1,6 +1,7 @@
+'use client';
 import styled from 'styled-components';
 
-const GooeynessSvgEffect = ({}) => {
+function GooeynessSvgEffect() {
   return (
     <StyledGooeynessSvgEffect>
       <defs>
@@ -17,7 +18,7 @@ const GooeynessSvgEffect = ({}) => {
       </defs>
     </StyledGooeynessSvgEffect>
   );
-};
+}
 
 export default GooeynessSvgEffect;
 

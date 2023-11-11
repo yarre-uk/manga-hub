@@ -1,4 +1,6 @@
-import React, { FC, ReactNode, useState, useRef } from 'react';
+'use client';
+
+import React, { ReactNode, useState, useRef } from 'react';
 
 import {
   Dropdown as StyledDropdown,

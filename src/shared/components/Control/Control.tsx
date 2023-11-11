@@ -1,3 +1,4 @@
+'use client';
 import React, { forwardRef, InputHTMLAttributes, Ref } from 'react';
 
 import { ValidationMessage } from './ControlStyles';

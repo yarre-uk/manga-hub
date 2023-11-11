@@ -1,10 +1,9 @@
-import './globals.css';
+import '../globals.css';
 
 import { ReactNode } from 'react';
 
-import Header from './Header';
-import Providers from './Providers';
-
+import Header from '@/shared/components/Header';
+import Providers from '@/shared/components/Providers';
 import { Toaster } from '@/shared/components/ui/toaster';
 
 interface RootLayoutProps {

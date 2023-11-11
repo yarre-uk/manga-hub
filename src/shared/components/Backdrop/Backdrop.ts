@@ -1,3 +1,4 @@
+'use client';
 import styled from 'styled-components';
 
 interface BackdropProps {
@@ -13,7 +14,9 @@ const Backdrop = styled.div<BackdropProps>`
   background: rgba(0, 0, 0, 0.85);
   z-index: ${({ open }) => (open ? 10 : -10)};
   padding: 8rem 4rem 0;
-  transition: opacity 0.3s ease, z-index 0s;
+  transition:
+    opacity 0.3s ease,
+    z-index 0s;
   opacity: ${({ open }) => (open ? 1 : 0)};
   pointer-events: ${({ open }) => (open ? 'auto' : 'none')};
 `;

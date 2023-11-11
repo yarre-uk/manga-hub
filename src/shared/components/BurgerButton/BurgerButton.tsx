@@ -1,3 +1,4 @@
+'use client';
 import './BurgerButtonStyles.css';
 import { GooeynessSvgEffect } from '..';
 
