@@ -1,5 +1,6 @@
 export const enum ROUTE {
   HOME = '/',
+  CATALOG = '/catalog',
   SIGN_IN = '/sign-in',
   SIGN_UP = '/sign-up',
   CHANGE_PASSWORD = '/change-password',

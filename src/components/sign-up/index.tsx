@@ -42,7 +42,7 @@ const validationSchema = yup
     password: yup
       .string()
       .required('No password provided.')
-      .min(8, 'Password minimal length is 8')
+      .min(4, 'Password minimal length is 4')
       .matches(
         PasswordRegex,
         'Password may contain only latin characters, numbers and special characters.',

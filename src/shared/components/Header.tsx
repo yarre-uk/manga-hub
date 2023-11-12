@@ -10,14 +10,7 @@ function Header() {
 
   return (
     <div className="flex gap-5 bg-secondary p-4">
-      <Link href={ROUTE.HOME}>Home</Link>
-      {session?.user.role == 'Admin' || session?.user.role == 'User' ? (
-        <Link href={ROUTE.WEATHER}>Weather Page</Link>
-      ) : null}
-      {session?.user.role == 'Admin' ? (
-        <Link href={ROUTE.ADMIN}>Admin Page</Link>
-      ) : null}
-      <div className="ml-auto flex gap-5">
+      <div className="container flex justify-end gap-5">
         {session?.user ? (
           <>
             <p className="text-sky-600">
