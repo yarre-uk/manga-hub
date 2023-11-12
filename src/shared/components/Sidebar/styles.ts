@@ -52,7 +52,7 @@ export const StyledSidebarInner = styled.div`
 
 export const StyledSidebarHeader = styled.div`
   width: 100%;
-  height: 72px;
+  height: 56px;
   padding: 0 10px;
   padding-left: 12.5px;
   display: flex;
