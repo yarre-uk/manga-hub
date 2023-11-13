@@ -2,7 +2,7 @@
 
 import { Button } from '@/shared/components/ui/button';
 import { useToast } from '@/shared/components/ui/use-toast';
-import useAxiosAuth from '@/shared/lib/hooks/useAxiosAuth';
+import useAxiosAuth from '@/shared/hooks/useAxiosAuth';
 
 function WeatherPage() {
   const axiosAuth = useAxiosAuth();

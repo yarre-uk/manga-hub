@@ -1,8 +1,8 @@
 import { Path, UseFormRegister } from 'react-hook-form';
 
-import transformStringFromCamelCase from '../lib/transformStringFromCamelCase';
-
-import { Checkbox as CheckboxShadCn } from '@/shared/components/ui/checkbox';
+import { Input } from './ui/input';
+import transformStringFromCamelCase from '../utils/transformStringFromCamelCase';
+import { cn } from '../utils/utils';
 
 interface CheckboxProps<T> {
   label: Path<T>;
@@ -12,14 +12,26 @@ interface CheckboxProps<T> {
   divClassName?: string;
 }
 
-function Checkbox<T>({ label, register, className, error }: CheckboxProps<T>) {
+function Checkbox<T>({
+  label,
+  register,
+  className,
+  error,
+  ...inputProps
+}: CheckboxProps<T>) {
   return (
-    <div className="items-top flex space-x-2">
-      <CheckboxShadCn id={label} className={className} {...register(label)} />
-      <div className="grid gap-1.5 leading-none">
-        <label htmlFor={label}>{transformStringFromCamelCase(label)}</label>
-        {error && <p className="ml-2 text-red-500">{error}</p>}
-      </div>
+    <div className="flex flex-row items-center gap-4">
+      <label htmlFor={label}>{transformStringFromCamelCase(label)}</label>
+      <Input
+        type="checkbox"
+        className={cn(
+          'peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground',
+          className,
+        )}
+        {...register(label)}
+        {...inputProps}
+      />
+      {error && <p className="ml-2 text-red-500">{error}</p>}
     </div>
   );
 }

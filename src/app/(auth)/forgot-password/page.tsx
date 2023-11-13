@@ -11,7 +11,7 @@ import Input from '@/shared/components/input';
 import { Button } from '@/shared/components/ui/button';
 import { useToast } from '@/shared/components/ui/use-toast';
 import { ROUTE } from '@/shared/constants/routes';
-import { axios } from '@/shared/lib/axios';
+import { axios } from '@/shared/utils/axios';
 
 const validationSchema = yup
   .object({

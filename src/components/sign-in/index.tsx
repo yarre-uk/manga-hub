@@ -64,11 +64,13 @@ export default function SignInContainer() {
     await signIn('credentials', {
       login: data.login,
       password: data.password,
-      redirect: false,
+      redirect: true,
     });
 
     setTimeout(() => {
-      router.replace(searchParams.get('callbackUrl') ?? ROUTE.HOME);
+      if (!searchParams.get('error')) {
+        router.replace(searchParams.get('callbackUrl') ?? ROUTE.HOME);
+      }
     }, 50);
   };
 

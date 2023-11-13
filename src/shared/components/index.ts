@@ -10,5 +10,6 @@ export { default as Input } from './Input/Input';
 export { default as Control } from './Control/Control';
 export { default as GoogleSignButton } from './GoogleSignButton/GoogleSignButton';
 export { default as ValidationControl } from './ValidationControl/ValidationControl';
+export { default as DataTable } from './DataTable/DataTable';
 
 export { default as GooeynessSvgEffect } from './GooeynessSvgEffect/GooeynessSvgEffect';

@@ -4,13 +4,13 @@ import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { useCallback, useEffect, useState } from 'react';
 
-import { DataTable as _DataTable } from './components/data-table';
 import { columns } from './types/columns';
 
+import { default as _DataTable } from '@/shared/components/DataTable/DataTable';
 import { Button } from '@/shared/components/ui/button';
 import { useToast } from '@/shared/components/ui/use-toast';
 import { ROUTE } from '@/shared/constants/routes';
-import useAxiosAuth from '@/shared/lib/hooks/useAxiosAuth';
+import useAxiosAuth from '@/shared/hooks/useAxiosAuth';
 import { User } from '@/shared/models/user';
 
 function AdminPage() {

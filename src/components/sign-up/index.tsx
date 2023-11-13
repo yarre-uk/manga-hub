@@ -28,8 +28,8 @@ import { GoogleSignButton, ValidationControl } from '@/shared/components';
 import { useToast } from '@/shared/components/ui/use-toast';
 import { ROUTE } from '@/shared/constants/routes';
 import { PasswordRegex } from '@/shared/constants/validationConstants';
-import { axios } from '@/shared/lib/axios';
 import { TRegisterFormValues } from '@/shared/types/auth';
+import { axios } from '@/shared/utils/axios';
 
 const validationSchema = yup
   .object({

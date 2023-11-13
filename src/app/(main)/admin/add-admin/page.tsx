@@ -4,10 +4,11 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Resolver, SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
+import Checkbox from '@/shared/components/checkbox';
 import Input from '@/shared/components/input';
 import { Button } from '@/shared/components/ui/button';
 import { useToast } from '@/shared/components/ui/use-toast';
-import useAxiosAuth from '@/shared/lib/hooks/useAxiosAuth';
+import useAxiosAuth from '@/shared/hooks/useAxiosAuth';
 
 type SetAdminDTO = { userId: number; isAdmin: boolean };
 
@@ -63,11 +64,9 @@ function ForgotPasswordPage() {
           error={errors?.userId?.message}
         />
 
-        <Input
-          type="checkbox"
+        <Checkbox
           label="isAdmin"
           register={register}
-          className="flex w-auto flex-row"
           error={errors?.isAdmin?.message}
         />
 

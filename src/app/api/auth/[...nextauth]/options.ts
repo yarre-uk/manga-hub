@@ -3,8 +3,8 @@ import { jwtDecode } from 'jwt-decode';
 import NextAuth, { AuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
-import { axiosAuth } from '@/shared/lib/axios';
 import { Role } from '@/shared/models/auth';
+import { axiosAuth } from '@/shared/utils/axios';
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
@@ -36,7 +36,7 @@ export const authOptions: AuthOptions = {
             return null;
           }
 
-          const decoded = jwtDecode(user.accessToken);
+          const decoded: any = jwtDecode(user.accessToken);
           let role: Role;
 
           // TODO fix
@@ -46,7 +46,7 @@ export const authOptions: AuthOptions = {
             }
           }
 
-          return { ...user, role };
+          return { ...user, role, id: decoded.id };
         } catch (e) {
           console.error(`Error ${e}`);
           return null;

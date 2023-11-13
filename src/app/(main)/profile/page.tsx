@@ -1,41 +1,29 @@
-import * as yup from 'yup';
+'use client';
 
-import {
-  PasswordRegex,
-  PhoneRegex,
-} from '@/shared/constants/validationConstants';
+import { useSession } from 'next-auth/react';
+import { useEffect, useState } from 'react';
 
-const validationSchema = yup
-  .object({
-    login: yup.string().required('Login required').min(4),
-    password: yup
-      .string()
-      .required('No password provided.')
-      .min(8, 'Password minimal length is 8')
-      .matches(
-        PasswordRegex,
-        'Password may contain only latin characters, numbers and special characters.',
-      ),
-    firstName: yup.string().required('First Name required').min(4),
-    lastName: yup.string().required('Last Name required').min(4),
-    description: yup.string().required('Description required').min(15),
-    phoneNumber: yup
-      .string()
-      .required('Phone number required')
-      .matches(PhoneRegex, 'Incorrect phone number'),
-    showConfidentialInformation: yup
-      .boolean()
-      .required('Show Confidential Information required'),
-    birthDate: yup.date().required('Birth dare required').min(new Date(1950)),
-    email: yup
-      .string()
-      .required('Email required')
-      .email('Incorrect email')
-      .min(5, 'Email minimum length is 5'),
-  })
-  .required();
+import useAxiosAuth from '@/shared/hooks/useAxiosAuth';
+import { User } from '@/shared/models/user';
 
 export default function Profile() {
-  console.log('validationSchema ==>', validationSchema);
-  return <div>Profile</div>;
+  const axiosAuth = useAxiosAuth();
+  const { data: session } = useSession();
+  const [user, setUser] = useState<User>(null);
+
+  useEffect(() => {
+    (async () => {
+      if (!session) {
+        return;
+      }
+
+      const res = await axiosAuth.get<User>(`api/User`, {
+        params: { userId: session.user.id },
+      });
+
+      setUser(res.data);
+    })();
+  }, [session]);
+
+  return <text>{JSON.stringify(user, null, 4)}</text>;
 }

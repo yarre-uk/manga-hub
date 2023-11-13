@@ -3,7 +3,7 @@ import { useSession } from 'next-auth/react';
 import { useEffect } from 'react';
 
 import { useRefreshToken } from './useRefreshToken';
-import { axiosAuth } from '../axios';
+import { axiosAuth } from '../utils/axios';
 
 const useAxiosAuth = () => {
   const { data: session } = useSession();
