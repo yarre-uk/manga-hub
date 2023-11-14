@@ -28,7 +28,7 @@ import {
   FormContentWrapper,
 } from './styles';
 
-import { SignInForm } from '@/components/sign-in/types';
+import { SignInForm } from '@/containers/sign-in/types';
 import { GoogleSignButton } from '@/shared/components';
 import { ROUTE } from '@/shared/constants/routes';
 import { PasswordRegex } from '@/shared/constants/validationConstants';

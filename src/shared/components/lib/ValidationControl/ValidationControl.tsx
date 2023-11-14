@@ -8,7 +8,7 @@ import {
 } from 'react';
 
 import { ValidationMessage, Spinner, UsernameWrapper } from './styles';
-import { Input } from '..';
+import { Input } from '../..';
 
 import { checkIfServiceKey, debounce } from '@/shared/utils';
 

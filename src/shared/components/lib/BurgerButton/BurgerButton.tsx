@@ -1,6 +1,6 @@
 'use client';
+import { GooeynessSvgEffect } from '../..';
 import './BurgerButtonStyles.css';
-import { GooeynessSvgEffect } from '..';
 
 interface BurgerButtonProps {
   onClick: () => void;

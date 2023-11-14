@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic';
 
-const SignInContainer = dynamic(() => import('@/components/sign-in'), {
+const SignInContainer = dynamic(() => import('@/containers/sign-in'), {
   ssr: false,
 });
 
