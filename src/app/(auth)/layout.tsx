@@ -2,7 +2,7 @@ import '../globals.css';
 
 import { ReactNode } from 'react';
 
-import Providers from '@/shared/components/Providers';
+import { Providers } from '@/shared/components';
 import { Toaster } from '@/shared/components/ui/toaster';
 
 interface RootLayoutProps {

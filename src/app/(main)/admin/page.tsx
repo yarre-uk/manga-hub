@@ -6,7 +6,7 @@ import { useCallback, useEffect, useState } from 'react';
 
 import { columns } from './types/columns';
 
-import { default as _DataTable } from '@/shared/components/DataTable/DataTable';
+import { DataTable as _DataTable } from '@/shared/components';
 import { Button } from '@/shared/components/ui/button';
 import { useToast } from '@/shared/components/ui/use-toast';
 import { ROUTE } from '@/shared/constants/routes';

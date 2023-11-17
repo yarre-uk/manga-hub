@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import styled from 'styled-components';
 
-import { Control as AuthControl } from '@/shared/components';
+import { Control as AuthControl } from '@/shared/components/lib';
 
 export const SignPageWrapper = styled.div`
   display: grid;

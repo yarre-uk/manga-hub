@@ -1,9 +1,8 @@
 import { InputHTMLAttributes } from 'react';
 import { Path, UseFormRegister } from 'react-hook-form';
 
-import transformStringFromCamelCase from '../utils/transformStringFromCamelCase';
-
 import { Textarea as TextareaShadCn } from '@/shared/components/ui/textarea';
+import transformStringFromCamelCase from '@/shared/utils/transformStringFromCamelCase';
 
 interface TextareaProps<T> extends InputHTMLAttributes<HTMLTextAreaElement> {
   label: Path<T>;

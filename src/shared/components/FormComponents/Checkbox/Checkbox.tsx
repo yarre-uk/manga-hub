@@ -1,8 +1,9 @@
 import { Path, UseFormRegister } from 'react-hook-form';
 
-import transformStringFromCamelCase from '../../utils/transformStringFromCamelCase';
-import { cn } from '../../utils/utils';
-import { Input } from '../ui/input';
+import { Input } from '../../ui/input';
+
+import transformStringFromCamelCase from '@/shared/utils/transformStringFromCamelCase';
+import { cn } from '@/shared/utils/utils';
 
 interface CheckboxProps<T> {
   label: Path<T>;

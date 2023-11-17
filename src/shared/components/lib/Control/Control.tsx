@@ -3,7 +3,7 @@ import React, { forwardRef, InputHTMLAttributes, Ref } from 'react';
 
 import { ValidationMessage } from './ControlStyles';
 
-import { Input } from '@/shared/components';
+import { Input } from '@/shared/components/lib';
 
 interface ControlProps extends InputHTMLAttributes<HTMLInputElement> {
   type: string;

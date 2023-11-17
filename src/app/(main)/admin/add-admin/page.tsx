@@ -4,8 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Resolver, SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
-import Checkbox from '@/shared/components/Checkbox/Checkbox';
-import Input from '@/shared/components/input';
+import { Checkbox, Input } from '@/shared/components/FormComponents';
 import { Button } from '@/shared/components/ui/button';
 import { useToast } from '@/shared/components/ui/use-toast';
 import useAxiosAuth from '@/shared/hooks/useAxiosAuth';

@@ -1,9 +1,8 @@
 import { InputHTMLAttributes } from 'react';
 import { Path, UseFormRegister } from 'react-hook-form';
 
-import transformStringFromCamelCase from '../utils/transformStringFromCamelCase';
-
 import { Input as InputShadCn } from '@/shared/components/ui/input';
+import transformStringFromCamelCase from '@/shared/utils/transformStringFromCamelCase';
 
 interface InputProps<T> extends InputHTMLAttributes<HTMLInputElement> {
   label: Path<T>;

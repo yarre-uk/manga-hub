@@ -3,14 +3,13 @@ import '../globals.css';
 import dynamic from 'next/dynamic';
 import { ReactNode } from 'react';
 
-import Header from '@/shared/components/Header/Header';
-import Providers from '@/shared/components/Providers';
 const Sidebar = dynamic(
   () => import('@/shared/components/lib/Sidebar/Sidebar'),
   {
     ssr: false,
   },
 );
+import { Header, Providers } from '@/shared/components';
 import { Toaster } from '@/shared/components/ui/toaster';
 
 interface RootLayoutProps {

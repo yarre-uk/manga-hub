@@ -8,7 +8,7 @@ import * as yup from 'yup';
 
 import { ChangePasswordDTO, ChangePasswordForm } from './types';
 
-import Input from '@/shared/components/input';
+import { Input } from '@/shared/components/FormComponents';
 import { Button } from '@/shared/components/ui/button';
 import { useToast } from '@/shared/components/ui/use-toast';
 import { ROUTE } from '@/shared/constants/routes';

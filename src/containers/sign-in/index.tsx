@@ -29,7 +29,7 @@ import {
 } from './styles';
 
 import { SignInForm } from '@/containers/sign-in/types';
-import { GoogleSignButton } from '@/shared/components';
+import { GoogleSignButton } from '@/shared/components/lib';
 import { ROUTE } from '@/shared/constants/routes';
 import { PasswordRegex } from '@/shared/constants/validationConstants';
 

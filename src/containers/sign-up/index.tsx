@@ -24,7 +24,7 @@ import {
   FormContentWrapper,
 } from './styles';
 
-import { GoogleSignButton, ValidationControl } from '@/shared/components';
+import { GoogleSignButton, ValidationControl } from '@/shared/components/lib';
 import { useToast } from '@/shared/components/ui/use-toast';
 import { ROUTE } from '@/shared/constants/routes';
 import { PasswordRegex } from '@/shared/constants/validationConstants';
