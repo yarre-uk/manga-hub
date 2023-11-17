@@ -36,7 +36,8 @@ export const Picture = styled.img`
 
 export const FormSection = styled.div`
   position: relative;
-  padding: 1.25rem;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
   display: flex;
   flex-direction: column;
   background: #202125;

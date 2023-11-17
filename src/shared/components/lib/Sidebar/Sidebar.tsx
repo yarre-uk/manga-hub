@@ -1,14 +1,6 @@
 'use client';
 
-import {
-  CloudDrizzle,
-  HomeIcon,
-  List,
-  Menu,
-  User2,
-  UserCog,
-  X,
-} from 'lucide-react';
+import { HomeIcon, List, Menu, UserCog, X } from 'lucide-react';
 import { Session } from 'next-auth';
 import { useSession } from 'next-auth/react';
 import { useState } from 'react';
@@ -40,19 +32,14 @@ export function getSidebarNavItems(session: Session) {
       href: ROUTE.CATALOG,
       icon: <List />,
     },
-    {
-      name: 'profile',
-      href: ROUTE.PROFILE,
-      icon: <User2 />,
-    },
   ];
 
   if (userRole === 'User' || userRole === 'Admin') {
-    sidebarNavItems.push({
-      name: 'weather',
-      href: ROUTE.WEATHER,
-      icon: <CloudDrizzle />,
-    });
+    // sidebarNavItems.push({
+    //   name: 'weather',
+    //   href: ROUTE.WEATHER,
+    //   icon: <CloudDrizzle />,
+    // });
 
     if (userRole === 'Admin') {
       sidebarNavItems.push({

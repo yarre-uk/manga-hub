@@ -9,6 +9,4 @@ export const enum ROUTE {
   ADD_ADMIN = '/admin/add-admin',
   PROFILE = '/profile',
   PAGE_NOT_FOUND = '/404',
-
-  WEATHER = '/weather',
 }

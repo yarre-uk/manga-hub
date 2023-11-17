@@ -1,29 +1,19 @@
 'use client';
 
 import { useSession } from 'next-auth/react';
-import { useEffect, useState } from 'react';
-
-import useAxiosAuth from '@/shared/hooks/useAxiosAuth';
-import { User } from '@/shared/models/user';
 
 export default function Profile() {
-  const axiosAuth = useAxiosAuth();
   const { data: session } = useSession();
-  const [user, setUser] = useState<User>(null);
 
-  useEffect(() => {
-    (async () => {
-      if (!session) {
-        return;
-      }
+  return (
+    <div>
+      <p className="text-center text-3xl">Profile information</p>
 
-      const res = await axiosAuth.get<User>(`api/User`, {
-        params: { userId: session.user.id },
-      });
-
-      setUser(res.data);
-    })();
-  }, [session]);
-
-  return <text>{JSON.stringify(user, null, 4)}</text>;
+      <p>{session?.user?.data.login}</p>
+      <p>{session?.user?.data.email}</p>
+      <p>{session?.user?.data.phoneNumber}</p>
+      <p>{session?.user?.data.description}</p>
+      <p>{session?.user?.data.avatar}</p>
+    </div>
+  );
 }

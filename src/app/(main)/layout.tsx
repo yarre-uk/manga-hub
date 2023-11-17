@@ -21,10 +21,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="en" className="dark">
       <body>
         <Providers>
-          <Header />
+          <Header className="pl-[70px]" />
           <Toaster />
           <Sidebar />
-          <div className="ml-[70px] h-[calc(100vh-56px)]">{children}</div>
+          <div className="h-[calc(100vh-56px)] pl-[70px] pt-4">{children}</div>
         </Providers>
       </body>
     </html>

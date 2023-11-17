@@ -28,4 +28,4 @@ export default withAuth(
   },
 );
 
-export const config = { matcher: ['/admin', '/weather', '/admin/add-admin'] };
+export const config = { matcher: ['/profile', '/admin', '/admin/add-admin'] };

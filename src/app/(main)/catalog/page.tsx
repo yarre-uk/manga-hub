@@ -4,7 +4,7 @@ import { Button } from '@/shared/components/ui/button';
 import { useToast } from '@/shared/components/ui/use-toast';
 import useAxiosAuth from '@/shared/hooks/useAxiosAuth';
 
-function WeatherPage() {
+function CatalogPage() {
   const axiosAuth = useAxiosAuth();
   const { toast } = useToast();
 
@@ -35,4 +35,4 @@ function WeatherPage() {
   );
 }
 
-export default WeatherPage;
+export default CatalogPage;

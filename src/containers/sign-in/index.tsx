@@ -30,6 +30,7 @@ import {
 
 import { SignInForm } from '@/containers/sign-in/types';
 import { GoogleSignButton } from '@/shared/components/lib';
+import { useToast } from '@/shared/components/ui/use-toast';
 import { ROUTE } from '@/shared/constants/routes';
 import { PasswordRegex } from '@/shared/constants/validationConstants';
 
@@ -51,6 +52,7 @@ export default function SignInContainer() {
   const router = useRouter();
   const { data: session } = useSession();
   const searchParams = useSearchParams();
+  const { toast } = useToast();
 
   const {
     register: formRegister,
@@ -77,6 +79,16 @@ export default function SignInContainer() {
   useEffect(() => {
     if (session?.user) {
       router.push(ROUTE.HOME);
+    }
+  }, [session, router]);
+
+  useEffect(() => {
+    if (searchParams.get('error')) {
+      toast({
+        title: 'Signin error',
+        description: 'Some error has occurred whilst you were signing in',
+        variant: 'destructive',
+      });
     }
   }, [session, router]);
 
