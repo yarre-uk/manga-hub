@@ -72,7 +72,7 @@ export default function SignIpContainer() {
 
   const onSubmit: SubmitHandler<TRegisterFormValues> = async (data) => {
     try {
-      await axios.post('api/User/register', {
+      await axios.post('User/register', {
         ...data,
         userId: 0,
         // birthDate: new Date(data.birthDate).toISOString(),

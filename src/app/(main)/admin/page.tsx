@@ -25,7 +25,7 @@ function AdminPage() {
   const fetchUsers = useCallback(
     async (page: number) => {
       try {
-        const res = await axiosAuth.get<User[]>('api/User/get-all', {
+        const res = await axiosAuth.get<User[]>('User/get-all', {
           params: { PageSize: 5, PageCount: page },
         });
 
@@ -127,7 +127,7 @@ function AdminPage() {
       </Button>
       <Button
         onClick={() => {
-          router.push(ROUTE.ADD_ADMIN);
+          router.push(ROUTE.SET_ADMIN);
         }}
       >
         Add Admin

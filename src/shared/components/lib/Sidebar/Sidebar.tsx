@@ -1,6 +1,6 @@
 'use client';
 
-import { HomeIcon, List, Menu, UserCog, X } from 'lucide-react';
+import { HomeIcon, List, PlusSquare, Menu, UserCog, X } from 'lucide-react';
 import { Session } from 'next-auth';
 import { useSession } from 'next-auth/react';
 import { useState } from 'react';
@@ -28,18 +28,18 @@ export function getSidebarNavItems(session: Session) {
       icon: <HomeIcon />,
     },
     {
-      name: 'catalog',
-      href: ROUTE.CATALOG,
+      name: 'manga list',
+      href: ROUTE.MANGA,
       icon: <List />,
     },
   ];
 
-  if (userRole === 'User' || userRole === 'Admin') {
-    // sidebarNavItems.push({
-    //   name: 'weather',
-    //   href: ROUTE.WEATHER,
-    //   icon: <CloudDrizzle />,
-    // });
+  if (userRole) {
+    sidebarNavItems.push({
+      name: 'add manga',
+      href: ROUTE.ADD_MANGA,
+      icon: <PlusSquare />,
+    });
 
     if (userRole === 'Admin') {
       sidebarNavItems.push({

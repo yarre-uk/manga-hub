@@ -9,7 +9,7 @@ export const useRefreshToken = () => {
 
   const refreshToken = async () => {
     if (session?.user?.refreshToken) {
-      const res = await axiosAuth.get('api/Auth/refresh', {
+      const res = await axiosAuth.get('Auth/refresh', {
         headers: { refreshTokenString: session?.user.refreshToken },
       });
 

@@ -28,4 +28,12 @@ export default withAuth(
   },
 );
 
-export const config = { matcher: ['/profile', '/admin', '/admin/add-admin'] };
+export const config = {
+  matcher: [
+    '/profile',
+    '/admin',
+    '/admin/set-admin',
+    '/manga/add-manga',
+    '/manga/edit-manga',
+  ],
+};

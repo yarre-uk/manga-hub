@@ -1,12 +1,17 @@
 export const enum ROUTE {
   HOME = '/',
-  CATALOG = '/catalog',
+  PAGE_NOT_FOUND = '/404',
+
   SIGN_IN = '/sign-in',
   SIGN_UP = '/sign-up',
   CHANGE_PASSWORD = '/change-password',
   FORGOT_PASSWORD = '/forgot-password',
-  ADMIN = '/admin',
-  ADD_ADMIN = '/admin/add-admin',
+
   PROFILE = '/profile',
-  PAGE_NOT_FOUND = '/404',
+  MANGA = `/manga`,
+  ADD_MANGA = `${ROUTE.MANGA}/add-manga`,
+  EDIT_MANGA = `${ROUTE.MANGA}/edit-manga`,
+
+  ADMIN = '/admin',
+  SET_ADMIN = `${ROUTE.ADMIN}/set-admin`,
 }

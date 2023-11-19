@@ -1,58 +1,50 @@
 'use client';
 
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useRouter } from 'next/navigation';
 import { Resolver, SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
-import { ForgotPasswordDTO } from './types';
+import { SetAdminDTO } from './types';
 
-import { Input } from '@/shared/components/FormComponents';
+import { Checkbox, Input } from '@/shared/components/FormComponents';
 import { Button } from '@/shared/components/ui/button';
 import { useToast } from '@/shared/components/ui/use-toast';
-import { ROUTE } from '@/shared/constants/routes';
-import { axios } from '@/shared/utils/axios';
+import useAxiosAuth from '@/shared/hooks/useAxiosAuth';
 
 const validationSchema = yup
   .object({
-    email: yup
-      .string()
-      .required('Email required')
-      .email('Incorrect email')
-      .min(5, 'Email minimum length is 5'),
+    userId: yup
+      .number()
+      .required('Id required')
+      .min(0, `Id can't be less then 0`),
+    isAdmin: yup.boolean().required('Show Confidential Information required'),
   })
   .required();
 
-function ForgotPasswordPage() {
+function SetAdminPage() {
   const { toast } = useToast();
-  const router = useRouter();
+  const axiosAuth = useAxiosAuth();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ForgotPasswordDTO>({
-    resolver: yupResolver(validationSchema) as Resolver<
-      ForgotPasswordDTO,
-      unknown
-    >,
+  } = useForm<SetAdminDTO>({
+    resolver: yupResolver(validationSchema) as Resolver<SetAdminDTO, unknown>,
   });
 
-  const onSubmit: SubmitHandler<ForgotPasswordDTO> = async (data) => {
+  const onSubmit: SubmitHandler<SetAdminDTO> = async (data) => {
     try {
-      await axios.post('User/forgot-password', data);
+      await axiosAuth.post('User/set-isadmin-value', data);
 
       toast({
         title: 'Success',
-        description: 'Check your email for changing password',
+        description: `User's admin option of user with id ${data.userId} has been set to ${data.isAdmin}`,
       });
-
-      router.push(ROUTE.HOME);
     } catch (error) {
       toast({
         title: 'Error occurred!',
         variant: 'destructive',
-        // description: error.errors, TODO doesn't work
       });
     }
   };
@@ -64,9 +56,17 @@ function ForgotPasswordPage() {
         onSubmit={handleSubmit(onSubmit)}
       >
         <Input
-          label="email"
+          label="userId"
+          type="number"
+          defaultValue={1}
           register={register}
-          error={errors?.email?.message}
+          error={errors?.userId?.message}
+        />
+
+        <Checkbox
+          label="isAdmin"
+          register={register}
+          error={errors?.isAdmin?.message}
         />
 
         <Button type="submit">Submit</Button>
@@ -75,4 +75,4 @@ function ForgotPasswordPage() {
   );
 }
 
-export default ForgotPasswordPage;
+export default SetAdminPage;

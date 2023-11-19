@@ -21,7 +21,7 @@ const validationSchema = yup
   })
   .required();
 
-function ForgotPasswordPage() {
+function AddMangaPage() {
   const { toast } = useToast();
   const axiosAuth = useAxiosAuth();
 
@@ -35,7 +35,7 @@ function ForgotPasswordPage() {
 
   const onSubmit: SubmitHandler<SetAdminDTO> = async (data) => {
     try {
-      await axiosAuth.post('api/User/set-isadmin-value', data);
+      await axiosAuth.post('User/set-isadmin-value', data);
 
       toast({
         title: 'Success',
@@ -69,15 +69,10 @@ function ForgotPasswordPage() {
           error={errors?.isAdmin?.message}
         />
 
-        <Button
-          type="submit"
-          className="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
-        >
-          Submit
-        </Button>
+        <Button type="submit">Submit</Button>
       </form>
     </div>
   );
 }
 
-export default ForgotPasswordPage;
+export default AddMangaPage;

@@ -57,7 +57,7 @@ function ChangePasswordPage() {
   useEffect(() => {
     (async () => {
       try {
-        await axios.get('api/User/request-reset-password', {
+        await axios.get('User/request-reset-password', {
           params: { token },
         });
       } catch (e) {
@@ -77,7 +77,7 @@ function ChangePasswordPage() {
   const onSubmit: SubmitHandler<ChangePasswordForm> = async (data) => {
     try {
       await axios.post<unknown, unknown, ChangePasswordDTO>(
-        'api/User/reset-password',
+        'User/reset-password',
         {
           ...data,
           token,

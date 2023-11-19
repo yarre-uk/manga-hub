@@ -12,6 +12,8 @@ const Sidebar = dynamic(
 import { Header, Providers } from '@/shared/components';
 import { Toaster } from '@/shared/components/ui/toaster';
 
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+
 interface RootLayoutProps {
   children: ReactNode;
 }

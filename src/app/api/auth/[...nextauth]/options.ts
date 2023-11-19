@@ -7,8 +7,6 @@ import { User } from '@/shared/models/user';
 import { Role } from '@/shared/types/auth';
 import { axiosAuth } from '@/shared/utils/axios';
 
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
-
 export const authOptions: AuthOptions = {
   session: { strategy: 'jwt' },
   pages: {
@@ -26,7 +24,7 @@ export const authOptions: AuthOptions = {
       },
       async authorize(credentials) {
         try {
-          const res = await axiosAuth.post('api/Auth/login', {
+          const res = await axiosAuth.post('Auth/login', {
             login: credentials.login,
             password: credentials.password,
           });
@@ -47,7 +45,7 @@ export const authOptions: AuthOptions = {
             }
           }
 
-          const { data } = await axiosAuth.get<User>(`api/User`, {
+          const { data } = await axiosAuth.get<User>(`User`, {
             headers: { Authorization: `Bearer ${res.data.accessToken}` },
             params: { userId: decoded.id },
           });

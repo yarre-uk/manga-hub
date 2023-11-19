@@ -1,5 +1,7 @@
 import '../globals.css';
 
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+
 import { ReactNode } from 'react';
 
 import { Providers } from '@/shared/components';

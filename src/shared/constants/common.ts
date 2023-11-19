@@ -1,8 +1,10 @@
 export const BASE_API_URL = process.env.NEXT_PUBLIC_API_URL ?? '';
 export const API_URL = `${BASE_API_URL}/api`;
+
 export const AUTHORIZATION_STORAGE_KEY = 'authorized';
 export const AUTHORIZATION_TOKEN_STORAGE_KEY = 'auth_token';
 export const REFRESH_TOKEN_STORAGE_KEY = 'refresh_token';
+
 export const CLIENT_URL = process.env.NEXT_PUBLIC_CLIENT_URL ?? '';
 
 export const SAVED_ROUTE_LOCATION_DATA_STORAGE_KEY =
