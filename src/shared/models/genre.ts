@@ -27,3 +27,13 @@ export const Genre = {
 type ObjectValues<T> = T[keyof T];
 
 export type GenreType = ObjectValues<typeof Genre>;
+
+export function getGenreName(value: GenreType): string | undefined {
+  for (const prop in Genre) {
+    if (Genre[prop as keyof typeof Genre] === value) {
+      return prop;
+    }
+  }
+
+  return undefined;
+}
