@@ -2,7 +2,7 @@ import { Path, UseFormRegister } from 'react-hook-form';
 
 import { Input } from '../../ui/input';
 
-import transformStringFromCamelCase from '@/shared/utils/transformStringFromCamelCase';
+import capitalizedWords from '@/shared/utils/capitalizedWords';
 import { cn } from '@/shared/utils/utils';
 
 interface CheckboxProps<T> {
@@ -22,7 +22,7 @@ function Checkbox<T>({
 }: CheckboxProps<T>) {
   return (
     <div className="flex flex-row items-center gap-4">
-      <label htmlFor={label}>{transformStringFromCamelCase(label)}</label>
+      <label htmlFor={label}>{capitalizedWords(label)}</label>
       <Input
         type="checkbox"
         className={cn(

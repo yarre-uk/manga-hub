@@ -1,25 +1,46 @@
 'use client';
 
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Resolver, SubmitHandler, useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
-import { Checkbox, Input } from '@/shared/components/FormComponents';
+import { FormValues } from './types';
+
+import { Input, Select, Textarea } from '@/shared/components/FormComponents';
 import { Button } from '@/shared/components/ui/button';
+import {
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/shared/components/ui/select';
 import { useToast } from '@/shared/components/ui/use-toast';
 import useAxiosAuth from '@/shared/hooks/useAxiosAuth';
+import { Genre } from '@/shared/models/genre';
+import capitalizedWords from '@/shared/utils/capitalizedWords';
 
-type SetAdminDTO = { userId: number; isAdmin: boolean };
-
-const validationSchema = yup
-  .object({
-    userId: yup
-      .number()
-      .required('Id required')
-      .min(0, `Id can't be less then 0`),
-    isAdmin: yup.boolean().required('Show Confidential Information required'),
-  })
-  .required();
+const validationSchema: yup.ObjectSchema<FormValues> = yup.object({
+  title: yup.string().required('No title provided.').min(4, 'Title too short.'),
+  genre: yup.string().required('No genre provided.'),
+  description: yup
+    .string()
+    .required('No description provided.')
+    .min(15, 'Description must be at least 15 characters long.'),
+  releasedOn: yup.date().required('No release date provided.'),
+  // coverImage: yup
+  //   .mixed<File>()
+  //   .transform((value) => {
+  //     if (!value) return value;
+  //     return value[0];
+  //   })
+  //   .test('fileSize', 'Invalid file', function (value) {
+  //     if (!value) return true;
+  //     if ('size' in value) {
+  //       return value.size <= 1024 * 1024; // 1MB
+  //     }
+  //     return true;
+  //   }),
+});
 
 function AddMangaPage() {
   const { toast } = useToast();
@@ -29,17 +50,23 @@ function AddMangaPage() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<SetAdminDTO>({
-    resolver: yupResolver(validationSchema) as Resolver<SetAdminDTO, unknown>,
+    setValue,
+    getValues,
+  } = useForm({
+    resolver: yupResolver(validationSchema),
   });
 
-  const onSubmit: SubmitHandler<SetAdminDTO> = async (data) => {
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
     try {
-      await axiosAuth.post('User/set-isadmin-value', data);
-
+      await axiosAuth.post<unknown, unknown, unknown>('Mangas', {
+        ...data,
+        genres: {},
+        coverImage: '',
+        genre: Genre[data.genre],
+      });
       toast({
         title: 'Success',
-        description: `User's admin option of user with id ${data.userId} has been set to ${data.isAdmin}`,
+        description: `Manga ${data.title} was successfully created!`,
       });
     } catch (error) {
       toast({
@@ -48,27 +75,58 @@ function AddMangaPage() {
       });
     }
   };
+
   return (
     <div className="flex flex-col items-center gap-6 pt-10">
-      <p className="text-2xl">Change Password Form</p>
+      <p className="text-2xl">Add new manga</p>
       <form
         className="flex w-[50%] flex-col gap-6 lg:w-[50rem]"
         onSubmit={handleSubmit(onSubmit)}
       >
         <Input
-          label="userId"
-          type="number"
-          defaultValue={1}
+          label="title"
           register={register}
-          error={errors?.userId?.message}
+          error={errors?.title?.message}
         />
-
-        <Checkbox
-          label="isAdmin"
+        <Input
+          label="releasedOn"
+          type="date"
           register={register}
-          error={errors?.isAdmin?.message}
+          error={errors?.releasedOn?.message}
+          defaultValue={new Date().toISOString().slice(0, 10)}
         />
-
+        <Textarea
+          label="description"
+          register={register}
+          error={errors?.description?.message}
+        />
+        <Select
+          label={'genre'}
+          setValue={setValue}
+          getValues={getValues}
+          register={register}
+          error={errors?.genre?.message}
+        >
+          <SelectTrigger className="w-[280px]">
+            <SelectValue placeholder="Select genre" />
+          </SelectTrigger>
+          <SelectContent>
+            <>
+              {Object.keys(Genre).map((key) => (
+                <SelectItem key={key} value={key}>
+                  {capitalizedWords(key)}
+                </SelectItem>
+              ))}
+            </>
+          </SelectContent>
+        </Select>
+        {/* <Input
+          label="coverImage"
+          type="file"
+          accept="image/*"
+          register={register}
+          error={errors?.coverImage?.message}
+        /> */}
         <Button type="submit">Submit</Button>
       </form>
     </div>
