@@ -1,3 +1,5 @@
+import { ObjectValues } from '../types/utils';
+
 export const Genre = {
   Shonen: 1,
   Seinen: 3,
@@ -23,8 +25,6 @@ export const Genre = {
   Cooking: 36,
   Military: 37,
 } as const;
-
-type ObjectValues<T> = T[keyof T];
 
 export type GenreType = ObjectValues<typeof Genre>;
 

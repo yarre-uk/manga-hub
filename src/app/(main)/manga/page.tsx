@@ -1,41 +1,27 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import MangaCard from './components/MangaCard';
 import { MangaDTO } from './types';
 
+import { FullPageLoader } from '@/shared/components/lib';
+import { axios } from '@/shared/utils/axios';
+
 function AdminMangaPage() {
-  const mangaasd: MangaDTO[] = [
-    {
-      mangaId: 'a85cedec-c71a-4774-ae93-355bf1b70c1f',
-      title: 'Hello world, this is a very long title',
-      genre: 12,
-      coverImage: '',
-      rating: 0,
-    },
-    {
-      mangaId: 'a85cedec-c71a-4774-ae93-355bf1b70c1f',
-      title: 'Hello world, this is a very long title',
-      genre: 12,
-      coverImage: '',
-      rating: 0,
-    },
-  ];
+  const [manga, setManga] = useState<MangaDTO[] | null>();
 
-  const [manga] = useState<MangaDTO[]>(mangaasd);
+  useEffect(() => {
+    axios.get<MangaDTO[]>('Mangas/get-all').then((res) => setManga(res.data));
+  }, []);
 
-  // const { toast } = useToast();
-  // const axiosAuth = useAxiosAuth();
-
-  // useEffect(() => {
-  //   (async () => {
-  //     //TODO handle error
-  //     const res = await axios.get<MangaDTO[]>('Mangas/get-all');
-
-  //     setManga(res.data);
-  //   })();
-  // }, []);
+  if (!manga) {
+    return (
+      <div className="flex h-full w-full items-center justify-center">
+        <FullPageLoader />
+      </div>
+    );
+  }
 
   const MangaCards = manga.map((manga) => (
     <MangaCard key={manga.mangaId} data={manga} />
