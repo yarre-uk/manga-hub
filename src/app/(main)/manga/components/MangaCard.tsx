@@ -7,6 +7,7 @@ import { MangaDTO } from '../types';
 
 import { Card, CardDescription, CardTitle } from '@/shared/components/ui/card';
 import { getGenreName } from '@/shared/models/genre';
+import bytesToImage from '@/shared/utils/bytesToImage';
 
 type MangaCardProps = {
   data: MangaDTO;
@@ -18,15 +19,6 @@ function truncateTitle(title: string, length: number) {
 
 function MangaCard({ data }: MangaCardProps) {
   const router = useRouter();
-
-  const byteCharacters = atob(data.coverImage);
-  const byteNumbers = new Array(byteCharacters.length);
-  for (let i = 0; i < byteCharacters.length; i++) {
-    byteNumbers[i] = byteCharacters.charCodeAt(i);
-  }
-  const byteArray = new Uint8Array(byteNumbers);
-  const blob = new Blob([byteArray], { type: 'image/png' });
-  const url = URL.createObjectURL(blob);
 
   return (
     <Card
@@ -42,11 +34,12 @@ function MangaCard({ data }: MangaCardProps) {
         </CardDescription>
         <CardDescription>Rating: {data.rating} / 5</CardDescription>
       </div>
-      <div className="relative my-auto flex h-[175px] w-[125px] items-center justify-center rounded">
+      <div className="relative my-auto flex h-[175px] w-[125px] items-center justify-center">
         <Image
-          layout="fill"
-          objectFit="cover"
-          src={url}
+          className="h-full w-full rounded-lg object-cover"
+          src={bytesToImage(data.coverImage)}
+          width={225}
+          height={300}
           alt={`${data.title} cover image`}
         />
       </div>

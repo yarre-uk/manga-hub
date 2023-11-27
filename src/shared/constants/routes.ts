@@ -9,8 +9,8 @@ export const enum ROUTE {
 
   PROFILE = '/profile',
   MANGA = `/manga`,
-  ADD_MANGA = `${ROUTE.MANGA}/add-manga`,
-  EDIT_MANGA = `${ROUTE.MANGA}/edit-manga`,
+  ADD_MANGA = `${ROUTE.MANGA}/add`,
+  EDIT_MANGA = `${ROUTE.MANGA}/edit`,
 
   ADMIN = '/admin',
   SET_ADMIN = `${ROUTE.ADMIN}/set-admin`,
