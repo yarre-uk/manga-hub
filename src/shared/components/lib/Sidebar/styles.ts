@@ -24,7 +24,7 @@ export const StyledBurgerButton = styled.button`
 `;
 
 export const StyledSidebar = styled.nav<{ $open: boolean }>`
-  position: absolute;
+  position: fixed;
   overflow: hidden;
   top: 0;
   left: 0;
