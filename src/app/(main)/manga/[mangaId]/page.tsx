@@ -6,16 +6,17 @@ import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import React, { useEffect, useRef, useState } from 'react';
 
-import ChapterList from './components/ChapterList';
+import Chapters from './components/Chapters';
 import { ChapterDTO } from './types';
 
-import { BeatLoader, FullPageLoader } from '@/shared/components/lib';
+import { FullPageLoader } from '@/shared/components/lib';
 import { Button } from '@/shared/components/ui/button';
 import useAxiosAuth from '@/shared/hooks/useAxiosAuth';
 import { getGenreName } from '@/shared/models/genre';
 import Manga from '@/shared/models/manga';
 import { axios } from '@/shared/utils/axios';
 import bytesToImage from '@/shared/utils/bytesToImage';
+import capitalizedWords from '@/shared/utils/capitalizedWords';
 
 type PageProps = {
   params: {
@@ -36,7 +37,7 @@ function Page({ params: { mangaId } }: PageProps) {
 
   const fetchManga = async (mangaId: string) => {
     const res = await axios.get<Manga>(`Mangas`, {
-      params: { mangaId: mangaId },
+      params: { mangaId },
     });
 
     return res.data;
@@ -44,7 +45,7 @@ function Page({ params: { mangaId } }: PageProps) {
 
   const fetchChapters = async (mangaId: string) => {
     const res = await axios.get<ChapterDTO[]>(`Chapters/get-manga-chapters`, {
-      params: { mangaId: mangaId },
+      params: { mangaId },
     });
 
     return res.data;
@@ -100,7 +101,9 @@ function Page({ params: { mangaId } }: PageProps) {
         <div id="info" className="flex flex-col justify-between ">
           <div className="flex flex-col gap-1">
             <h2 className="mb-4 text-2xl font-bold">{manga.title}</h2>
-            <p className="text-primary">Genre: {getGenreName(manga.genre)}</p>
+            <p className="text-primary">
+              Genre: {capitalizedWords(getGenreName(manga.genre))}
+            </p>
             <p>Description: {manga.description}</p>
             <p>
               Released on: {new Date(manga.releasedOn).toLocaleDateString()}
@@ -112,7 +115,7 @@ function Page({ params: { mangaId } }: PageProps) {
               className="mt-4"
               variant="outline"
               onClick={() => {
-                router.push(`/manga/edit/${mangaId}`);
+                router.push(`/manga/edit?mangaId=${mangaId}`);
               }}
             >
               Edit Manga
@@ -153,8 +156,8 @@ function Page({ params: { mangaId } }: PageProps) {
               <input
                 type="file"
                 id="fileUpload"
-                style={{ display: 'none' }}
                 ref={fileInputRef}
+                className="hidden"
                 onChange={handleImageChange}
               />
             </div>
@@ -162,18 +165,7 @@ function Page({ params: { mangaId } }: PageProps) {
         </div>
       </div>
 
-      <div id="chapters" className="flex flex-col gap-2">
-        <p className="mb-4 text-2xl font-bold">Chapters</p>
-        <>
-          {chapters?.length !== 0 ? (
-            <ChapterList chapters={chapters} />
-          ) : (
-            <div className="text-center">
-              <BeatLoader size={30} />
-            </div>
-          )}
-        </>
-      </div>
+      <Chapters mangaId={mangaId} chapters={chapters} />
     </div>
   );
 }
