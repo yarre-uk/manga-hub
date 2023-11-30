@@ -1,7 +1,7 @@
 type Chapter = {
   chapterId: string;
   title: string;
-  scans: Uint8Array;
+  scans: string;
   chapterNumber: number;
   createdOn: Date;
   lastUpdatedOn?: Date;
