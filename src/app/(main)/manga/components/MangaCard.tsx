@@ -7,7 +7,7 @@ import { MangaDTO } from '../types';
 
 import { Card, CardDescription, CardTitle } from '@/shared/components/ui/card';
 import { getGenreName } from '@/shared/models/genre';
-import bytesToImage from '@/shared/utils/bytesToImage';
+import bytesToFile from '@/shared/utils/bytesToImage';
 
 type MangaCardProps = {
   data: MangaDTO;
@@ -37,7 +37,7 @@ function MangaCard({ data }: MangaCardProps) {
       <div className="relative my-auto flex h-[175px] w-[125px] items-center justify-center">
         <Image
           className="h-full w-full rounded-lg object-cover"
-          src={bytesToImage(data.coverImage)}
+          src={bytesToFile(data.coverImage, 'image/png')}
           width={225}
           height={300}
           alt={`${data.title} cover image`}

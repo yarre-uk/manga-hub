@@ -15,7 +15,7 @@ import useAxiosAuth from '@/shared/hooks/useAxiosAuth';
 import { getGenreName } from '@/shared/models/genre';
 import Manga from '@/shared/models/manga';
 import { axios } from '@/shared/utils/axios';
-import bytesToImage from '@/shared/utils/bytesToImage';
+import bytesToFile from '@/shared/utils/bytesToImage';
 import capitalizedWords from '@/shared/utils/capitalizedWords';
 
 type PageProps = {
@@ -137,7 +137,7 @@ function Page({ params: { mangaId } }: PageProps) {
           <div id="image" className=" h-[300px] w-[225px] ">
             <Image
               className="h-full w-full rounded-lg object-cover"
-              src={bytesToImage(manga.coverImage)}
+              src={bytesToFile(manga.coverImage, 'image/png')}
               width={225}
               height={300}
               alt={`${manga.title} cover image`}
