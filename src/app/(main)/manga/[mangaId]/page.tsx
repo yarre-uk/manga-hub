@@ -6,11 +6,11 @@ import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import React, { useEffect, useRef, useState } from 'react';
 
-import Chapters from './components/Chapters';
 import { ChapterDTO } from './types';
 
 import { FullPageLoader } from '@/shared/components/lib';
 import { Button } from '@/shared/components/ui/button';
+import { ROUTE } from '@/shared/constants/routes';
 import useAxiosAuth from '@/shared/hooks/useAxiosAuth';
 import { getGenreName } from '@/shared/models/genre';
 import Manga from '@/shared/models/manga';
@@ -111,20 +111,23 @@ function Page({ params: { mangaId } }: PageProps) {
             <p>Rating: {manga.rating} / 5</p>
           </div>
           <div className="flex flex-col">
-            <Button
-              className="mt-4"
-              variant="outline"
-              onClick={() => {
-                router.push(`/manga/edit?mangaId=${mangaId}`);
-              }}
-            >
-              Edit Manga
-            </Button>
+            {session?.user?.accessToken && (
+              <Button
+                className="mt-4"
+                variant="outline"
+                onClick={() => {
+                  router.push(`/manga/edit?mangaId=${mangaId}`);
+                }}
+              >
+                Edit Manga
+              </Button>
+            )}
+
             <Button
               className="mt-4"
               onClick={() => {
                 router.push(
-                  `/manga/${mangaId}/chapter/${chapters?.[0].chapterId ?? 1}}`,
+                  `${ROUTE.MANGA}/${mangaId}/${chapters?.[0].chapterId}`,
                 );
               }}
             >
@@ -165,7 +168,7 @@ function Page({ params: { mangaId } }: PageProps) {
         </div>
       </div>
 
-      <Chapters mangaId={mangaId} chapters={chapters} />
+      {/* <Chapters mangaId={mangaId} chapters={chapters} /> */}
     </div>
   );
 }

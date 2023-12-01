@@ -76,7 +76,11 @@ export default function SignIpContainer() {
         ...data,
         userId: 0,
         // birthDate: new Date(data.birthDate).toISOString(),
+        description: 'TEST TEST TEST TEST TEST',
+        firstName: 'TEST TEST',
+        lastName: 'TEST TEST',
         avatar: '',
+        phoneNumber: '555 555 5555',
       });
 
       toast({
@@ -138,7 +142,7 @@ export default function SignIpContainer() {
               id="email"
               type="string"
               placeholder="Email"
-              takenMessage="Email already taken"
+              // takenMessage="Email already taken"
               errorMessage={errors.email?.message}
               //getValues().email
               onCheck={() => handleLoginEmailCheck()}
@@ -149,7 +153,7 @@ export default function SignIpContainer() {
               id="login"
               type="string"
               placeholder="Login"
-              takenMessage="Login already taken"
+              // takenMessage="Login already taken"
               errorMessage={errors.login?.message}
               //getValues().login
               onCheck={() => handleLoginEmailCheck()}

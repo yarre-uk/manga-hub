@@ -1,6 +1,7 @@
 'use client';
 
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useRouter } from 'next/navigation';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
@@ -15,6 +16,7 @@ import {
   SelectValue,
 } from '@/shared/components/ui/select';
 import { useToast } from '@/shared/components/ui/use-toast';
+import { ROUTE } from '@/shared/constants/routes';
 import useAxiosAuth from '@/shared/hooks/useAxiosAuth';
 import { Genre } from '@/shared/models/genre';
 import capitalizedWords from '@/shared/utils/capitalizedWords';
@@ -32,6 +34,7 @@ const validationSchema: yup.ObjectSchema<FormValues> = yup.object({
 function AddMangaPage() {
   const { toast } = useToast();
   const axiosAuth = useAxiosAuth();
+  const router = useRouter();
 
   const {
     register,
@@ -51,10 +54,13 @@ function AddMangaPage() {
         coverImage: '',
         genre: Genre[data.genre],
       });
+
       toast({
         title: 'Success',
         description: `Manga "${data.title}" was successfully created!`,
       });
+
+      router.push(ROUTE.MANGA);
     } catch (error) {
       toast({
         title: 'Error occurred!',
@@ -107,13 +113,6 @@ function AddMangaPage() {
             </>
           </SelectContent>
         </Select>
-        {/* <Input
-          label="coverImage"
-          type="file"
-          accept="image/*"
-          register={register}
-          error={errors?.coverImage?.message}
-        /> */}
         <Button type="submit">Submit</Button>
       </form>
     </div>
