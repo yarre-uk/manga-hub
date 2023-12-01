@@ -6,8 +6,9 @@ import { useRouter } from 'next/navigation';
 import { MangaDTO } from '../types';
 
 import { Card, CardDescription, CardTitle } from '@/shared/components/ui/card';
-import { getGenreName } from '@/shared/models/genre';
+import { Genre, GenreType } from '@/shared/models/genre';
 import bytesToFile from '@/shared/utils/bytesToImage';
+import capitalizedWords from '@/shared/utils/capitalizedWords';
 
 type MangaCardProps = {
   data: MangaDTO;
@@ -20,6 +21,16 @@ function truncateTitle(title: string, length: number) {
 function MangaCard({ data }: MangaCardProps) {
   const router = useRouter();
 
+  function getGenreName(value: GenreType): string | undefined {
+    for (const prop in Genre) {
+      if (Genre[prop as keyof typeof Genre] === value) {
+        return prop;
+      }
+    }
+
+    return undefined;
+  }
+
   return (
     <Card
       onClick={() => {
@@ -31,6 +42,14 @@ function MangaCard({ data }: MangaCardProps) {
         <CardTitle>{truncateTitle(data.title, 20)}</CardTitle>
         <CardDescription className="text-primary">
           {getGenreName(data.genre)}
+        </CardDescription>
+        <CardDescription className="text-primary">
+          Genre:{' '}
+          {capitalizedWords(
+            getGenreName(
+              parseInt(data.genre as unknown as string) as GenreType,
+            ),
+          )}
         </CardDescription>
         <CardDescription>Rating: {data.rating} / 5</CardDescription>
       </div>

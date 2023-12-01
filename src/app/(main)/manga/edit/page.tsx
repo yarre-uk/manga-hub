@@ -25,7 +25,7 @@ import capitalizedWords from '@/shared/utils/capitalizedWords';
 
 const validationSchema: yup.ObjectSchema<FormValues> = yup.object({
   title: yup.string().required('No title provided.').min(4, 'Title too short.'),
-  genre: yup.string().required('No genre provided.'),
+  genre: yup.string(),
   description: yup
     .string()
     .required('No description provided.')
@@ -67,11 +67,9 @@ function AddMangaPage() {
 
   useEffect(() => {
     fetchManga(mangaId).then((manga) => {
-      console.log(manga);
       setValue('title', manga?.title);
-      setValue('genre', getGenreName(manga?.genre));
+      // setValue('genre', getGenreName(manga?.genre));
       setValue('description', manga?.description);
-      // setValue('releasedOn', new Date());
       setManga(manga);
     });
   }, [mangaId]);
@@ -83,7 +81,7 @@ function AddMangaPage() {
         ...data,
         mangaId,
         genres: {},
-        genre: Genre[data.genre],
+        genre: Genre[data.genre] ?? manga.genre,
       });
 
       toast({
@@ -133,9 +131,9 @@ function AddMangaPage() {
         />
         <Select
           label={'genre'}
-          defaultValue="2"
           setValue={setValue}
           getValues={getValues}
+          defaultValue={getGenreName(manga?.genre)}
           register={register}
           error={errors?.genre?.message}
         >

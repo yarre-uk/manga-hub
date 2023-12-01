@@ -7,3 +7,9 @@ export type MangaDTO = {
   coverImage?: string;
   rating: number;
 };
+
+export type SearchParams = {
+  title: string;
+  genre: string;
+  rating: number;
+};

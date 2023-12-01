@@ -16,7 +16,7 @@ interface ValidationControlProps extends InputHTMLAttributes<HTMLInputElement> {
   type: string;
   id: string;
   placeholder: string;
-  takenMessage: string;
+  takenMessage?: string;
   errorMessage?: string;
   onCheck: () => Promise<boolean> | boolean;
 }
