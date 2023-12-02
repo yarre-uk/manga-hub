@@ -22,7 +22,10 @@ import { Genre } from '@/shared/models/genre';
 import capitalizedWords from '@/shared/utils/capitalizedWords';
 
 const validationSchema: yup.ObjectSchema<FormValues> = yup.object({
-  title: yup.string().required('No title provided.').min(4, 'Title too short.'),
+  title: yup
+    .string()
+    .required('No title provided.')
+    .min(10, 'Title too short.'),
   genre: yup.string().required('No genre provided.'),
   description: yup
     .string()
