@@ -51,6 +51,16 @@ function Page({ params: { mangaId } }: PageProps) {
     return res.data;
   };
 
+  const handleDelete = async () => {
+    try {
+      await axiosAuth.delete(`/Mangas`, { params: { mangaId } });
+
+      router.push(ROUTE.MANGA);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
     fetchManga(mangaId).then(setManga);
     fetchChapters(mangaId).then(setChapters);
@@ -110,6 +120,17 @@ function Page({ params: { mangaId } }: PageProps) {
             </p>
             <p>Rating: {manga.rating} / 5</p>
           </div>
+
+          {session?.user?.accessToken && (
+            <Button
+              className="mt-4"
+              variant="destructive"
+              onClick={handleDelete}
+            >
+              Delete Manga
+            </Button>
+          )}
+
           <div className="flex flex-col">
             {session?.user?.accessToken && (
               <Button
