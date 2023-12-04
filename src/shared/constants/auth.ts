@@ -1,5 +1,4 @@
 import { ROUTE } from './routes';
 
-export const UserPages = [ROUTE.WEATHER];
-export const AdminPages = [ROUTE.ADMIN, ROUTE.ADD_ADMIN];
-export const ValidatePages = UserPages.concat(AdminPages);
+export const UserPages = [ROUTE.PROFILE, ROUTE.ADD_MANGA, ROUTE.EDIT_MANGA];
+export const AdminPages = [ROUTE.ADMIN, ROUTE.SET_ADMIN];

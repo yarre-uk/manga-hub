@@ -2,18 +2,19 @@ import { NextResponse } from 'next/server';
 import { NextRequestWithAuth, withAuth } from 'next-auth/middleware';
 
 import { AdminPages, UserPages } from './shared/constants/auth';
+import { ROUTE } from './shared/constants/routes';
 
 export default withAuth(
   function middleware(request: NextRequestWithAuth) {
     if (
-      AdminPages.includes(request.nextUrl.pathname) &&
+      AdminPages.includes(request.nextUrl.pathname as ROUTE) &&
       request.nextauth.token?.role !== 'Admin'
     ) {
       return NextResponse.rewrite('http://localhost:3000/404');
     }
 
     if (
-      UserPages.includes(request.nextUrl.pathname) &&
+      UserPages.includes(request.nextUrl.pathname as ROUTE) &&
       request.nextauth.token?.role !== 'Admin' &&
       request.nextauth.token?.role !== 'User'
     ) {
@@ -27,4 +28,12 @@ export default withAuth(
   },
 );
 
-export const config = { matcher: ['/admin', '/weather', '/admin/add-admin'] };
+export const config = {
+  matcher: [
+    '/profile',
+    '/admin',
+    '/admin/set-admin',
+    '/manga/add-manga',
+    '/manga/edit-manga',
+  ],
+};

@@ -1,4 +1,4 @@
-export interface User {
+export type User = {
   userId: number;
   firstName: string;
   lastName: string;
@@ -11,4 +11,4 @@ export interface User {
   login: string;
   registrationDate: Date;
   isAdmin: boolean;
-}
+};

@@ -3,10 +3,9 @@ import { jwtDecode } from 'jwt-decode';
 import NextAuth, { AuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
-import { axiosAuth } from '@/shared/lib/axios';
-import { Role } from '@/shared/models/auth';
-
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+import { User } from '@/shared/models/user';
+import { Role } from '@/shared/types/auth';
+import { axiosAuth } from '@/shared/utils/axios';
 
 export const authOptions: AuthOptions = {
   session: { strategy: 'jwt' },
@@ -25,7 +24,7 @@ export const authOptions: AuthOptions = {
       },
       async authorize(credentials) {
         try {
-          const res = await axiosAuth.post('api/Auth/login', {
+          const res = await axiosAuth.post('Auth/login', {
             login: credentials.login,
             password: credentials.password,
           });
@@ -36,7 +35,7 @@ export const authOptions: AuthOptions = {
             return null;
           }
 
-          const decoded = jwtDecode(user.accessToken);
+          const decoded: any = jwtDecode(user.accessToken);
           let role: Role;
 
           // TODO fix
@@ -46,7 +45,12 @@ export const authOptions: AuthOptions = {
             }
           }
 
-          return { ...user, role };
+          const { data } = await axiosAuth.get<User>(`User`, {
+            headers: { Authorization: `Bearer ${res.data.accessToken}` },
+            params: { userId: decoded.id },
+          });
+
+          return { ...user, role, id: decoded.id, data };
         } catch (e) {
           console.error(`Error ${e}`);
           return null;

@@ -5,10 +5,10 @@ module.exports = {
   // Lint then format TypeScript and JavaScript files
   '**/*.(ts|tsx|js)': (filenames) => [
     `yarn eslint --fix ${filenames
-      .filter((filePath) => !filePath.includes('[...nextauth]'))
+      .filter((filePath) => !filePath.includes('[', '('))
       .join(' ')}`,
     `yarn prettier --write ${filenames
-      .filter((filePath) => !filePath.includes('[...nextauth]'))
+      .filter((filePath) => !filePath.includes('[', '('))
       .join(' ')}`,
   ],
 
