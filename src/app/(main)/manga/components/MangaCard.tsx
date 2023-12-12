@@ -7,7 +7,7 @@ import { MangaDTO } from '../types';
 
 import { Card, CardDescription, CardTitle } from '@/shared/components/ui/card';
 import { Genre, GenreType } from '@/shared/models/genre';
-import bytesToFile from '@/shared/utils/bytesToImage';
+import bytesToFile from '@/shared/utils/bytesToFile';
 import capitalizedWords from '@/shared/utils/capitalizedWords';
 
 type MangaCardProps = {

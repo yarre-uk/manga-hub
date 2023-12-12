@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import React, { useEffect, useRef, useState } from 'react';
 
+import Chapters from './components/Chapters';
 import { ChapterDTO } from './types';
 
 import { FullPageLoader } from '@/shared/components/lib';
@@ -15,7 +16,7 @@ import useAxiosAuth from '@/shared/hooks/useAxiosAuth';
 import { getGenreName } from '@/shared/models/genre';
 import Manga from '@/shared/models/manga';
 import { axios } from '@/shared/utils/axios';
-import bytesToFile from '@/shared/utils/bytesToImage';
+import bytesToFile from '@/shared/utils/bytesToFile';
 import capitalizedWords from '@/shared/utils/capitalizedWords';
 
 type PageProps = {
@@ -35,20 +36,25 @@ function Page({ params: { mangaId } }: PageProps) {
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const fetchManga = async (mangaId: string) => {
+  const fetchManga = async () => {
     const res = await axios.get<Manga>(`Mangas`, {
       params: { mangaId },
     });
 
-    return res.data;
+    setManga(res.data);
   };
 
-  const fetchChapters = async (mangaId: string) => {
+  const fetchChapters = async () => {
     const res = await axios.get<ChapterDTO[]>(`Chapters/get-manga-chapters`, {
       params: { mangaId },
     });
 
-    return res.data;
+    setChapters(res.data);
+  };
+
+  const refetchData = () => {
+    fetchManga();
+    fetchChapters();
   };
 
   const handleDelete = async () => {
@@ -62,8 +68,7 @@ function Page({ params: { mangaId } }: PageProps) {
   };
 
   useEffect(() => {
-    fetchManga(mangaId).then(setManga);
-    fetchChapters(mangaId).then(setChapters);
+    refetchData();
   }, [mangaId]);
 
   const handleImageChange = async (
@@ -90,7 +95,7 @@ function Page({ params: { mangaId } }: PageProps) {
 
       if (response.status === 200) {
         setManga(null);
-        fetchManga(mangaId).then(setManga);
+        fetchManga();
       }
     } catch (error) {
       console.error(error);
@@ -189,7 +194,11 @@ function Page({ params: { mangaId } }: PageProps) {
         </div>
       </div>
 
-      {/* <Chapters mangaId={mangaId} chapters={chapters} /> */}
+      <Chapters
+        mangaId={mangaId}
+        chapters={chapters}
+        refetchData={refetchData}
+      />
     </div>
   );
 }

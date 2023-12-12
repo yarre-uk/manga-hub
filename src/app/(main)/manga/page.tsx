@@ -1,7 +1,6 @@
 'use client';
 
-import { usePathname, useSearchParams } from 'next/navigation';
-import { useRouter } from 'next/navigation';
+import { LucideArrowBigDownDash } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
@@ -24,9 +23,7 @@ import capitalizedWords from '@/shared/utils/capitalizedWords';
 
 function MangaPage() {
   const [manga, setManga] = useState<MangaDTO[] | null>();
-
-  const router = useRouter();
-  const path = usePathname();
+  const [page, setPage] = useState(1);
 
   const {
     register,
@@ -35,56 +32,57 @@ function MangaPage() {
     setValue,
     getValues,
   } = useForm<SearchParams>();
-  const searchParams = useSearchParams();
 
-  const title = searchParams.get('title');
-  const genre = searchParams.get('genre');
-  const rating = searchParams.get('rating');
+  const fetchManga = async (
+    title?: string,
+    genre?: string,
+    rating?: number,
+    pageNumber?: number,
+  ) => {
+    const res = await axios.get<MangaDTO[]>('Mangas/get-all-filter', {
+      params: {
+        searchQuery: title,
+        genre: Genre[genre],
+        rating: rating > 0 ? rating : undefined,
+        'PagingModel.PageSize': 6,
+        'PagingModel.PageCount': pageNumber ?? 1,
+      },
+    });
 
-  useEffect(() => {
-    axios.get<MangaDTO[]>('Mangas/get-all').then((res) => setManga(res.data));
-  }, []);
-
-  const setValuesToParams = (data: SearchParams) => {
-    const params = new URLSearchParams(searchParams);
-
-    if (data.title) {
-      params.set('title', data.title);
-    } else {
-      params.delete('title');
-    }
-
-    if (data.genre) {
-      params.set('genre', data.genre);
-    } else {
-      params.delete('genre');
-    }
-
-    if (data.rating) {
-      params.set('rating', data.rating.toString());
-    } else {
-      params.delete('rating');
-    }
-
-    router.replace(`${path}?${params.toString()}`);
+    return res.data;
   };
 
+  useEffect(() => {
+    fetchManga().then((data) => setManga(data));
+  }, []);
+
   const onSubmit: SubmitHandler<SearchParams> = async (data) => {
-    setValuesToParams(data);
+    // setManga(null);
+
+    const manga = await fetchManga(data.title, data.genre, data.rating, page);
+
+    setManga(manga);
   };
 
   const handleClear = () => {
-    const params = new URLSearchParams(searchParams);
+    setValue('title', '');
+    setValue('genre', undefined);
+    setValue('rating', 0);
 
-    params.delete('title');
-    params.delete('genre');
-    params.delete('rating');
+    fetchManga().then((data) => setManga(data));
+  };
 
-    setValue('title', null);
-    setValue('genre', '');
-    setValue('rating', null);
+  const handleLoadNewPage = async () => {
+    setPage(page + 1);
 
-    router.replace(`${path}?${params.toString()}`);
+    const res = await fetchManga(
+      getValues('title'),
+      getValues('genre'),
+      getValues('rating'),
+      page + 1,
+    );
+
+    setManga([...(manga ?? []), ...res]);
   };
 
   if (!manga) {
@@ -105,25 +103,24 @@ function MangaPage() {
         >
           <Input
             label="title"
-            defaultValue={title}
             register={register}
             error={errors?.title?.message}
           />
           <Input
             label="rating"
             type="number"
+            defaultValue={0}
             min={0}
             max={5}
-            defaultValue={rating}
             register={register}
             error={errors?.rating?.message}
           />
           <Select
             label={'genre'}
-            defaultValue={genre ?? ''}
             setValue={setValue}
             getValues={getValues}
             register={register}
+            defaultValue={getValues('genre')}
             error={errors?.genre?.message}
           >
             <SelectTrigger className="w-[280px]">
@@ -146,8 +143,15 @@ function MangaPage() {
         </form>
       </Card>
       <div className="flex flex-wrap justify-center gap-4">
-        <MangaList manga={manga} searchParams={{ title, genre, rating }} />
+        <MangaList manga={manga} />
       </div>
+      <Button
+        className="mx-16"
+        disabled={manga?.length % 6 != 0}
+        onClick={handleLoadNewPage}
+      >
+        <LucideArrowBigDownDash />
+      </Button>
     </div>
   );
 }

@@ -1,5 +1,6 @@
-import { LucideUpload } from 'lucide-react';
+import { LucideUpload, Edit, X } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 import { useRef } from 'react';
 
 import { ChapterDTO } from '../types';
@@ -13,13 +14,44 @@ type ChapterListProps = {
   chapter: ChapterDTO;
   index: number;
   mangaId: string;
+  refetchData: () => void;
 };
 
-function ChapterCard({ chapter, index, mangaId }: ChapterListProps) {
+function ChapterCard({
+  chapter,
+  index,
+  mangaId,
+  refetchData,
+}: ChapterListProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const axiosAuth = useAxiosAuth();
   const { toast } = useToast();
   const router = useRouter();
+
+  const { data: session } = useSession();
+
+  // const handleEdit = async () => {};
+
+  const handleDelete = async () => {
+    try {
+      await axiosAuth.delete('/Chapters', {
+        params: { chapterId: chapter.chapterId },
+      });
+
+      toast({
+        title: 'Success',
+        description: 'Chapter has been deleted',
+      });
+
+      refetchData();
+    } catch (error) {
+      toast({
+        title: 'Error',
+        variant: 'destructive',
+        description: 'Something went wrong.',
+      });
+    }
+  };
 
   const handleImageChange = async (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -64,25 +96,43 @@ function ChapterCard({ chapter, index, mangaId }: ChapterListProps) {
           {index + 1}: {chapter.title}
         </p>
       </Card>
-      <Button
-        variant="outline"
-        className="z-50"
-        onClick={(e) => {
-          e.stopPropagation();
-          e.nativeEvent.stopImmediatePropagation();
-          e.preventDefault();
-          fileInputRef?.current.click();
-        }}
-      >
-        <LucideUpload size={20} />
-      </Button>
-      <input
-        type="file"
-        id="fileUpload"
-        ref={fileInputRef}
-        className="hidden"
-        onChange={handleImageChange}
-      />
+      {session?.user?.accessToken ? (
+        <>
+          <Button
+            variant="outline"
+            className="z-50"
+            onClick={(e) => {
+              e.stopPropagation();
+              e.nativeEvent.stopImmediatePropagation();
+              e.preventDefault();
+              fileInputRef?.current.click();
+            }}
+          >
+            <LucideUpload size={20} />
+          </Button>
+          <Button
+            variant="outline"
+            onClick={(e) => {
+              e.stopPropagation();
+              e.nativeEvent.stopImmediatePropagation();
+              e.preventDefault();
+              fileInputRef?.current.click();
+            }}
+          >
+            <Edit size={20} />
+          </Button>
+          <Button variant="destructive" onClick={handleDelete}>
+            <X size={20} />
+          </Button>
+          <input
+            type="file"
+            id="fileUpload"
+            ref={fileInputRef}
+            className="hidden"
+            onChange={handleImageChange}
+          />
+        </>
+      ) : null}
     </div>
   );
 }

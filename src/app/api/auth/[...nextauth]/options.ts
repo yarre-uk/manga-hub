@@ -52,7 +52,7 @@ export const authOptions: AuthOptions = {
 
           return { ...user, role, id: decoded.id, data };
         } catch (e) {
-          console.error(`Error ${e}`);
+          console.error(e);
           return null;
         }
       },

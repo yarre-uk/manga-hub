@@ -11,9 +11,15 @@ type ChaptersProps = {
   className?: string;
   mangaId: string;
   chapters: ChapterDTO[];
+  refetchData: () => void;
 };
 
-function Chapters({ chapters, mangaId, className = '' }: ChaptersProps) {
+function Chapters({
+  chapters,
+  mangaId,
+  className = '',
+  refetchData,
+}: ChaptersProps) {
   const router = useRouter();
 
   return (
@@ -40,6 +46,7 @@ function Chapters({ chapters, mangaId, className = '' }: ChaptersProps) {
               index={index}
               chapter={chapter}
               mangaId={mangaId}
+              refetchData={refetchData}
             />
           ))
         ) : (

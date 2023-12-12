@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react';
 
+import MangaPDF from './MangaPDF';
+
 import useAxiosAuth from '@/shared/hooks/useAxiosAuth';
 import Chapter from '@/shared/models/chapter';
 
@@ -40,7 +42,7 @@ function ChapterPage({ params: { chapterId } }: PageProps) {
       <p>Chapter info</p>
       <p>Chapter title {chapter?.title}</p>
       <p>Scans available {chapter?.scans ? 'yes' : 'no'}</p>
-      {/* {chapter?.scans && <MangaPDF chapter={chapter?.scans} />} */}
+      {chapter?.scans && <MangaPDF chapter={chapter?.scans} />}
     </div>
   );
 }
