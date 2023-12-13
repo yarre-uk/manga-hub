@@ -64,7 +64,7 @@ function MangaPage() {
 
   const handleClear = () => {
     setValue('title', '');
-    setValue('genre', undefined);
+    setValue('genre', '');
     setValue('rating', 0);
 
     fetchManga().then((data) => setManga(data));
@@ -144,8 +144,9 @@ function MangaPage() {
         <MangaList manga={manga} />
       </div>
       <Button
-        className="mx-16"
-        disabled={manga?.length % 6 != 0}
+        className="mx-auto w-[500px]"
+        variant="outline"
+        disabled={manga?.length % 6 != 0 || manga?.length == 0}
         onClick={handleLoadNewPage}
       >
         <LucideArrowBigDownDash />

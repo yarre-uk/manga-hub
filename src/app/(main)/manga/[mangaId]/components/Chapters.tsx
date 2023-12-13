@@ -1,5 +1,6 @@
 import { BookPlusIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 
 import ChapterCard from './ChapterCard';
 import { ChapterDTO } from '../types';
@@ -21,22 +22,25 @@ function Chapters({
   refetchData,
 }: ChaptersProps) {
   const router = useRouter();
+  const { data: session } = useSession();
 
   return (
     <div className="flex flex-col gap-2">
       <p className="text-2xl">Chapters</p>
       <div>
-        <Button
-          variant="outline"
-          onClick={() => {
-            router.push(`/chapter/add?mangaId=${mangaId}`);
-          }}
-          className="w-full p-6"
-        >
-          <p className="flex flex-row gap-4">
-            Add Chapter <BookPlusIcon />
-          </p>
-        </Button>
+        {session?.user?.accessToken ? (
+          <Button
+            variant="outline"
+            onClick={() => {
+              router.push(`/chapter/add?mangaId=${mangaId}`);
+            }}
+            className="w-full p-6"
+          >
+            <p className="flex flex-row gap-4">
+              Add Chapter <BookPlusIcon />
+            </p>
+          </Button>
+        ) : null}
       </div>
       <div className={`${className} flex flex-col gap-4`}>
         {chapters?.length !== 0 ? (

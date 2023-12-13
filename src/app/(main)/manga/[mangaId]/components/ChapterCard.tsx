@@ -92,7 +92,7 @@ function ChapterCard({
   return (
     <div className="flex flex-row gap-4">
       <Card
-        className="z-0 flex w-full flex-row items-center justify-between p-2 px-8"
+        className="z-0 flex w-full cursor-pointer flex-row items-center justify-between p-2 px-8"
         onClick={() => {
           router.push(`${ROUTE.MANGA}/${mangaId}/${chapter.chapterId}`);
         }}

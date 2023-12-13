@@ -36,7 +36,7 @@ function MangaCard({ data }: MangaCardProps) {
       onClick={() => {
         router.push(`manga/${data.mangaId}`);
       }}
-      className="flex h-[200px] w-[400px] justify-between px-4"
+      className="flex h-[200px] w-[400px] cursor-pointer justify-between px-4"
     >
       <div className="flex flex-col gap-4 pt-4">
         <CardTitle>{truncateTitle(data.title, 15)}</CardTitle>
