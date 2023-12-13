@@ -23,7 +23,7 @@ function MangaCard({ data }: MangaCardProps) {
 
   function getGenreName(value: GenreType): string | undefined {
     for (const prop in Genre) {
-      if (Genre[prop as keyof typeof Genre] === value) {
+      if (Genre[prop as keyof typeof Genre] == value) {
         return prop;
       }
     }
@@ -39,17 +39,9 @@ function MangaCard({ data }: MangaCardProps) {
       className="flex h-[200px] w-[400px] justify-between px-4"
     >
       <div className="flex flex-col gap-4 pt-4">
-        <CardTitle>{truncateTitle(data.title, 20)}</CardTitle>
+        <CardTitle>{truncateTitle(data.title, 15)}</CardTitle>
         <CardDescription className="text-primary">
-          {getGenreName(data.genre)}
-        </CardDescription>
-        <CardDescription className="text-primary">
-          Genre:{' '}
-          {capitalizedWords(
-            getGenreName(
-              parseInt(data.genre as unknown as string) as GenreType,
-            ),
-          )}
+          Genre: {capitalizedWords(getGenreName(data.genre))}
         </CardDescription>
         <CardDescription>Rating: {data.rating} / 5</CardDescription>
       </div>

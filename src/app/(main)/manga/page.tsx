@@ -57,8 +57,6 @@ function MangaPage() {
   }, []);
 
   const onSubmit: SubmitHandler<SearchParams> = async (data) => {
-    // setManga(null);
-
     const manga = await fetchManga(data.title, data.genre, data.rating, page);
 
     setManga(manga);

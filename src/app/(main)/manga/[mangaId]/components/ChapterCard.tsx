@@ -8,6 +8,7 @@ import { ChapterDTO } from '../types';
 import { Button } from '@/shared/components/ui/button';
 import { Card } from '@/shared/components/ui/card';
 import { useToast } from '@/shared/components/ui/use-toast';
+import { ROUTE } from '@/shared/constants/routes';
 import useAxiosAuth from '@/shared/hooks/useAxiosAuth';
 
 type ChapterListProps = {
@@ -30,7 +31,11 @@ function ChapterCard({
 
   const { data: session } = useSession();
 
-  // const handleEdit = async () => {};
+  const handleEdit = async () => {
+    router.push(
+      `${ROUTE.EDIT_CHAPTER}?chapterId=${chapter.chapterId}&mangaId=${mangaId}`,
+    );
+  };
 
   const handleDelete = async () => {
     try {
@@ -89,7 +94,7 @@ function ChapterCard({
       <Card
         className="z-0 flex w-full flex-row items-center justify-between p-2 px-8"
         onClick={() => {
-          router.push(`/manga/${mangaId}/${chapter.chapterId}`);
+          router.push(`${ROUTE.MANGA}/${mangaId}/${chapter.chapterId}`);
         }}
       >
         <p>
@@ -110,15 +115,7 @@ function ChapterCard({
           >
             <LucideUpload size={20} />
           </Button>
-          <Button
-            variant="outline"
-            onClick={(e) => {
-              e.stopPropagation();
-              e.nativeEvent.stopImmediatePropagation();
-              e.preventDefault();
-              fileInputRef?.current.click();
-            }}
-          >
+          <Button variant="outline" onClick={handleEdit}>
             <Edit size={20} />
           </Button>
           <Button variant="destructive" onClick={handleDelete}>
