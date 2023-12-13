@@ -25,11 +25,11 @@ function Header({ className }: HeaderProps) {
 
   return (
     <div
-      className={`${className} flex h-16 items-center justify-between gap-5 bg-background-secondary pr-4`}
+      className={`${className} flex h-[56px] items-center justify-between gap-5 bg-background-secondary pr-4`}
     >
       <div />
       <div />
-      <div className=" flex gap-5">
+      <div className="flex gap-5">
         {session?.user ? (
           <>
             <DropdownMenu>

@@ -26,7 +26,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <Header className="pl-[70px]" />
           <Toaster />
           <Sidebar />
-          <div className="h-[calc(100vh-56px)] pl-[70px] pt-4">{children}</div>
+          <div className="h-[calc(100vh-56px)] pl-[70px]">{children}</div>
         </Providers>
       </body>
     </html>

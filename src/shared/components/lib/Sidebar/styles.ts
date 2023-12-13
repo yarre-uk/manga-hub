@@ -91,6 +91,7 @@ export const StyledSidebarButton = styled(Link)`
   color: #f9f9f9;
   opacity: 0.8;
   transition: opacity 0.3s;
+  white-space: nowrap;
 
   &:hover {
     background: rgb(0 0 0 / 30%);
