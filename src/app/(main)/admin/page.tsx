@@ -31,8 +31,8 @@ function AdminPage() {
 
         const users = res.data.map((user) => ({
           ...user,
-          birthDate: new Date(user.birthDate),
-          registrationDate: new Date(user.registrationDate),
+          // birthDate: new Date(user.birthDate),
+          // registrationDate: new Date(user.registrationDate),
         }));
 
         setUsers(users);

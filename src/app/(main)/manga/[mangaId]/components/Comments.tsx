@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import CommentCard from './CommentCard';
+import CommentForm from './CommentForm';
 
 import { BeatLoader } from '@/shared/components/lib';
 import Comment from '@/shared/models/comment';
@@ -28,8 +29,8 @@ function Comments({ mangaId }: CommentsProps) {
   return (
     <div className="flex flex-col gap-2">
       <p className="text-2xl">Comments</p>
-      <form />
-      <div className="flex flex-col gap-4">
+      <CommentForm mangaId={mangaId} refetchData={fetchComments} />
+      <div className="mb-16 flex flex-col gap-4">
         {comments?.length !== 0 ? (
           comments?.map((comment, index) => (
             <CommentCard

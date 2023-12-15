@@ -1,14 +1,14 @@
 export type User = {
   userId: number;
-  firstName: string;
-  lastName: string;
-  avatar: string;
-  description: string;
-  phoneNumber: string;
+  // firstName: string;
+  // lastName: string;
+  // avatar: string;
+  // description: string;
+  // phoneNumber: string;
   showConfidentialInformation: boolean;
-  birthDate: Date;
+  // birthDate: Date;
   email: string;
   login: string;
-  registrationDate: Date;
+  // registrationDate: Date;
   isAdmin: boolean;
 };
