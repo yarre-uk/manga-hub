@@ -8,6 +8,7 @@ import { Role } from '@/shared/types/auth';
 import { axiosAuth } from '@/shared/utils/axios';
 
 export const authOptions: AuthOptions = {
+  secret: process.env.NEXTAUTH_SECRET,
   session: { strategy: 'jwt' },
   pages: {
     signIn: '/sign-in',
@@ -52,7 +53,7 @@ export const authOptions: AuthOptions = {
 
           return { ...user, role, id: decoded.id, data };
         } catch (e) {
-          console.error(`Error ${e}`);
+          console.error(e);
           return null;
         }
       },

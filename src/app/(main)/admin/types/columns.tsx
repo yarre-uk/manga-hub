@@ -20,18 +20,6 @@ export const columns: ColumnDef<User>[] = [
     header: 'Login',
   },
   {
-    accessorKey: 'firstName',
-    header: 'First name',
-  },
-  {
-    accessorKey: 'lastName',
-    header: 'Last name',
-  },
-  {
-    accessorKey: 'phoneNumber',
-    header: 'Phone number',
-  },
-  {
     accessorKey: 'showConfidentialInformation',
     header: 'Show Confidential Information',
   },

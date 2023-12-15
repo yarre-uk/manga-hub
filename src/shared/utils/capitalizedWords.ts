@@ -11,6 +11,8 @@
  * ```
  */
 function capitalizedWords(str: string): string {
+  if (!str) return str;
+
   for (let i = str.length - 1; i > 1; i--) {
     if (str[i] == str[i].toUpperCase()) {
       str = `${str.substring(0, i)} ${str.substring(i)}`;
