@@ -9,10 +9,10 @@ import Comment from '@/shared/models/comment';
 
 type CommentCardProps = {
   comment: Comment;
-  refetchData?: () => void;
+  onDelete?: () => void;
 };
 
-function CommentCard({ comment, refetchData }: CommentCardProps) {
+function CommentCard({ comment, onDelete }: CommentCardProps) {
   const axiosAuth = useAxiosAuth();
   const { toast } = useToast();
   const { data: session } = useSession();
@@ -32,7 +32,7 @@ function CommentCard({ comment, refetchData }: CommentCardProps) {
         description: 'Comment has been deleted',
       });
 
-      refetchData();
+      onDelete();
     } catch (error) {
       toast({
         title: 'Error',
@@ -44,10 +44,19 @@ function CommentCard({ comment, refetchData }: CommentCardProps) {
 
   return (
     <div className="flex flex-row gap-4">
-      <Card className="z-0 flex w-full cursor-pointer flex-row items-center justify-between p-2 px-8">
-        <p>
-          {comment.body} - {new Date(comment.createdDate).toLocaleDateString()}
-        </p>
+      <Card className="flex w-full items-center justify-between px-4">
+        <div className="flex flex-col gap-2 p-2 px-4">
+          <p className="text-lg font-semibold">
+            {comment.login}{' '}
+            {comment.userId == session?.user?.id ? (
+              <span className="text-sm text-primary">(You)</span>
+            ) : null}
+          </p>
+          <pre className="font-rubick ">{comment.body}</pre>
+          <p className="text-xs text-primary">
+            {new Date(comment.createdDate).toLocaleString()}
+          </p>
+        </div>
         {comment.userId == session?.user?.id ? (
           <Button variant="outline" onClick={handleDelete}>
             <X />

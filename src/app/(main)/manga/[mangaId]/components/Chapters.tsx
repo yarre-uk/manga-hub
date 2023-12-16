@@ -1,7 +1,7 @@
 import { BookPlusIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import ChapterCard from './ChapterCard';
 import { ChapterDTO } from '../types';
@@ -15,7 +15,7 @@ type ChaptersProps = {
 };
 
 function Chapters({ mangaId }: ChaptersProps) {
-  const [chapters, setChapters] = useState<ChapterDTO[] | null>(null);
+  const [chapters, setChapters] = useState<ChapterDTO[]>([]);
 
   const router = useRouter();
   const { data: session } = useSession();
@@ -27,6 +27,10 @@ function Chapters({ mangaId }: ChaptersProps) {
 
     setChapters(res.data);
   };
+
+  useEffect(() => {
+    fetchChapters();
+  }, []);
 
   return (
     <div className="flex flex-col gap-2">

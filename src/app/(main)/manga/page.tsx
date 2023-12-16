@@ -21,6 +21,8 @@ import { Genre } from '@/shared/models/genre';
 import { axios } from '@/shared/utils/axios';
 import capitalizedWords from '@/shared/utils/capitalizedWords';
 
+const PAGE_SIZE = 6;
+
 function MangaPage() {
   const [manga, setManga] = useState<MangaDTO[] | null>();
   const [page, setPage] = useState(1);
@@ -44,7 +46,7 @@ function MangaPage() {
         searchQuery: title,
         genre: Genre[genre],
         rating: rating > 0 ? rating : undefined,
-        'PagingModel.PageSize': 6,
+        'PagingModel.PageSize': PAGE_SIZE,
         'PagingModel.PageCount': pageNumber ?? 1,
       },
     });

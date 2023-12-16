@@ -37,7 +37,9 @@ function Page({ params: { mangaId } }: PageProps) {
 
   const fetchManga = async () => {
     const res = await axios.get<Manga>(`Mangas`, {
-      params: { mangaId },
+      params: {
+        mangaId,
+      },
     });
 
     setManga(res.data);
