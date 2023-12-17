@@ -1,6 +1,6 @@
 type Comment = {
   login: string;
-  id: number;
+  id: string;
   body: string;
   userId: number;
   createdDate: string;

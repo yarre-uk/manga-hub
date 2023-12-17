@@ -1,4 +1,4 @@
-import { X } from 'lucide-react';
+import { Edit, X } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 
 import { Button } from '@/shared/components/ui/button';
@@ -10,18 +10,17 @@ import Comment from '@/shared/models/comment';
 type CommentCardProps = {
   comment: Comment;
   onDelete?: () => void;
+  onUpdate?: (comment: Comment) => void;
 };
 
-function CommentCard({ comment, onDelete }: CommentCardProps) {
+function CommentCard({ comment, onDelete, onUpdate }: CommentCardProps) {
   const axiosAuth = useAxiosAuth();
   const { toast } = useToast();
   const { data: session } = useSession();
 
-  // const handleEdit = async () => {
-  //   router.push(
-  //     `${ROUTE.EDIT_CHAPTER}?chapterId=${chapter.chapterId}&mangaId=${mangaId}`,
-  //   );
-  // };
+  const handleEdit = async () => {
+    onUpdate(comment);
+  };
 
   const handleDelete = async () => {
     try {
@@ -58,9 +57,14 @@ function CommentCard({ comment, onDelete }: CommentCardProps) {
           </p>
         </div>
         {comment.userId == session?.user?.id ? (
-          <Button variant="outline" onClick={handleDelete}>
-            <X />
-          </Button>
+          <div className="flex flex-col">
+            <Button variant="outline" onClick={handleDelete}>
+              <X />
+            </Button>
+            <Button variant="outline" onClick={handleEdit}>
+              <Edit />
+            </Button>
+          </div>
         ) : null}
       </Card>
     </div>
