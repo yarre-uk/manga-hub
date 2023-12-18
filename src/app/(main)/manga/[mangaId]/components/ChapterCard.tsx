@@ -11,7 +11,7 @@ import { useToast } from '@/shared/components/ui/use-toast';
 import { ROUTE } from '@/shared/constants/routes';
 import useAxiosAuth from '@/shared/hooks/useAxiosAuth';
 
-type ChapterListProps = {
+type ChapterCardProps = {
   chapter: ChapterDTO;
   index: number;
   mangaId: string;
@@ -23,7 +23,7 @@ function ChapterCard({
   index,
   mangaId,
   refetchData,
-}: ChapterListProps) {
+}: ChapterCardProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const axiosAuth = useAxiosAuth();
   const { toast } = useToast();
