@@ -66,14 +66,14 @@ export default function SignInContainer() {
     await signIn('credentials', {
       login: data.login,
       password: data.password,
-      redirect: true,
+      // redirect: true,
     });
 
-    setTimeout(() => {
-      if (!searchParams.get('error')) {
-        router.replace(searchParams.get('callbackUrl') ?? ROUTE.HOME);
-      }
-    }, 50);
+    // setTimeout(() => {
+    //   if (!searchParams.get('error') && searchParams.get('callbackUrl')) {
+    //     router.replace(searchParams.get('callbackUrl') ?? ROUTE.HOME);
+    //   }
+    // }, 100);
   };
 
   useEffect(() => {
@@ -84,6 +84,7 @@ export default function SignInContainer() {
 
   useEffect(() => {
     if (searchParams.get('error')) {
+      // console.log(searchParams.get('error'));
       toast({
         title: 'Signin error',
         description: 'Some error has occurred whilst you were signing in',
