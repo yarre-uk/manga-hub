@@ -1,28 +1,36 @@
 import { BookPlusIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
+import { useEffect, useState } from 'react';
 
 import ChapterCard from './ChapterCard';
 import { ChapterDTO } from '../types';
 
 import { BeatLoader } from '@/shared/components/lib';
 import { Button } from '@/shared/components/ui/button';
+import { axios } from '@/shared/utils/axios';
 
 type ChaptersProps = {
-  className?: string;
   mangaId: string;
-  chapters: ChapterDTO[];
-  refetchData: () => void;
 };
 
-function Chapters({
-  chapters,
-  mangaId,
-  className = '',
-  refetchData,
-}: ChaptersProps) {
+function Chapters({ mangaId }: ChaptersProps) {
+  const [chapters, setChapters] = useState<ChapterDTO[]>([]);
+
   const router = useRouter();
   const { data: session } = useSession();
+
+  const fetchChapters = async () => {
+    const res = await axios.get<ChapterDTO[]>(`Chapters/get-manga-chapters`, {
+      params: { mangaId },
+    });
+
+    setChapters(res.data);
+  };
+
+  useEffect(() => {
+    fetchChapters();
+  }, []);
 
   return (
     <div className="flex flex-col gap-2">
@@ -42,7 +50,7 @@ function Chapters({
           </Button>
         ) : null}
       </div>
-      <div className={`${className} flex flex-col gap-4`}>
+      <div className="flex flex-col gap-4">
         {chapters?.length !== 0 ? (
           chapters?.map((chapter, index) => (
             <ChapterCard
@@ -50,7 +58,7 @@ function Chapters({
               index={index}
               chapter={chapter}
               mangaId={mangaId}
-              refetchData={refetchData}
+              refetchData={fetchChapters}
             />
           ))
         ) : (

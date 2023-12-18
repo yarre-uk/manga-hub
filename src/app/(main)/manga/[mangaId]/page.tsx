@@ -7,7 +7,7 @@ import { useSession } from 'next-auth/react';
 import React, { useEffect, useRef, useState } from 'react';
 
 import Chapters from './components/Chapters';
-import { ChapterDTO } from './types';
+import Comments from './components/Comments';
 
 import { FullPageLoader } from '@/shared/components/lib';
 import { Button } from '@/shared/components/ui/button';
@@ -30,7 +30,6 @@ function Page({ params: { mangaId } }: PageProps) {
   const router = useRouter();
 
   const [manga, setManga] = useState<Manga | null>(null);
-  const [chapters, setChapters] = useState<ChapterDTO[] | null>(null);
 
   const { data: session } = useSession();
 
@@ -38,23 +37,16 @@ function Page({ params: { mangaId } }: PageProps) {
 
   const fetchManga = async () => {
     const res = await axios.get<Manga>(`Mangas`, {
-      params: { mangaId },
+      params: {
+        mangaId,
+      },
     });
 
     setManga(res.data);
   };
 
-  const fetchChapters = async () => {
-    const res = await axios.get<ChapterDTO[]>(`Chapters/get-manga-chapters`, {
-      params: { mangaId },
-    });
-
-    setChapters(res.data);
-  };
-
   const refetchData = () => {
     fetchManga();
-    fetchChapters();
   };
 
   const handleDelete = async () => {
@@ -148,17 +140,6 @@ function Page({ params: { mangaId } }: PageProps) {
                 Edit Manga
               </Button>
             )}
-
-            <Button
-              className="mt-4"
-              onClick={() => {
-                router.push(
-                  `${ROUTE.MANGA}/${mangaId}/${chapters?.[0].chapterId}`,
-                );
-              }}
-            >
-              Read Now
-            </Button>
           </div>
         </div>
 
@@ -194,11 +175,8 @@ function Page({ params: { mangaId } }: PageProps) {
         </div>
       </div>
 
-      <Chapters
-        mangaId={mangaId}
-        chapters={chapters}
-        refetchData={refetchData}
-      />
+      <Chapters mangaId={mangaId} />
+      <Comments mangaId={mangaId} />
     </div>
   );
 }
