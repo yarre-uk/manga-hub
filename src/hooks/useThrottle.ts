@@ -4,7 +4,7 @@ function useThrottle<T extends unknown[], K>(
   func: (...args: T) => K,
   wait: number,
 ): (...args: T) => void {
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const throttledFunc = useCallback(
     (...args: T) => {
