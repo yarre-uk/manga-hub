@@ -22,13 +22,9 @@
     },
     "allowJs": true,
     "incremental": true,
-    "esModuleInterop": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ]
+    "esModuleInterop": true
   },
   "include": ["src", ".next/types/**/*.ts"],
+  "references": [{ "path": "./tsconfig.node.json" }],
   "exclude": ["node_modules"]
 }
