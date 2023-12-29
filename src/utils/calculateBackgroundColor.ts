@@ -1,4 +1,4 @@
-import modifyColor from './colorModifier';
+import modifyColor from './modifyColor';
 
 const calculateBackgroundColor = (
   color: string,

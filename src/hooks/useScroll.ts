@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import { debounce } from '@/shared/utils';
+import { debounce } from '@/utils';
 
 const useScroll = () => {
   const [scrollY, setScrollY] = useState(window.scrollY);
