@@ -21,7 +21,9 @@ const Sidebar = () => {
   return (
     <SideBarStyled>
       {Routes.map((route) => (
-        <LinkStyled to={route.path}>{route.name}</LinkStyled>
+        <LinkStyled key={route.path} to={route.path}>
+          {route.name}
+        </LinkStyled>
       ))}
     </SideBarStyled>
   );
