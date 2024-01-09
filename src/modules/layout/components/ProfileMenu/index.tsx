@@ -1,11 +1,11 @@
-import { ProfileMenuStyled } from './styles';
+import { MenuElement, ProfileMenuStyled } from './styles';
 
 const ProfileMenu = () => {
   return (
     <ProfileMenuStyled>
-      <p>asd</p>
-      <p>asd</p>
-      <p>asd</p>
+      <MenuElement>asd</MenuElement>
+      <MenuElement>asd</MenuElement>
+      <MenuElement>asd</MenuElement>
     </ProfileMenuStyled>
   );
 };
