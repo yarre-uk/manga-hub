@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 
 import { LayoutContainer } from './modules/layout';
 
@@ -16,9 +16,12 @@ import { NotFoundContainer } from '@/modules/notFound';
 
 const App = () => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   useEffect(() => {
-    navigate(ROUTE.HOME);
+    if (pathname === '/') {
+      navigate(ROUTE.HOME);
+    }
   }, []);
 
   return (
