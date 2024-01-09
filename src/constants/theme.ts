@@ -8,7 +8,7 @@ const theme = {
 
   primary: '#1db954',
 
-  round: '5%',
+  round: '5px',
 };
 
 export default theme;
