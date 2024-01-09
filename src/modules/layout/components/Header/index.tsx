@@ -1,7 +1,7 @@
 import { Home, Menu } from 'lucide-react';
 
 import { HeaderStyled } from './styles';
-import Link from '../Link';
+import HeaderLink from '../Link';
 import ProfileButton from '../ProfileButton';
 
 import { ROUTE } from '@/constants';
@@ -9,12 +9,12 @@ import { ROUTE } from '@/constants';
 const Header = () => {
   return (
     <HeaderStyled>
-      <Link to={ROUTE.HOME} label="Home">
+      <HeaderLink to={ROUTE.HOME} label="Home">
         <Home />
-      </Link>
-      <Link to={ROUTE.MANGA} label="Catalog">
+      </HeaderLink>
+      <HeaderLink to={ROUTE.MANGA} label="Catalog">
         <Menu />
-      </Link>
+      </HeaderLink>
       <ProfileButton />
     </HeaderStyled>
   );

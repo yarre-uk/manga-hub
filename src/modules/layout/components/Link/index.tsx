@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 
 import { LinkStyled } from './styles';
 
-const Link = ({
+const HeaderLink = ({
   to,
   label,
   children,
@@ -19,4 +19,4 @@ const Link = ({
   );
 };
 
-export default Link;
+export default HeaderLink;

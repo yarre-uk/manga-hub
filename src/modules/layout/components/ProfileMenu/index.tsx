@@ -1,11 +1,29 @@
-import { MenuElement, ProfileMenuStyled } from './styles';
+import { MenuLink, MenuText, ProfileMenuStyled } from './styles';
+
+import { ROUTE } from '@/constants';
 
 const ProfileMenu = () => {
+  const authorized = false;
+
   return (
     <ProfileMenuStyled>
-      <MenuElement>asd</MenuElement>
-      <MenuElement>asd</MenuElement>
-      <MenuElement>asd</MenuElement>
+      {authorized ? (
+        <>
+          <MenuLink to={ROUTE.PROFILE}>Profile</MenuLink>
+          <MenuText
+            onClick={() => {
+              console.log('log out');
+            }}
+          >
+            Log out
+          </MenuText>
+        </>
+      ) : (
+        <>
+          <MenuLink to={ROUTE.SIGN_IN}>Sign in</MenuLink>
+          <MenuLink to={ROUTE.SIGN_UP}>Sign up</MenuLink>
+        </>
+      )}
     </ProfileMenuStyled>
   );
 };

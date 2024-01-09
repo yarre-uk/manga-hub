@@ -26,7 +26,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   body a {
-    all: unset;
+    text-decoration: none;
   }
 `;
 
