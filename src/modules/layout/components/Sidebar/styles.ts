@@ -1,14 +1,14 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-export const SideBarStyled = styled.div`
+export const SidebarStyled = styled.div`
   display: flex;
   flex-direction: column;
 
   width: 4rem;
   height: 100vh;
 
-  background-color: #2c3e50;
+  background-color: #1c1c1e;
 
   align-items: center;
 
