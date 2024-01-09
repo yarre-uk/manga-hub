@@ -1,27 +1,21 @@
-import { Home, Menu, User } from 'lucide-react';
+import { Home, Menu } from 'lucide-react';
 
-import { HeaderStyled, LinkStyled } from './styles';
+import { HeaderStyled } from './styles';
+import Link from '../Link';
+import ProfileButton from '../ProfileButton';
 
 import { ROUTE } from '@/constants';
 
 const Header = () => {
   return (
     <HeaderStyled>
-      <LinkStyled to={ROUTE.HOME}>
+      <Link to={ROUTE.HOME} label="Home">
         <Home />
-        <p>Home</p>
-        <div className="test">
-          <p>Hello</p>
-        </div>
-      </LinkStyled>
-      <LinkStyled to={ROUTE.MANGA}>
+      </Link>
+      <Link to={ROUTE.MANGA} label="Catalog">
         <Menu />
-        <p>Manga</p>
-      </LinkStyled>
-      <LinkStyled to={ROUTE.PROFILE}>
-        <User />
-        <p>Profile</p>
-      </LinkStyled>
+      </Link>
+      <ProfileButton />
     </HeaderStyled>
   );
 };
