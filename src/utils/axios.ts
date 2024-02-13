@@ -8,4 +8,5 @@ export const axios = _axios.create({
 export const axiosAuth = _axios.create({
   // baseURL: API_URL,
   headers: { 'Content-Type': 'application/json' },
+  withCredentials: true,
 });
