@@ -8,7 +8,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   .lucide {
-    color: ${(props) => props.theme.fontColor};
+    color: ${(props) => props.theme.font.color.light};
     width: 1.75rem;
     height: 1.75rem;
     stroke-width: 1.5px;
@@ -22,7 +22,7 @@ const GlobalStyles = createGlobalStyle`
 
   body * {
     font-family: 'Rubik', sans-serif !important;
-    color: ${(props) => props.theme.fontColor};
+    color: ${(props) => props.theme.font.color.light};
   }
 
   body a {

@@ -4,11 +4,19 @@ const theme = {
     basic: '#1c1c1e',
     light: '#282828',
   },
-  fontColor: '#ddd',
+
+  font: {
+    family: 'Roboto, sans-serif',
+    size: '16px',
+    color: {
+      light: '#ddd',
+      dark: '#191919',
+    },
+  },
 
   primary: '#1db954',
 
-  round: '5px',
+  borderRadius: '5px',
 };
 
 export default theme;

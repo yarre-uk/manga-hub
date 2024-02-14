@@ -8,8 +8,7 @@ type Auth = {
 const AuthContext = createContext<{
   auth: Auth;
   setAccessToken: (accessToken: string) => void;
-  setRefreshToken: (refreshToken: string) => void;
-}>({ auth: null, setAccessToken: null, setRefreshToken: null });
+}>({ auth: null, setAccessToken: null });
 
 export const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState<Auth>({});
@@ -18,12 +17,8 @@ export const AuthProvider = ({ children }) => {
     setAuth((prev) => ({ ...prev, accessToken }));
   };
 
-  const setRefreshToken = (refreshToken: string) => {
-    setAuth((prev) => ({ ...prev, refreshToken }));
-  };
-
   return (
-    <AuthContext.Provider value={{ auth, setAccessToken, setRefreshToken }}>
+    <AuthContext.Provider value={{ auth, setAccessToken }}>
       {children}
     </AuthContext.Provider>
   );

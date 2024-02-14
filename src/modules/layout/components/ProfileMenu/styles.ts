@@ -11,7 +11,7 @@ export const ProfileMenuStyled = styled.div`
   padding: 0.5rem;
   gap: 0.5rem;
 
-  border-radius: ${({ theme }) => theme.round};
+  border-radius: ${({ theme }) => theme.borderRadius};
   border: 1px solid ${({ theme }) => theme.foreground.light};
 
   background-color: ${({ theme }) => theme.background};
@@ -24,7 +24,7 @@ export const ProfileMenuStyled = styled.div`
 export const MenuLink = styled(Link)`
   padding: 0.5rem 1rem;
   background-color: ${({ theme }) => theme.foreground.basic};
-  border-radius: ${({ theme }) => theme.round};
+  border-radius: ${({ theme }) => theme.borderRadius};
   width: 100%;
 
   &:hover {
@@ -35,7 +35,7 @@ export const MenuLink = styled(Link)`
 export const MenuText = styled.span`
   padding: 0.5rem 1rem;
   background-color: ${({ theme }) => theme.foreground.basic};
-  border-radius: ${({ theme }) => theme.round};
+  border-radius: ${({ theme }) => theme.borderRadius};
   width: 100%;
 
   &:hover {
