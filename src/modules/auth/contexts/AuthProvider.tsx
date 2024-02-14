@@ -1,24 +1,33 @@
 import { createContext, useState } from 'react';
 
-type Auth = {
-  accessToken?: string;
-  refreshToken?: string;
-};
+import { SignInFormValues, SignUpFormValues } from '@/types';
 
 const AuthContext = createContext<{
-  auth: Auth;
+  accessToken: string | null;
   setAccessToken: (accessToken: string) => void;
-}>({ auth: null, setAccessToken: null });
+  signIn: (data: SignInFormValues) => void;
+  signUp: (data: SignUpFormValues) => void;
+  logOut: () => void;
+}>(null);
 
 export const AuthProvider = ({ children }) => {
-  const [auth, setAuth] = useState<Auth>({});
+  const [auth, setAuth] = useState<string>();
 
+  //TODO
   const setAccessToken = (accessToken: string) => {
-    setAuth((prev) => ({ ...prev, accessToken }));
+    setAuth(accessToken);
   };
 
+  const signIn = (data: SignInFormValues) => {};
+
+  const signUp = (data: SignUpFormValues) => {};
+
+  const logOut = () => {};
+
   return (
-    <AuthContext.Provider value={{ auth, setAccessToken }}>
+    <AuthContext.Provider
+      value={{ accessToken: auth, setAccessToken, signIn, signUp, logOut }}
+    >
       {children}
     </AuthContext.Provider>
   );

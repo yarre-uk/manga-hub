@@ -7,7 +7,7 @@ import { axiosAuth } from '@/utils';
 
 const useAuth = () => {
   const refresh = useRefreshToken();
-  const { auth } = useContext(AuthContext);
+  const { accessToken: auth } = useContext(AuthContext);
 
   useEffect(() => {
     const requestIntercept = axiosAuth.interceptors.request.use(
