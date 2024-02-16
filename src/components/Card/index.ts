@@ -4,9 +4,9 @@ const DefaultCard = styled.div`
   display: flex;
   flex-direction: column;
 
-  background-color: ${({ theme }) => theme.foreground.basic};
+  background-color: ${({ theme }) => theme.colors.foreground.basic};
 
-  border: 2px solid ${({ theme }) => theme.foreground.light};
+  border: 2px solid ${({ theme }) => theme.colors.foreground.light};
   border-radius: ${({ theme }) => theme.borderRadius};
 
   padding: 0.75rem 1.5rem;

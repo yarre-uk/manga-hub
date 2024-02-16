@@ -1,8 +1,14 @@
 const theme = {
-  background: '#141414',
-  foreground: {
-    basic: '#1c1c1e',
-    light: '#282828',
+  colors: {
+    primary: '#1db954',
+    secondary: '#b3b3b3',
+    tertiary: '#535353',
+
+    background: '#141414',
+    foreground: {
+      basic: '#1c1c1e',
+      light: '#282828',
+    },
   },
 
   font: {
@@ -13,8 +19,6 @@ const theme = {
       dark: '#191919',
     },
   },
-
-  primary: '#1db954',
 
   borderRadius: '5px',
 };

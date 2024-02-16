@@ -12,9 +12,9 @@ export const ProfileMenuStyled = styled.div`
   gap: 0.5rem;
 
   border-radius: ${({ theme }) => theme.borderRadius};
-  border: 1px solid ${({ theme }) => theme.foreground.light};
+  border: 1px solid ${({ theme }) => theme.colors.foreground.light};
 
-  background-color: ${({ theme }) => theme.background};
+  background-color: ${({ theme }) => theme.colors.background};
 
   align-items: center;
 
@@ -23,22 +23,22 @@ export const ProfileMenuStyled = styled.div`
 
 export const MenuLink = styled(Link)`
   padding: 0.5rem 1rem;
-  background-color: ${({ theme }) => theme.foreground.basic};
+  background-color: ${({ theme }) => theme.colors.foreground.basic};
   border-radius: ${({ theme }) => theme.borderRadius};
   width: 100%;
 
   &:hover {
-    background-color: ${({ theme }) => theme.foreground.light};
+    background-color: ${({ theme }) => theme.colors.foreground.light};
   }
 `;
 
 export const MenuText = styled.span`
   padding: 0.5rem 1rem;
-  background-color: ${({ theme }) => theme.foreground.basic};
+  background-color: ${({ theme }) => theme.colors.foreground.basic};
   border-radius: ${({ theme }) => theme.borderRadius};
   width: 100%;
 
   &:hover {
-    background-color: ${({ theme }) => theme.foreground.light};
+    background-color: ${({ theme }) => theme.colors.foreground.light};
   }
 `;
