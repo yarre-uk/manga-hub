@@ -1,58 +1,82 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { on } from 'events';
-import { Resolver, useForm } from 'react-hook-form';
+import { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
 import { object, string, ObjectSchema, ref } from 'yup';
 
-import { SignUpContainerStyled } from './styles';
+import { SignUpContainerStyled, SignUpForm } from './styles';
 
-import { CardForm } from '@/components';
+import { Button, FormInput, FormInputPassword } from '@/components';
 import { PasswordRegex } from '@/constants';
 import { SignUpFormValues } from '@/types';
 
 const schema: ObjectSchema<SignUpFormValues> = object({
-  email: string().email().required(),
-  nickname: string().trim().required(),
-  password: string().trim().matches(PasswordRegex).required(),
-  confirm_password: string().oneOf(
-    [ref('password'), null],
-    'Passwords must match',
-  ),
-}).required();
+  email: string().email('Input is invalid email').required('Email is required'),
+  nickname: string()
+    .trim()
+    .min(4, 'Nickname must be at least 4 characters long')
+    .max(32, 'Nickname must be at most 32 characters long')
+    .required('Nickname is required'),
+  password: string()
+    .trim()
+    .min(8, 'Password must be at least 8 characters long')
+    .max(32, 'Password must be at most 32 characters long')
+    .matches(PasswordRegex, {
+      message:
+        'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character',
+    })
+    .required('Password is required'),
+  confirm_password: string()
+    .oneOf([ref('password'), null], 'Passwords must match')
+    .required('Confirm password is required'),
+});
 
 const SignUpContainer = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, touchedFields },
+    watch,
+    trigger,
   } = useForm({
     resolver: yupResolver<SignUpFormValues>(schema),
+    mode: 'onChange',
   });
 
-  const onSubmit = (data: SignUpFormValues) => console.log(data);
+  const password = watch('password');
+
+  useEffect(() => {
+    if (touchedFields.password) {
+      trigger('confirm_password');
+    }
+  }, [password, trigger, touchedFields.password]);
+
+  const onSubmit = (data: SignUpFormValues) => {
+    console.log(data);
+  };
 
   return (
     <SignUpContainerStyled>
-      <CardForm onSubmit={handleSubmit(onSubmit)}>
+      <SignUpForm onSubmit={handleSubmit(onSubmit)}>
         <h2>Sign Up</h2>
 
-        <label htmlFor="email">Email</label>
-        <input {...register('email')} />
-        <p>{errors.email?.message}</p>
+        <FormInput label={'email'} register={register} errors={errors} />
 
-        <label htmlFor="nickname">Nickname</label>
-        <input {...register('nickname')} />
-        <p>{errors.nickname?.message}</p>
+        <FormInput label={'nickname'} register={register} errors={errors} />
 
-        <label htmlFor="password">Password</label>
-        <input {...register('password')} />
-        <p>{errors.password?.message}</p>
+        <FormInputPassword
+          label={'password'}
+          register={register}
+          errors={errors}
+        />
 
-        <label htmlFor="confirm_password">Confirm Password</label>
-        <input {...register('confirm_password')} />
-        <p>{errors.confirm_password?.message}</p>
+        <FormInputPassword
+          label={'confirm_password'}
+          register={register}
+          errors={errors}
+        />
 
-        <button type="submit">Submit</button>
-      </CardForm>
+        <Button type="submit">Submit</Button>
+      </SignUpForm>
     </SignUpContainerStyled>
   );
 };
