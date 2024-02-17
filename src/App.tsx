@@ -8,8 +8,6 @@ import GlobalStyles from '@/globals';
 import {
   ChangePasswordContainer,
   ForgotPasswordContainer,
-  SignInContainer,
-  SignUpContainer,
 } from '@/modules/auth';
 import { HomeContainer } from '@/modules/home';
 import { NotFoundContainer } from '@/modules/notFound';
@@ -30,8 +28,6 @@ const App = () => {
       <Routes>
         <Route path={ROUTE.HOME} element={<LayoutContainer />}>
           <Route index element={<HomeContainer />} />
-          <Route path={ROUTE.SIGN_IN} element={<SignInContainer />} />
-          <Route path={ROUTE.SIGN_UP} element={<SignUpContainer />} />
           <Route
             path={ROUTE.FORGOT_PASSWORD}
             element={<ForgotPasswordContainer />}

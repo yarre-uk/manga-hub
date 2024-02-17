@@ -32,6 +32,17 @@ export const MenuLink = styled(Link)`
   }
 `;
 
+export const MenuButton = styled.button`
+  padding: 0.5rem 1rem;
+  background-color: ${({ theme }) => theme.colors.foreground.basic};
+  border-radius: ${({ theme }) => theme.borderRadius};
+  width: 100%;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.foreground.light};
+  }
+`;
+
 export const MenuText = styled.span`
   padding: 0.5rem 1rem;
   background-color: ${({ theme }) => theme.colors.foreground.basic};

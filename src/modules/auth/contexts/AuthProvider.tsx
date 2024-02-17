@@ -4,6 +4,7 @@ import { SignInFormValues, SignUpFormValues } from '@/types';
 
 const AuthContext = createContext<{
   accessToken: string | null;
+  authorized: () => boolean;
   setAccessToken: (accessToken: string) => void;
   signIn: (data: SignInFormValues) => void;
   signUp: (data: SignUpFormValues) => void;
@@ -18,15 +19,32 @@ export const AuthProvider = ({ children }) => {
     setAuth(accessToken);
   };
 
-  const signIn = (data: SignInFormValues) => {};
+  const authorized = () => {
+    return !!auth;
+  };
 
-  const signUp = (data: SignUpFormValues) => {};
+  const signIn = (data: SignInFormValues) => {
+    console.log('signIn data ->', data);
+  };
 
-  const logOut = () => {};
+  const signUp = (data: SignUpFormValues) => {
+    console.log('signUp data ->', data);
+  };
+
+  const logOut = () => {
+    console.log('logOut');
+  };
 
   return (
     <AuthContext.Provider
-      value={{ accessToken: auth, setAccessToken, signIn, signUp, logOut }}
+      value={{
+        accessToken: auth,
+        authorized,
+        setAccessToken,
+        signIn,
+        signUp,
+        logOut,
+      }}
     >
       {children}
     </AuthContext.Provider>

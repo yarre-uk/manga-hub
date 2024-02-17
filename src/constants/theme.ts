@@ -9,6 +9,8 @@ const theme = {
       basic: '#1c1c1e',
       light: '#282828',
     },
+
+    backdrop: 'rgba(0, 0, 0, 0.4)',
   },
 
   font: {
