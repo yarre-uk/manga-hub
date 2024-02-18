@@ -41,7 +41,7 @@ const useAuth = () => {
       axiosAuth.interceptors.request.eject(requestIntercept);
       axiosAuth.interceptors.response.eject(responseIntercept);
     };
-  }, [auth, refresh]);
+  }, [accessToken, refresh]);
 
   return axiosAuth;
 };

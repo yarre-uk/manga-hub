@@ -3,9 +3,13 @@ import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { object, string, ObjectSchema, ref } from 'yup';
 
-import { SignUpContainerStyled, SignUpForm } from './styles';
-
-import { Button, FormInput, FormInputPassword } from '@/components';
+import {
+  Button,
+  CardForm,
+  ContainerDiv,
+  FormInput,
+  FormInputPassword,
+} from '@/components';
 import { PasswordRegex } from '@/constants';
 import { SignUpFormValues } from '@/types';
 
@@ -55,8 +59,8 @@ const SignUpContainer = () => {
   };
 
   return (
-    <SignUpContainerStyled>
-      <SignUpForm onSubmit={handleSubmit(onSubmit)}>
+    <ContainerDiv>
+      <CardForm onSubmit={handleSubmit(onSubmit)}>
         <h2>Sign Up</h2>
 
         <FormInput label={'email'} register={register} errors={errors} />
@@ -76,8 +80,8 @@ const SignUpContainer = () => {
         />
 
         <Button type="submit">Submit</Button>
-      </SignUpForm>
-    </SignUpContainerStyled>
+      </CardForm>
+    </ContainerDiv>
   );
 };
 

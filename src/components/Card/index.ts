@@ -17,5 +17,11 @@ const DefaultCard = styled.div`
 export const Card = styled(DefaultCard)``;
 
 export const CardForm = styled(DefaultCard).attrs({ as: 'form' })`
-  gap: 0;
+  width: 100%;
+
+  min-width: 250px;
+  max-width: 400px;
+  padding: 20px;
+
+  gap: 1rem;
 `;
