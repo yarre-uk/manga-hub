@@ -7,6 +7,8 @@ import {
 
 import { DialogStyled } from './styled';
 
+import { useCursorLeave } from '@/hooks';
+
 type DialogProps = {
   children: ReactElement;
   onCancel?: () => void;
@@ -18,6 +20,10 @@ type DialogProps = {
 
 const Dialog = forwardRef<HTMLDialogElement, DialogProps>(
   ({ children, onCancel, onClose }: DialogProps, ref) => {
+    //! ONLY IN DEVELOPMENT
+    //TODO remove
+    useCursorLeave(onClose);
+
     return (
       <DialogStyled ref={ref} onCancel={onClose} onClose={onCancel}>
         {children}

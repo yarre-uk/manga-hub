@@ -1,8 +1,7 @@
 import { Outlet } from 'react-router-dom';
 
 import { Content, LayoutContainerStyled } from './styles';
-import { Header } from '../../components';
-import DialogManager from '../../components/DialogManager';
+import { DialogManager, Header } from '../../components';
 import { LayoutProvider } from '../../contexts/LayoutProvider';
 
 const Layout = () => {
