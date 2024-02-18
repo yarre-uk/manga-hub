@@ -6,10 +6,13 @@ function useCursorLeave(onCursorLeave: () => void) {
       onCursorLeave();
     };
 
-    document.addEventListener('mouseleave', handleCursorLeave);
+    document.documentElement.addEventListener('mouseleave', handleCursorLeave);
 
     return () => {
-      document.removeEventListener('mouseleave', handleCursorLeave);
+      document.documentElement.removeEventListener(
+        'mouseleave',
+        handleCursorLeave,
+      );
     };
   }, [onCursorLeave]);
 }
