@@ -2,18 +2,18 @@ import { useContext, useEffect } from 'react';
 
 import useRefreshToken from './useRefreshToken';
 
-import AuthContext from '@/modules/auth/contexts/AuthProvider';
+import { AuthContext } from '@/modules/auth';
 import { axiosAuth } from '@/utils';
 
 const useAuth = () => {
   const refresh = useRefreshToken();
-  const { accessToken: auth } = useContext(AuthContext);
+  const { accessToken } = useContext(AuthContext);
 
   useEffect(() => {
     const requestIntercept = axiosAuth.interceptors.request.use(
       (config) => {
         if (!config.headers['Authorization']) {
-          config.headers['Authorization'] = `Bearer ${auth?.accessToken}`;
+          config.headers['Authorization'] = `Bearer ${accessToken}`;
         }
 
         return config;
