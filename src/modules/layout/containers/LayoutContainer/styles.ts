@@ -1,10 +1,8 @@
 import styled from 'styled-components';
 
-export const LayoutContainerStyled = styled.div`
-  display: flex;
-  flex-direction: column;
+import { ContainerDiv } from '@/components';
 
-  width: 100%;
+export const LayoutContainerStyled = styled(ContainerDiv)`
   height: 100vh;
 `;
 

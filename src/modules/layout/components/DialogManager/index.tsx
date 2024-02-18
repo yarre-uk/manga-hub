@@ -1,8 +1,9 @@
-import { ReactElement, useContext, useEffect, useRef } from 'react';
+import { ReactElement, useContext, useEffect, useMemo, useRef } from 'react';
 
 import LayoutContext, { DialogType } from '../../contexts/LayoutProvider';
 
 import { Dialog } from '@/components';
+import { SignInContainer, SignUpContainer } from '@/modules/auth';
 
 const DialogManager = () => {
   const { isDialogOpen, dialogType, closeDialog } = useContext(LayoutContext);
@@ -20,11 +21,13 @@ const DialogManager = () => {
     }
   }, [isDialogOpen, dialogRef]);
 
-  const dialogContent = {
-    signIn: <p>sign in</p>,
-    signUp: <p>sign up</p>,
-    forgotPassword: <p>forgot password</p>,
-  } satisfies Record<DialogType, ReactElement>;
+  const dialogContent = useMemo(() => {
+    return {
+      signIn: <SignInContainer />,
+      signUp: <SignUpContainer />,
+      forgotPassword: <p>forgot password</p>,
+    } satisfies Record<DialogType, ReactElement>;
+  }, []);
 
   return (
     <div>
