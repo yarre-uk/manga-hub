@@ -5,6 +5,7 @@ import {
   forwardRef,
 } from 'react';
 
+import { CloseButton } from './CloseButton';
 import { DialogStyled } from './styled';
 
 import { useCursorLeave } from '@/hooks';
@@ -27,6 +28,7 @@ const Dialog = forwardRef<HTMLDialogElement, DialogProps>(
     return (
       <DialogStyled ref={ref} onCancel={onClose} onClose={onCancel}>
         {children}
+        <CloseButton onClick={onCancel} />
       </DialogStyled>
     );
   },
