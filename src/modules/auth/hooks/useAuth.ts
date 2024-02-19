@@ -1,53 +1,30 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 
-import useRefreshToken from './useRefreshToken';
-
-import { ResponseStatusCode } from '@/constants';
-import { AuthContext } from '@/modules/auth';
-import { axiosAuth } from '@/utils';
+import { AuthContext, useAxios } from '@/modules/auth';
+import { SignInFormValues, SignUpFormValues } from '@/types';
 
 const useAuth = () => {
-  const refresh = useRefreshToken();
-  const { accessToken } = useContext(AuthContext);
+  const { setAccessToken } = useContext(AuthContext);
+  const axios = useAxios();
 
-  useEffect(() => {
-    const requestIntercept = axiosAuth.interceptors.request.use(
-      (config) => {
-        if (!config.headers['Authorization']) {
-          config.headers['Authorization'] = `Bearer ${accessToken}`;
-        }
+  const signIn = async (data: SignInFormValues) => {
+    const res = await axios.post<{ accessToken: string }>('/auth/signin', data);
+    const accessToken = res.data.accessToken;
 
-        return config;
-      },
-      (error) => Promise.reject(error),
-    );
+    setAccessToken(accessToken.split(' ')[1]);
+  };
 
-    const responseIntercept = axiosAuth.interceptors.response.use(
-      (response) => response,
-      async (error) => {
-        const prevRequest = error?.config;
+  const signUp = async (data: SignUpFormValues) => {
+    //TODO add toast notification
+    axios.post('/auth/signup', data);
+  };
 
-        if (
-          error?.response?.status === ResponseStatusCode.FORBIDDEN &&
-          !prevRequest?.sent
-        ) {
-          prevRequest.sent = true;
-          const newAccessToken = await refresh();
-          prevRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
-          return axiosAuth(prevRequest);
-        }
+  const logOut = () => {
+    axios.post('/auth/logout');
+    setAccessToken(null);
+  };
 
-        return Promise.reject(error);
-      },
-    );
-
-    return () => {
-      axiosAuth.interceptors.request.eject(requestIntercept);
-      axiosAuth.interceptors.response.eject(responseIntercept);
-    };
-  }, [accessToken, refresh]);
-
-  return axiosAuth;
+  return { signIn, signUp, logOut };
 };
 
 export default useAuth;

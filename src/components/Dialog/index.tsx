@@ -8,8 +8,6 @@ import {
 import { CloseButton } from './CloseButton';
 import { DialogStyled } from './styled';
 
-import { useCursorLeave } from '@/hooks';
-
 type DialogProps = {
   children: ReactElement;
   onCancel?: () => void;

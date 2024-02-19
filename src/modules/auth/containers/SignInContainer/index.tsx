@@ -1,9 +1,8 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { object, string, ObjectSchema } from 'yup';
 
-import { AuthContext } from '../../contexts';
+import { useAuth } from '../../hooks';
 
 import {
   Button,
@@ -29,7 +28,7 @@ const schema: ObjectSchema<SignInFormValues> = object({
     .required('Password is required'),
 });
 
-const SignInContainer = () => {
+const SignInContainer = ({ onSubmit }: { onSubmit: () => void }) => {
   const {
     register,
     handleSubmit,
@@ -39,15 +38,16 @@ const SignInContainer = () => {
     mode: 'onChange',
   });
 
-  const { signIn } = useContext(AuthContext);
+  const { signIn } = useAuth();
 
-  const onSubmit = (data: SignInFormValues) => {
+  const onFormSubmit = (data: SignInFormValues) => {
     signIn(data);
+    onSubmit();
   };
 
   return (
     <ContainerDiv>
-      <CardForm onSubmit={handleSubmit(onSubmit)}>
+      <CardForm onSubmit={handleSubmit(onFormSubmit)}>
         <Title>Sign Up</Title>
 
         <FormInput label={'email'} register={register} errors={errors} />

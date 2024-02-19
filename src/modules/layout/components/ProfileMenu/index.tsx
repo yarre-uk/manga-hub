@@ -4,11 +4,12 @@ import { MenuButton, MenuLink, MenuText, ProfileMenuStyled } from './styles';
 import LayoutContext from '../../contexts/LayoutProvider';
 
 import { ROUTE } from '@/constants';
-import { AuthContext } from '@/modules/auth';
+import { AuthContext, useAuth } from '@/modules/auth';
 
 const ProfileMenu = () => {
   const { openDialog } = useContext(LayoutContext);
-  const { authorized, logOut } = useContext(AuthContext);
+  const { authorized } = useContext(AuthContext);
+  const { logOut } = useAuth();
 
   const handleSignIn = () => {
     openDialog(true, 'signIn');

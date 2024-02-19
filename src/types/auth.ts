@@ -1,5 +1,5 @@
+import { StringMap } from './utils';
 import { ResponseStatusCode } from '../constants/common';
-import { StringMap } from '../utils';
 
 export type Role = 'Admin' | 'User';
 
@@ -21,7 +21,7 @@ export enum AuthFieldsNames {
   NICKNAME = 'nickname',
   EMAIL = 'email',
   PASSWORD = 'password',
-  CONFIRM_PASSWORD = 'confirm_password',
+  PASSWORD_CONFIRMATION = 'passwordConfirmation',
 }
 
 export type SignInFormValues = {
@@ -33,5 +33,5 @@ export type SignUpFormValues = {
   [AuthFieldsNames.EMAIL]: string;
   [AuthFieldsNames.NICKNAME]: string;
   [AuthFieldsNames.PASSWORD]: string;
-  [AuthFieldsNames.CONFIRM_PASSWORD]: string;
+  [AuthFieldsNames.PASSWORD_CONFIRMATION]: string;
 };

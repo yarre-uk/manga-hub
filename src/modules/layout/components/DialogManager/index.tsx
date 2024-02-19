@@ -23,8 +23,8 @@ const DialogManager = () => {
 
   const dialogContent = useMemo(() => {
     return {
-      signIn: <SignInContainer />,
-      signUp: <SignUpContainer />,
+      signIn: <SignInContainer onSubmit={closeDialog} />,
+      signUp: <SignUpContainer onSubmit={closeDialog} />,
       forgotPassword: <p>forgot password</p>,
     } satisfies Record<DialogType, ReactElement>;
   }, []);

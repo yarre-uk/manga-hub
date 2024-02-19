@@ -4,6 +4,7 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
+    "setup": "husky install",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",

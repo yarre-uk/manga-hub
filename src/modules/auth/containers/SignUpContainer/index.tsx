@@ -3,6 +3,8 @@ import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { object, string, ObjectSchema, ref } from 'yup';
 
+import useAuth from '../../hooks/useAuth';
+
 import {
   Button,
   CardForm,
@@ -29,12 +31,12 @@ const schema: ObjectSchema<SignUpFormValues> = object({
         'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character',
     })
     .required('Password is required'),
-  confirm_password: string()
+  passwordConfirmation: string()
     .oneOf([ref('password'), null], 'Passwords must match')
     .required('Confirm password is required'),
 });
 
-const SignUpContainer = () => {
+const SignUpContainer = ({ onSubmit }: { onSubmit: () => void }) => {
   const {
     register,
     handleSubmit,
@@ -46,21 +48,24 @@ const SignUpContainer = () => {
     mode: 'onChange',
   });
 
+  const { signUp } = useAuth();
+
   const password = watch('password');
 
   useEffect(() => {
     if (touchedFields.password) {
-      trigger('confirm_password');
+      trigger('passwordConfirmation');
     }
   }, [password, trigger, touchedFields.password]);
 
-  const onSubmit = (data: SignUpFormValues) => {
-    console.log(data);
+  const onFormSubmit = (data: SignUpFormValues) => {
+    signUp(data);
+    onSubmit();
   };
 
   return (
     <ContainerDiv>
-      <CardForm onSubmit={handleSubmit(onSubmit)}>
+      <CardForm onSubmit={handleSubmit(onFormSubmit)}>
         <h2>Sign Up</h2>
 
         <FormInput label={'email'} register={register} errors={errors} />
@@ -74,7 +79,7 @@ const SignUpContainer = () => {
         />
 
         <FormInputPassword
-          label={'confirm_password'}
+          label={'passwordConfirmation'}
           register={register}
           errors={errors}
         />

@@ -1,5 +1,3 @@
-import { lazy } from 'react';
-
 const theme = {
   colors: {
     primary: '#1db954',

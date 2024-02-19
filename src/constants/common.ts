@@ -1,5 +1,3 @@
-import process from 'process';
-
 export enum ResponseStatusCode {
   SUCCESS = 200,
   CREATED = 201,
@@ -13,4 +11,4 @@ export enum ResponseStatusCode {
   SERVER_ERROR = 500,
 }
 
-export const API_URL = process.env.API_URL || 'http://localhost:3000';
+export const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
