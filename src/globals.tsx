@@ -23,6 +23,7 @@ const GlobalStyles = createGlobalStyle`
   body * {
     font-family: 'Rubik', sans-serif !important;
     color: ${(props) => props.theme.font.color.light};
+    font-size: ${(props) => props.theme.font.size.normal};
   }
 
   body a {

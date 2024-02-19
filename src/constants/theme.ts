@@ -1,3 +1,5 @@
+import { lazy } from 'react';
+
 const theme = {
   colors: {
     primary: '#1db954',
@@ -16,7 +18,13 @@ const theme = {
 
   font: {
     family: 'Roboto, sans-serif',
-    size: '16px',
+    size: {
+      small: '0.9rem',
+      normal: '1.05rem',
+      semiLarge: '1.1rem',
+      large: '1.25rem',
+      huge: '1.35rem',
+    },
     color: {
       light: '#ddd',
       dark: '#191919',

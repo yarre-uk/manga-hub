@@ -1,6 +1,9 @@
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { object, string, ObjectSchema } from 'yup';
+
+import { AuthContext } from '../../contexts';
 
 import {
   Button,
@@ -8,6 +11,7 @@ import {
   ContainerDiv,
   FormInput,
   FormInputPassword,
+  Title,
 } from '@/components';
 import { PasswordRegex } from '@/constants';
 import { SignInFormValues } from '@/types';
@@ -35,14 +39,16 @@ const SignInContainer = () => {
     mode: 'onChange',
   });
 
+  const { signIn } = useContext(AuthContext);
+
   const onSubmit = (data: SignInFormValues) => {
-    console.log(data);
+    signIn(data);
   };
 
   return (
     <ContainerDiv>
       <CardForm onSubmit={handleSubmit(onSubmit)}>
-        <h2>Sign Up</h2>
+        <Title>Sign Up</Title>
 
         <FormInput label={'email'} register={register} errors={errors} />
 
