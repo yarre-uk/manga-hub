@@ -2,6 +2,7 @@ import { useContext, useEffect } from 'react';
 
 import useRefreshToken from './useRefreshToken';
 
+import { ResponseStatusCode } from '@/constants';
 import { AuthContext } from '@/modules/auth';
 import { axiosAuth } from '@/utils';
 
@@ -26,7 +27,10 @@ const useAuth = () => {
       async (error) => {
         const prevRequest = error?.config;
 
-        if (error?.response?.status === 403 && !prevRequest?.sent) {
+        if (
+          error?.response?.status === ResponseStatusCode.FORBIDDEN &&
+          !prevRequest?.sent
+        ) {
           prevRequest.sent = true;
           const newAccessToken = await refresh();
           prevRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;

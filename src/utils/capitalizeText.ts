@@ -7,13 +7,13 @@ const specialChars = ['_', ' ', '-'];
  * @returns The capitalized string.
  *
  * @example```
- * capitalizedWords('hello world') // 'Hello World'
- * capitalizedWords('hello_world') // 'Hello World'
- * capitalizedWords('hello-world') // 'Hello World'
- * capitalizedWords('helloWorld') // 'Hello World'
+ * capitalizeText('hello world') // 'Hello World'
+ * capitalizeText('hello_world') // 'Hello World'
+ * capitalizeText('hello-world') // 'Hello World'
+ * capitalizeText('helloWorld') // 'Hello World'
  * ```
  */
-function capitalizedWords(str: string): string {
+function capitalizeText(str: string): string {
   if (!str) {
     return str;
   }
@@ -33,4 +33,4 @@ function capitalizedWords(str: string): string {
   return str;
 }
 
-export default capitalizedWords;
+export default capitalizeText;

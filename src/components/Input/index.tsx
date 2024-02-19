@@ -3,7 +3,7 @@ import { UseFormRegister, FieldErrors, Path } from 'react-hook-form';
 import { Input, InputStyled, Label } from './styled';
 import ErrorMessage from '../ErrorMessage';
 
-import { capitalizedWords } from '@/utils';
+import { capitalizeText } from '@/utils';
 
 type FormInputProps<T> = {
   label: Path<T>;
@@ -18,7 +18,7 @@ export const FormInput = <T,>({
 }: FormInputProps<T>) => {
   return (
     <InputStyled>
-      <Label htmlFor={label}>{capitalizedWords(label)}</Label>
+      <Label htmlFor={label}>{capitalizeText(label)}</Label>
       <Input {...register(label)} />
       <ErrorMessage message={errors[label]?.message} />
     </InputStyled>
@@ -32,7 +32,7 @@ export const FormInputPassword = <T,>({
 }: FormInputProps<T>) => {
   return (
     <InputStyled>
-      <Label htmlFor={label}>{capitalizedWords(label)}</Label>
+      <Label htmlFor={label}>{capitalizeText(label)}</Label>
       <Input {...register(label)} type="password" />
       {<ErrorMessage message={errors[label]?.message} />}
     </InputStyled>
