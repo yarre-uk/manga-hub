@@ -23,7 +23,7 @@ const Dialog = forwardRef<HTMLDialogElement, DialogProps>(
   ({ children, onCancel, onClose }: DialogProps, ref) => {
     //! ONLY IN DEVELOPMENT
     //TODO remove
-    useCursorLeave(onClose);
+    // useCursorLeave(onClose);
 
     return (
       <DialogStyled ref={ref} onCancel={onClose} onClose={onCancel}>

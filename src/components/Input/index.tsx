@@ -3,6 +3,7 @@ import { UseFormRegister, FieldErrors, Path } from 'react-hook-form';
 import styled from 'styled-components';
 
 import { InputStyled } from './styled';
+import ErrorMessage from '../ErrorMessage';
 
 import { capitalizedWords } from '@/utils';
 
@@ -20,17 +21,11 @@ export const FormInput = <T,>({
   register,
   errors,
 }: FormInputProps<T>) => {
-  let error: ReactNode | null = null;
-
-  if (errors[label]?.message !== undefined) {
-    error = <p>{`${errors[label]?.message}`}</p>;
-  }
-
   return (
     <InputStyled>
       <label htmlFor={label}>{capitalizedWords(label)}</label>
       <Input {...register(label)} />
-      {error}
+      <ErrorMessage message={`${errors[label].message}`} />
     </InputStyled>
   );
 };
@@ -40,17 +35,11 @@ export const FormInputPassword = <T,>({
   register,
   errors,
 }: FormInputProps<T>) => {
-  let error: ReactNode | null = null;
-
-  if (errors[label]?.message !== undefined) {
-    error = <p>{`${errors[label]?.message}`}</p>;
-  }
-
   return (
     <InputStyled>
       <label htmlFor={label}>{capitalizedWords(label)}</label>
       <Input {...register(label)} type="password" />
-      {error}
+      <ErrorMessage message={`${errors[label].message}`} />
     </InputStyled>
   );
 };
