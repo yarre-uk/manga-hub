@@ -1,19 +1,28 @@
 import { useContext } from 'react';
 
+import { AccessTokenResponse } from '../types';
+
 import { AuthContext } from '@/modules/auth';
 import { axios } from '@/utils';
 
 const useRefreshToken = () => {
-  const { setAccessToken } = useContext(AuthContext);
+  const { setToken } = useContext(AuthContext);
 
   const refresh = async () => {
-    const response = await axios.get('/refresh', {
-      withCredentials: true,
-    });
+    const response = await axios.get<AccessTokenResponse>(
+      '/auth/refresh-tokens',
+      {
+        withCredentials: true,
+      },
+    );
 
-    setAccessToken(response.data.accessToken);
+    const token = response.data.accessToken;
 
-    return response.data.accessToken as string;
+    console.log('refresh');
+
+    setToken(token);
+
+    return token;
   };
 
   return refresh;

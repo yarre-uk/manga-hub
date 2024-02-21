@@ -1,29 +1,30 @@
-import { createContext, useState } from 'react';
+import { ReactNode, createContext, useState } from 'react';
 
 const AuthContext = createContext<{
-  accessToken: string | null;
-  authorized: () => boolean;
-  setAccessToken: (accessToken: string) => void;
+  accessToken: string;
+  setToken: (accessToken: string) => void;
+  clearToken: () => void;
 }>(null);
 
-export const AuthProvider = ({ children }) => {
-  const [auth, setAuth] = useState<string>();
+export const AuthProvider = ({ children }: { children: ReactNode }) => {
+  const [accessToken, setAccessToken] = useState<string>();
 
-  //TODO
-  const setAccessToken = (accessToken: string) => {
-    setAuth(accessToken);
+  const setToken = (accessToken: string) => {
+    localStorage.setItem('accessToken', accessToken);
+    setAccessToken(accessToken);
   };
 
-  const authorized = () => {
-    return !!auth;
+  const clearToken = () => {
+    localStorage.removeItem('accessToken');
+    setAccessToken(null);
   };
 
   return (
     <AuthContext.Provider
       value={{
-        accessToken: auth,
-        authorized,
-        setAccessToken,
+        accessToken,
+        clearToken,
+        setToken,
       }}
     >
       {children}

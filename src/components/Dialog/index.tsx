@@ -1,3 +1,4 @@
+import { X } from 'lucide-react';
 import {
   DetailedHTMLProps,
   DialogHTMLAttributes,
@@ -5,8 +6,15 @@ import {
   forwardRef,
 } from 'react';
 
-import { CloseButton } from './CloseButton';
-import { DialogStyled } from './styled';
+import { CloseButtonStyled, DialogStyled } from './styled';
+
+export const CloseButton = ({ onClick }: { onClick: () => void }) => {
+  return (
+    <CloseButtonStyled onClick={onClick}>
+      <X size={30} />
+    </CloseButtonStyled>
+  );
+};
 
 type DialogProps = {
   children: ReactElement;

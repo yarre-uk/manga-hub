@@ -33,6 +33,7 @@ const useAxios = () => {
         ) {
           prevRequest.sent = true;
           const newAccessToken = await refresh();
+
           prevRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
           return axiosAuth(prevRequest);
         }

@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 
+import { useAuth } from './modules/auth';
 import { LayoutContainer } from './modules/layout';
 
 import { ROUTE } from '@/constants';
@@ -11,6 +12,7 @@ import { NotFoundContainer } from '@/modules/notFound';
 const App = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
+  useAuth();
 
   // This must work only once
   useEffect(() => {
