@@ -18,8 +18,6 @@ const useRefreshToken = () => {
 
     const token = response.data.accessToken;
 
-    console.log('refresh');
-
     setToken(token);
 
     return token;

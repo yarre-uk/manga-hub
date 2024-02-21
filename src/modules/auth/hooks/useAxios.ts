@@ -28,13 +28,14 @@ const useAxios = () => {
         const prevRequest = error?.config;
 
         if (
-          error?.response?.status === ResponseStatusCode.FORBIDDEN &&
+          error?.response?.status === ResponseStatusCode.NOT_AUTHORIZED &&
           !prevRequest?.sent
         ) {
           prevRequest.sent = true;
           const newAccessToken = await refresh();
 
           prevRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
+
           return axiosAuth(prevRequest);
         }
 
