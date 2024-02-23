@@ -43,6 +43,8 @@ const useAuth = () => {
           if (payload.exp * 1000 < Date.now()) {
             throw new Error('Token expired');
           }
+
+          setToken(localStorageToken);
         }
       } catch (error) {
         const newToken = await refresh();
