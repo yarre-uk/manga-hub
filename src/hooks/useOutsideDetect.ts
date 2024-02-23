@@ -23,7 +23,7 @@ function useOutsideDetect(
       return () =>
         document.removeEventListener('mousedown', handleDocumentClick);
     }
-  }, [isOpen, ref.current]);
+  }, [isOpen, handleDocumentClick]);
 }
 
 export default useOutsideDetect;
