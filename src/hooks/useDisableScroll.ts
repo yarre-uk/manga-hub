@@ -37,7 +37,7 @@ const useDisableScroll = (disabled: boolean) => {
     return () => {
       enableScroll();
     };
-  }, [disabled]);
+  }, [disabled, previousScrollPosition, scrollPosition]);
 };
 
 export default useDisableScroll;

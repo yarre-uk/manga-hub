@@ -10,9 +10,11 @@ function useThrottle<T extends unknown[], K>(
     (...args: T) => {
       if (!timeoutRef.current) {
         func(...args);
+
         timeoutRef.current = setTimeout(() => {
           timeoutRef.current = null;
         }, wait);
+
         return Promise.resolve();
       } else {
         return null;
