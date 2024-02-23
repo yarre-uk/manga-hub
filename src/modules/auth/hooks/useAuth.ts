@@ -2,7 +2,7 @@ import { jwtDecode } from 'jwt-decode';
 import { useContext, useEffect } from 'react';
 
 import useRefreshToken from './useRefreshToken';
-import { AccessTokenResponse } from '../types';
+import { AccessTokenResponse } from '../types/responses';
 
 import { AuthContext, useAxios } from '@/modules/auth';
 import { SignInFormValues, SignUpFormValues } from '@/types';

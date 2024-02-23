@@ -1,7 +1,7 @@
 import { Button } from '@/components';
 import { useAxios } from '@/modules/auth';
 
-const HomeContainer = () => {
+const Page = () => {
   const axios = useAxios();
 
   const handleClick = async () => {
@@ -11,10 +11,10 @@ const HomeContainer = () => {
 
   return (
     <div>
-      <p>Home Page</p>
+      <p>Profile Page</p>
       <Button onClick={handleClick}>Click</Button>
     </div>
   );
 };
 
-export default HomeContainer;
+export default Page;

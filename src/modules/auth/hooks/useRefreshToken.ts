@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { AccessTokenResponse } from '../types';
+import { AccessTokenResponse } from '../types/responses';
 
 import { AuthContext } from '@/modules/auth';
 import { axios } from '@/utils';
