@@ -1,5 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 import { object, string, ObjectSchema } from 'yup';
 
 import { useAuth } from '../../hooks';
@@ -41,7 +42,12 @@ const SignInContainer = ({ onSubmit }: { onSubmit: () => void }) => {
   const { signIn } = useAuth();
 
   const onFormSubmit = (data: SignInFormValues) => {
-    signIn(data);
+    toast.promise(signIn(data), {
+      pending: 'Signing in...',
+      success: 'Successfully signed in',
+      error: 'Failed to sign in',
+    });
+
     onSubmit();
   };
 

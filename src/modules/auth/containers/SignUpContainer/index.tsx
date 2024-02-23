@@ -1,6 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 import { object, string, ObjectSchema, ref } from 'yup';
 
 import useAuth from '../../hooks/useAuth';
@@ -59,7 +60,12 @@ const SignUpContainer = ({ onSubmit }: { onSubmit: () => void }) => {
   }, [password, trigger, touchedFields.password]);
 
   const onFormSubmit = (data: SignUpFormValues) => {
-    signUp(data);
+    toast.promise(signUp(data), {
+      pending: 'Signing up...',
+      success: 'Successfully signed up',
+      error: 'Failed to sign up',
+    });
+
     onSubmit();
   };
 
