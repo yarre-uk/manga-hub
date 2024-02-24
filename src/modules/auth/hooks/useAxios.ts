@@ -29,6 +29,7 @@ const useAxios = () => {
 
         if (
           error?.response?.status === ResponseStatusCode.NOT_AUTHORIZED &&
+          prevRequest?.url !== '/auth/signin' &&
           !prevRequest?.sent
         ) {
           prevRequest.sent = true;

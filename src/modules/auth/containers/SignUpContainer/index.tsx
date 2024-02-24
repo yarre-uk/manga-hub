@@ -10,10 +10,13 @@ import {
   Button,
   CardForm,
   ContainerDiv,
+  ErrorMessage,
   FormInput,
   FormInputPassword,
+  StateSuspense,
 } from '@/components';
 import { PasswordRegex } from '@/constants';
+import { useLoading } from '@/hooks';
 import { SignUpFormValues } from '@/types';
 
 const schema: ObjectSchema<SignUpFormValues> = object({
@@ -51,6 +54,9 @@ const SignUpContainer = ({ onSubmit }: { onSubmit: () => void }) => {
 
   const { signUp } = useAuth();
 
+  const { loading, error, startLoading, stopLoading, errorOccurred } =
+    useLoading();
+
   const password = watch('password');
 
   useEffect(() => {
@@ -59,20 +65,29 @@ const SignUpContainer = ({ onSubmit }: { onSubmit: () => void }) => {
     }
   }, [password, trigger, touchedFields.password]);
 
-  const onFormSubmit = (data: SignUpFormValues) => {
-    toast.promise(signUp(data), {
-      pending: 'Signing up...',
-      success: 'Successfully signed up',
-      error: 'Failed to sign up',
-    });
+  const onFormSubmit = async (data: SignUpFormValues) => {
+    try {
+      startLoading();
 
-    onSubmit();
+      await toast.promise(signUp(data), {
+        pending: 'Signing up...',
+        success: 'Successfully signed up',
+        error: 'Failed to sign up',
+      });
+
+      stopLoading();
+      onSubmit();
+    } catch (error) {
+      errorOccurred(new Error('Credentials are invalid'));
+    }
   };
 
   return (
     <ContainerDiv>
       <CardForm onSubmit={handleSubmit(onFormSubmit)}>
         <h2>Sign Up</h2>
+
+        <ErrorMessage message={error?.message} />
 
         <FormInput label={'email'} register={register} errors={errors} />
 
@@ -89,6 +104,8 @@ const SignUpContainer = ({ onSubmit }: { onSubmit: () => void }) => {
           register={register}
           errors={errors}
         />
+
+        <StateSuspense show={!loading} fallback={<div>Loading</div>} />
 
         <Button type="submit">Submit</Button>
       </CardForm>
