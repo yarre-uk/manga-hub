@@ -11,6 +11,8 @@ const theme = {
       light: '#282828',
     },
 
+    border: '#282828',
+
     backdrop: 'rgba(0, 0, 0, 0.4)',
   },
 
