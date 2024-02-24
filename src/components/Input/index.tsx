@@ -1,8 +1,18 @@
+import { Eye, EyeOff } from 'lucide-react';
+import { useState } from 'react';
 import { UseFormRegister, FieldErrors, Path } from 'react-hook-form';
 
-import { Input, InputStyled, Label } from './styled';
+import {
+  Input,
+  InputStyled,
+  Label,
+  PasswordButton,
+  PasswordGroup,
+  PasswordInput,
+} from './styled';
 import ErrorMessage from '../ErrorMessage';
 
+import theme from '@/constants/theme';
 import { capitalizeText } from '@/utils';
 
 type FormInputProps<T> = {
@@ -30,10 +40,24 @@ export const FormInputPassword = <T,>({
   register,
   errors,
 }: FormInputProps<T>) => {
+  const [showPassword, setShowPassword] = useState(false);
+
   return (
     <InputStyled>
       <Label htmlFor={label}>{capitalizeText(label)}</Label>
-      <Input {...register(label)} type="password" />
+      <PasswordGroup>
+        <PasswordInput
+          {...register(label)}
+          type={showPassword ? 'text' : 'password'}
+        />
+        <PasswordButton onClick={() => setShowPassword((prev) => !prev)}>
+          {showPassword ? (
+            <Eye color={theme.font.color.dark} />
+          ) : (
+            <EyeOff color={theme.font.color.dark} />
+          )}
+        </PasswordButton>
+      </PasswordGroup>
       {<ErrorMessage message={errors[label]?.message} />}
     </InputStyled>
   );
