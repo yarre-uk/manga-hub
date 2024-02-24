@@ -7,7 +7,7 @@ function useEvent<T extends unknown[], K>(fn: Fn<T, K>): Fn<T, K> {
 
   useLayoutEffect(() => {
     ref.current = fn;
-  });
+  }, [fn]);
 
   return useMemo(
     () =>

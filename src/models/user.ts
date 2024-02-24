@@ -1,4 +1,4 @@
-export type User = {
+type User = {
   userId: number;
   // firstName: string;
   // lastName: string;
@@ -12,3 +12,5 @@ export type User = {
   // registrationDate: Date;
   isAdmin: boolean;
 };
+
+export default User;

@@ -1,45 +1,64 @@
+import 'react-toastify/dist/ReactToastify.css';
+
 import { useEffect } from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import { ToastContainer, Bounce, toast } from 'react-toastify';
 
-import { LayoutContainer } from './modules/layout';
-
-import { ROUTE } from '@/constants';
-import GlobalStyles from '@/globals';
-import {
-  ChangePasswordContainer,
-  ForgotPasswordContainer,
-  SignInContainer,
-  SignUpContainer,
-} from '@/modules/auth';
-import { HomeContainer } from '@/modules/home';
-import { NotFoundContainer } from '@/modules/notFound';
+import { StateSuspense } from './components';
+import { ROUTE } from './constants';
+import GlobalStyles from './globals';
+import { LayoutContainer, useAuth } from './modules';
+import { HomePage, NotFoundPage, ProfilePage } from './pages';
+import { axios } from './utils';
 
 const App = () => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const { authorized, isReady } = useAuth();
+
+  // This must work only once
+  useEffect(() => {
+    if (pathname === '/') {
+      navigate(ROUTE.HOME);
+    }
+  }, []);
 
   useEffect(() => {
-    navigate(ROUTE.HOME);
+    toast.promise(axios.get('/app/test'), {
+      error: 'Server is not available',
+    });
   }, []);
 
   return (
     <>
       <GlobalStyles />
-      <Routes>
-        <Route path={ROUTE.HOME} element={<LayoutContainer />}>
-          <Route index element={<HomeContainer />} />
-          <Route path={ROUTE.SIGN_IN} element={<SignInContainer />} />
-          <Route path={ROUTE.SIGN_UP} element={<SignUpContainer />} />
-          <Route
-            path={ROUTE.FORGOT_PASSWORD}
-            element={<ForgotPasswordContainer />}
-          />
-          <Route
-            path={ROUTE.CHANGE_PASSWORD}
-            element={<ChangePasswordContainer />}
-          />
-          <Route path="/*" element={<NotFoundContainer />} />
-        </Route>
-      </Routes>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss={false}
+        draggable
+        pauseOnHover={false}
+        theme="dark"
+        transition={Bounce}
+      />
+      <StateSuspense show={isReady} fallback={<div>Loading...</div>}>
+        <Routes>
+          <Route path={ROUTE.HOME} element={<LayoutContainer />}>
+            <Route index element={<HomePage />} />
+
+            {authorized() ? (
+              <Route path={ROUTE.PROFILE} element={<ProfilePage />} />
+            ) : null}
+
+            <Route path="*" element={<NotFoundPage />} />
+            <Route path={ROUTE.PAGE_NOT_FOUND} element={<NotFoundPage />} />
+          </Route>
+        </Routes>
+      </StateSuspense>
     </>
   );
 };

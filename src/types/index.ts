@@ -1,2 +1,2 @@
 export * from './auth';
-export type { ObjectValues } from './utils';
+export type { ObjectValues, StringMap } from './utils';

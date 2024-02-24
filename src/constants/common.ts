@@ -10,3 +10,5 @@ export enum ResponseStatusCode {
   SOMETHING_WRONG = 418,
   SERVER_ERROR = 500,
 }
+
+export const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
