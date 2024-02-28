@@ -1,20 +1,14 @@
-import { Button } from '@/components';
-import { useAxios } from '@/modules/auth';
+import { ProfilePageStyled } from './styled';
 
-const Page = () => {
-  const axios = useAxios();
+import { ManagerContainer, MenuContainer } from '@/modules/profile';
 
-  const handleClick = async () => {
-    const res = await axios.get('/profile');
-    console.log(res.data);
-  };
-
+const ProfilePage = () => {
   return (
-    <div>
-      <p>Profile Page</p>
-      <Button onClick={handleClick}>Click</Button>
-    </div>
+    <ProfilePageStyled>
+      <ManagerContainer />
+      <MenuContainer />
+    </ProfilePageStyled>
   );
 };
 
-export default Page;
+export default ProfilePage;

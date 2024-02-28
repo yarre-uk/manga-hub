@@ -35,3 +35,11 @@ export type SignUpFormValues = {
   [AuthFieldsNames.PASSWORD]: string;
   [AuthFieldsNames.PASSWORD_CONFIRMATION]: string;
 };
+
+export type UpdateProfileFormValues = {
+  // [AuthFieldsNames.AVATAR]: string;
+  [AuthFieldsNames.NICKNAME]: string;
+  [AuthFieldsNames.EMAIL]: string;
+  [AuthFieldsNames.PASSWORD]?: string;
+  [AuthFieldsNames.PASSWORD_CONFIRMATION]?: string;
+};

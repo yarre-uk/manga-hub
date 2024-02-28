@@ -7,3 +7,4 @@ export { default as debounce } from './debounce';
 export { parseLengthAndUnit, cssValue } from './unitConverter';
 export { default as modifyColor } from './modifyColor';
 export { default as createAnimation } from './createAnimation';
+export { default as removeEmpty } from './removeEmpty';

@@ -7,7 +7,8 @@ import { ToastContainer, Bounce, toast } from 'react-toastify';
 import { StateSuspense } from './components';
 import { ROUTE } from './constants';
 import GlobalStyles from './globals';
-import { LayoutContainer, useAuth } from './modules';
+import { useAuth } from './modules/auth';
+import { LayoutContainer } from './modules/layout';
 import { HomePage, NotFoundPage, ProfilePage } from './pages';
 import { axios } from './utils';
 
@@ -45,7 +46,7 @@ const App = () => {
         theme="dark"
         transition={Bounce}
       />
-      <StateSuspense show={isReady} fallback={<div>Loading...</div>}>
+      <StateSuspense show={isReady} fallback={<div>Loading</div>}>
         <Routes>
           <Route path={ROUTE.HOME} element={<LayoutContainer />}>
             <Route index element={<HomePage />} />
