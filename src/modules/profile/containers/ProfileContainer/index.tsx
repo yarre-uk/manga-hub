@@ -63,6 +63,7 @@ const ProfileContainer = () => {
     data: profileData,
     error,
     isLoading,
+    isRefetching,
     refetch,
   } = useQuery({
     queryKey: ['profile'],
@@ -92,7 +93,7 @@ const ProfileContainer = () => {
     }
   };
 
-  if (isLoading) {
+  if (isLoading || isRefetching) {
     return <div>Loading...</div>;
   }
 
