@@ -2,7 +2,8 @@ export const enum ROUTE {
   HOME = '/',
   PAGE_NOT_FOUND = '/404',
 
-  PROFILE = '/profile',
+  USER = '/user',
+  USER_PROFILE = `${ROUTE.USER}/profile`,
 
   MANGA = `/manga`,
   ADD_MANGA = `${ROUTE.MANGA}/add`,

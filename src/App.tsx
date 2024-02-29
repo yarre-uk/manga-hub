@@ -10,7 +10,8 @@ import { ROUTE } from './constants';
 import GlobalStyles from './globals';
 import { useAuth } from './modules/auth';
 import { LayoutContainer } from './modules/layout';
-import { HomePage, NotFoundPage, ProfilePage } from './pages';
+import { ProfileContainer } from './modules/user';
+import { HomePage, NotFoundPage, UserPage } from './pages';
 import { axios } from './utils';
 
 const App = () => {
@@ -53,7 +54,15 @@ const App = () => {
             <Route index element={<HomePage />} />
 
             {authorized() ? (
-              <Route path={ROUTE.PROFILE} element={<ProfilePage />} />
+              <>
+                <Route path={ROUTE.USER} element={<UserPage />}>
+                  <Route index element={<ProfileContainer />} />
+                  <Route
+                    path={ROUTE.USER_PROFILE}
+                    element={<ProfileContainer />}
+                  />
+                </Route>
+              </>
             ) : null}
 
             <Route path="*" element={<NotFoundPage />} />

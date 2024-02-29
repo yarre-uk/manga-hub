@@ -23,7 +23,7 @@ const ProfileMenu = ({ onClose }: { onClose: () => void }) => {
     >
       {authorized() ? (
         <>
-          <MenuLink to={ROUTE.PROFILE}>Profile</MenuLink>
+          <MenuLink to={ROUTE.USER}>Profile</MenuLink>
           <MenuText onClick={logOut}>Log out</MenuText>
         </>
       ) : (
