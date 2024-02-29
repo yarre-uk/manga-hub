@@ -14,6 +14,7 @@ import {
   FormInputPassword,
   Title,
 } from '@/components';
+import { ContainerLoader } from '@/components';
 import { PasswordRegex } from '@/constants';
 import { User } from '@/models';
 import { useAxios } from '@/modules/auth';
@@ -94,7 +95,7 @@ const ProfileContainer = () => {
   };
 
   if (isLoading || isRefetching) {
-    return <div>Loading...</div>;
+    return <ContainerLoader />;
   }
 
   return (

@@ -1,11 +1,7 @@
-import { ContainerSection } from '@/components';
+import { ContainerLoader } from '@/components';
 
 const ProfileContainer = () => {
-  return (
-    <ContainerSection>
-      <div>asd</div>
-    </ContainerSection>
-  );
+  return <ContainerLoader />;
 };
 
 export default ProfileContainer;

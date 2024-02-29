@@ -7,3 +7,4 @@ export { default as ErrorMessage } from './ErrorMessage';
 export { Title, Subtitle } from './Typography';
 export { default as StateSuspense } from './StateSuspense';
 export { Page } from './Page';
+export { CircleLoader, ContainerLoader, FullPageLoader } from './Loader';

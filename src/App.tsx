@@ -5,6 +5,7 @@ import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { ToastContainer, Bounce, toast } from 'react-toastify';
 
 import { StateSuspense } from './components';
+import { FullPageLoader } from './components';
 import { ROUTE } from './constants';
 import GlobalStyles from './globals';
 import { useAuth } from './modules/auth';
@@ -46,7 +47,7 @@ const App = () => {
         theme="dark"
         transition={Bounce}
       />
-      <StateSuspense show={isReady} fallback={<div>Loading</div>}>
+      <StateSuspense show={isReady} fallback={<FullPageLoader />}>
         <Routes>
           <Route path={ROUTE.HOME} element={<LayoutContainer />}>
             <Route index element={<HomePage />} />
