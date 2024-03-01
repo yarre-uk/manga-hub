@@ -4,6 +4,8 @@ export const enum ROUTE {
 
   USER = '/user',
   USER_PROFILE = `${ROUTE.USER}/profile`,
+  USER_CONTINUE_READING = `${ROUTE.USER}/continue-reading`,
+  USER_LIST = `${ROUTE.USER}/list`,
 
   MANGA = `/manga`,
   ADD_MANGA = `${ROUTE.MANGA}/add`,

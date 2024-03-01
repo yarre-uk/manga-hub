@@ -4,10 +4,10 @@ const DefaultCard = styled.div`
   display: flex;
   flex-direction: column;
 
-  background-color: ${({ theme }) => theme.colors.foreground.basic};
+  background-color: ${({ theme }) => theme.colours.foreground.basic};
 
-  border: 2px solid ${({ theme }) => theme.colors.foreground.light};
-  border-radius: ${({ theme }) => theme.borderRadius};
+  border: 2px solid ${({ theme }) => theme.colours.foreground.light};
+  border-radius: ${({ theme }) => theme.border.radius};
 
   padding: 0.75rem 1.5rem;
 

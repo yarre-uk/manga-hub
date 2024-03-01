@@ -22,7 +22,7 @@ export const FullPageLoader = () => {
 };
 
 export const CircleLoader = ({
-  color = theme.colors.primary,
+  color = theme.colours.primary,
   speedMultiplier = 1,
   cssOverride = {},
   size = 50,
@@ -80,7 +80,7 @@ export const CircleLoader = ({
 };
 
 const BeatLoader = ({
-  color = theme.colors.primary,
+  color = theme.colours.primary,
   speedMultiplier = 1,
   cssOverride = {},
   size = 15,

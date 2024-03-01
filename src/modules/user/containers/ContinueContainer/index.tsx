@@ -1,11 +1,11 @@
 import { ContainerSection } from '@/components';
 
-const ProfileContainer = () => {
+const ContinueContainer = () => {
   return (
     <ContainerSection>
-      <div>asd</div>
+      <div>Continue Reading</div>
     </ContainerSection>
   );
 };
 
-export default ProfileContainer;
+export default ContinueContainer;

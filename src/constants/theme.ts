@@ -1,17 +1,18 @@
 const theme = {
-  colors: {
-    primary: '#1db954',
-    secondary: '#b3b3b3',
+  colours: {
+    primary: '#379634',
+    secondary: '#156064',
+    tertiary: '#BC9EC1',
     danger: '#ff4d4f',
-    tertiary: '#535353',
+    warning: '#faad14',
+    success: '#52c41a',
+    info: '#1890ff',
 
     background: '#141414',
     foreground: {
       basic: '#1c1c1e',
       light: '#282828',
     },
-
-    border: '#282828',
 
     backdrop: 'rgba(0, 0, 0, 0.4)',
   },
@@ -31,7 +32,11 @@ const theme = {
     },
   },
 
-  borderRadius: '5px',
+  border: {
+    width: '3px',
+    radius: '5px',
+    colour: '#282828',
+  },
 } as const;
 
 export default theme;

@@ -9,7 +9,7 @@ export const ContainerLoaderStyled = styled(Card)`
 
   margin: 2rem;
 
-  background-color: ${({ theme }) => theme.colors.foreground.basic};
+  background-color: ${({ theme }) => theme.colours.foreground.basic};
 `;
 
 export const FullPageLoaderStyled = styled.div`
@@ -21,5 +21,5 @@ export const FullPageLoaderStyled = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: ${({ theme }) => theme.colors.background};
+  background-color: ${({ theme }) => theme.colours.background};
 `;

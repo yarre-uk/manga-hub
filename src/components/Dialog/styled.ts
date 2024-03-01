@@ -7,10 +7,10 @@ export const DialogStyled = styled(Card).attrs({ as: 'dialog' })`
 
   padding: 0;
 
-  background-color: ${({ theme }) => theme.colors.background};
+  background-color: ${({ theme }) => theme.colours.background};
 
   &::backdrop {
-    background-color: ${({ theme }) => theme.colors.backdrop};
+    background-color: ${({ theme }) => theme.colours.backdrop};
   }
 
   &[open] {
@@ -29,9 +29,9 @@ export const CloseButtonStyled = styled.div`
   width: 2.5rem;
   height: 2.5rem;
 
-  border-bottom-left-radius: ${({ theme }) => theme.borderRadius};
+  border-bottom-left-radius: ${({ theme }) => theme.border.radius};
 
-  background-color: ${({ theme }) => theme.colors.danger};
+  background-color: ${({ theme }) => theme.colours.danger};
 
   cursor: pointer;
 `;

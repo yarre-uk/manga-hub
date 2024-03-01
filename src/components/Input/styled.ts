@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { getBorder } from '@/utils';
+
 export const InputStyled = styled.div`
   display: flex;
   flex-direction: column;
@@ -17,15 +19,13 @@ export const Input = styled.input`
 
   padding: 0.35rem;
 
-  border-radius: ${({ theme }) => theme.borderRadius};
-  border: 2px solid ${({ theme }) => theme.colors.border};
-  height: 2.5rem;
+  ${getBorder()}
 
   font-size: ${({ theme }) => theme.font.size.semiLarge};
 
   &:focus {
     outline: none;
-    border: 2px solid ${({ theme }) => theme.colors.primary};
+    ${({ theme }) => getBorder(theme.colours.primary)};
   }
 `;
 
@@ -41,13 +41,12 @@ export const PasswordGroup = styled.div`
 
   padding: 0.35rem;
 
-  border-radius: ${({ theme }) => theme.borderRadius};
-  border: 2px solid ${({ theme }) => theme.colors.border};
+  ${getBorder()}
 
   font-size: ${({ theme }) => theme.font.size.semiLarge};
 
   &:focus-within {
-    border: 2px solid ${({ theme }) => theme.colors.primary};
+    ${({ theme }) => getBorder(theme.colours.primary)}
   }
 `;
 
@@ -63,8 +62,8 @@ export const PasswordButton = styled.div`
 
   background-color: #fff;
 
-  border-radius: ${({ theme }) => theme.borderRadius};
-  border-color: ${({ theme }) => theme.colors.foreground.light};
+  border-radius: ${({ theme }) => theme.border.radius};
+  border-color: ${({ theme }) => theme.colours.foreground.light};
 
   .lucide {
     width: 1.5rem;

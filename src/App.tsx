@@ -10,7 +10,11 @@ import { ROUTE } from './constants';
 import GlobalStyles from './globals';
 import { useAuth } from './modules/auth';
 import { LayoutContainer } from './modules/layout';
-import { ProfileContainer } from './modules/user';
+import {
+  ContinueContainer,
+  ListContainer,
+  ProfileContainer,
+} from './modules/user';
 import { HomePage, NotFoundPage, UserPage } from './pages';
 import { axios } from './utils';
 
@@ -61,6 +65,11 @@ const App = () => {
                     path={ROUTE.USER_PROFILE}
                     element={<ProfileContainer />}
                   />
+                  <Route
+                    path={ROUTE.USER_CONTINUE_READING}
+                    element={<ContinueContainer />}
+                  />
+                  <Route path={ROUTE.USER_LIST} element={<ListContainer />} />
                 </Route>
               </>
             ) : null}
